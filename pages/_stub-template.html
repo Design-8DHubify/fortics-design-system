@@ -1,0 +1,81 @@
+<!--
+  STUB template used to generate empty pages while phases 2-5 are pending.
+  Inline placeholders for title/level/description are substituted by the bash script.
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{{TITLE}} · Fortics DS</title>
+<link rel="icon" type="image/svg+xml" href="../assets/icons/spark-principal.svg" />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/tokens.css" />
+<link rel="stylesheet" href="../css/base.css" />
+<link rel="stylesheet" href="../css/components.css" />
+<link rel="stylesheet" href="../css/molecules.css" />
+<link rel="stylesheet" href="../css/showcase.css" />
+</head>
+<body>
+<div class="docs">
+  <aside class="docs-side">
+    <div class="docs-side__brand">
+      <img class="logo-dark"  src="../assets/logos/horizontal-branco.svg" alt="Fortics" />
+      <img class="logo-light" src="../assets/logos/horizontal-marinho.svg" alt="Fortics" hidden />
+    </div>
+    <div class="docs-side__group">
+      <div class="docs-side__title">Início</div>
+      <a class="docs-side__link" href="../index.html"><i data-lucide="home"></i> Visão geral</a>
+    </div>
+    <div class="docs-side__group">
+      <div class="docs-side__title">Atomic Design</div>
+      <a class="docs-side__link" href="./01-foundations.html"><span class="level-dot">0</span> Fundamentos</a>
+      <a class="docs-side__link {{ACTIVE_ATOMS}}" href="./02-atoms.html"><span class="level-dot">A</span> Átomos</a>
+      <a class="docs-side__link {{ACTIVE_MOLECULES}}" href="./03-molecules.html"><span class="level-dot">M</span> Moléculas</a>
+      <a class="docs-side__link {{ACTIVE_ORGANISMS}}" href="./04-organisms.html"><span class="level-dot">O</span> Organismos</a>
+    </div>
+    <div class="docs-side__footer">
+      <div class="fds-theme-toggle" data-fds-theme-toggle role="group" aria-label="Tema">
+        <button class="fds-theme-toggle__btn" data-theme-set="light" aria-pressed="true" aria-label="Tema claro"><i data-lucide="sun" style="width:16px;height:16px"></i></button>
+        <button class="fds-theme-toggle__btn" data-theme-set="dark" aria-pressed="false" aria-label="Tema escuro"><i data-lucide="moon" style="width:16px;height:16px"></i></button>
+      </div>
+      <p class="fds-caption" style="margin:0">Fortics DS v1.0</p>
+    </div>
+  </aside>
+
+  <main class="docs-main">
+    <header class="docs-top">
+      <div class="docs-top__crumb">~ / design-system / {{SLUG}}</div>
+      <div class="docs-top__actions">
+        <span class="fds-badge fds-badge--warning"><span class="fds-badge__dot"></span>Em construção · Fase {{PHASE}}</span>
+      </div>
+    </header>
+
+    <section class="docs-section" style="min-height:60vh;display:flex;align-items:center">
+      <div style="max-width:640px">
+        <span class="docs-section__eyebrow"><span class="level-dot">{{LEVEL}}</span> {{TITLE}}</span>
+        <h1 class="docs-section__title">{{TITLE}}</h1>
+        <p class="docs-section__lead">{{DESC}}</p>
+        <div style="margin-top:var(--fds-space-6);display:flex;gap:var(--fds-space-3);flex-wrap:wrap">
+          <a href="./01-foundations.html" class="fds-btn fds-btn--primary"><i data-lucide="arrow-left" style="width:16px;height:16px"></i> Voltar para Fundamentos</a>
+          <a href="../index.html" class="fds-btn fds-btn--ghost"><i data-lucide="home" style="width:16px;height:16px"></i> Hub</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="../js/fds-theme.js"></script>
+<script>
+  lucide.createIcons();
+  function syncLogos() {
+    const dark = (document.documentElement.getAttribute('data-theme') || 'light') === 'dark';
+    document.querySelectorAll('.logo-dark').forEach(el => el.hidden  = !dark);
+    document.querySelectorAll('.logo-light').forEach(el => el.hidden = dark);
+  }
+  syncLogos();
+  document.addEventListener('fds:theme-change', syncLogos);
+</script>
+</body>
+</html>

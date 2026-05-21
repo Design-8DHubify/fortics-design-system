@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fortics — Design System</title>
+<meta name="description" content="Design System oficial da Fortics — Atomic Design, tokens interativos, biblioteca GSAP, componentes WordPress-friendly." />
+
+<link rel="icon" type="image/svg+xml" href="assets/icons/spark-principal.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="css/tokens.css" />
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/components.css" />
+<link rel="stylesheet" href="css/molecules.css" />
+<link rel="stylesheet" href="css/showcase.css" />
+<script>
+  // No-FOUC: aplica tema persistido o quanto antes
+  (function(){
+    try {
+      var t = localStorage.getItem('fds-theme');
+      if (!t) t = 'light';  // light como padrão absoluto do brandbook
+      document.documentElement.setAttribute('data-theme', t);
+    } catch(_) {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  })();
+</script>
+</head>
+<body>
+
+<div class="docs">
+
+  <!-- =========================== SIDEBAR =========================== -->
+  <aside class="docs-side">
+    <div class="docs-side__brand">
+      <img class="logo-dark"  src="assets/logos/horizontal-branco.svg" alt="Fortics" />
+      <img class="logo-light" src="assets/logos/horizontal-marinho.svg" alt="Fortics" hidden />
+    </div>
+
+    <div class="docs-side__group">
+      <div class="docs-side__title">Início</div>
+      <a class="docs-side__link is-active" href="./index.html">
+        <i data-lucide="home"></i> Visão geral
+      </a>
+      <a class="docs-side__link" href="#getting-started">
+        <i data-lucide="rocket"></i> Como usar
+      </a>
+    </div>
+
+    <div class="docs-side__group">
+      <div class="docs-side__title">Atomic Design</div>
+      <a class="docs-side__link" href="./pages/01-foundations.html">
+        <span class="level-dot">0</span> Fundamentos
+      </a>
+      <a class="docs-side__link" href="./pages/02-atoms.html">
+        <span class="level-dot">A</span> Átomos
+      </a>
+      <a class="docs-side__link" href="./pages/03-molecules.html">
+        <span class="level-dot">M</span> Moléculas
+      </a>
+      <a class="docs-side__link" href="./pages/04-organisms.html">
+        <span class="level-dot">O</span> Organismos
+      </a>
+      
+      </div>
+
+    <div class="docs-side__group">
+      <div class="docs-side__title">Recursos</div>
+      <a class="docs-side__link" href="./pages/07-spark-animations.html"><i data-lucide="sparkles"></i> Spark Animations</a>
+      <a class="docs-side__link" href="./pages/08-3d-builder.html"><i data-lucide="box"></i> 3D Builder</a>
+      <a class="docs-side__link" href="./pages/10-marca-segmento.html"><i data-lucide="layers-2"></i> Marca por Segmento</a>
+    </div>
+
+    <div class="docs-side__footer">
+      <div class="fds-theme-toggle" data-fds-theme-toggle role="group" aria-label="Tema">
+        <button class="fds-theme-toggle__btn" data-theme-set="light" aria-pressed="true" aria-label="Tema claro">
+          <i data-lucide="sun" style="width:16px;height:16px"></i>
+        </button>
+        <button class="fds-theme-toggle__btn" data-theme-set="dark" aria-pressed="false" aria-label="Tema escuro">
+          <i data-lucide="moon" style="width:16px;height:16px"></i>
+        </button>
+      </div>
+      <p class="fds-caption" style="margin:0">Fortics DS v1.0 · Brandbook 2026<br/>GSAP 3.12 · Lucide Icons</p>
+    </div>
+  </aside>
+
+  <!-- =========================== MAIN =========================== -->
+  <main class="docs-main">
+
+    <header class="docs-top">
+      <div class="docs-top__crumb">~ / design-system</div>
+      <div class="docs-top__actions">
+        <button class="fds-btn fds-btn--ghost fds-btn--sm" id="copy-stack" data-copy data-copy-from="#stack-snippet" data-copy-label="HTML">
+          <i data-lucide="copy" style="width:14px;height:14px"></i> Copiar setup
+        </button>
+        <a class="fds-btn fds-btn--secondary fds-btn--sm" href="https://github.com/Design-8DHubify/fortics-design-center" target="_blank">
+          <i data-lucide="github" style="width:14px;height:14px"></i> GitHub
+        </a>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hub">
+      <div class="hub__bg"></div>
+      <div class="hub__inner">
+        <div class="hub__hero">
+          <span class="hub__brand">
+            <img src="assets/icons/spark-principal.svg" width="20" height="20" alt="" />
+            FORTICS · BRANDBOOK 2026
+          </span>
+          <h1 class="hub__title">
+            Menos abas,<br/>
+            <span class="fds-text-gradient">mais ação.</span>
+          </h1>
+          <p class="hub__lead">
+            Design System oficial da Fortics — construído sobre <strong>Atomic Design</strong>,
+            com tokens interativos, biblioteca de animações <strong>GSAP</strong> e componentes
+            prontos para copiar e colar no WordPress.
+          </p>
+          <div class="fds-row fds-gap-3 fds-wrap">
+            <a href="./pages/01-foundations.html" class="fds-btn fds-btn--primary fds-btn--lg">
+              <i data-lucide="layers" style="width:18px;height:18px"></i>
+              Explorar fundamentos
+            </a>
+            <a href="./pages/02-atoms.html" class="fds-btn fds-btn--secondary fds-btn--lg">
+              <i data-lucide="atom" style="width:18px;height:18px"></i>
+              Ver componentes
+            </a>
+          </div>
+        </div>
+
+        <!-- ATOMIC CARDS -->
+        <h2 class="fds-h2" style="margin-bottom:var(--fds-space-2)">Navegue por nível atômico</h2>
+        <p class="fds-lead" style="margin-bottom:var(--fds-space-7);max-width:680px">
+          A documentação segue a metodologia de <strong>Brad Frost</strong> — do menor token visual
+          até páginas inteiras prontas para implementação.
+        </p>
+
+        <div class="hub-grid">
+          <a class="atomic-card" href="./pages/01-foundations.html">
+            <span class="atomic-card__arrow"><i data-lucide="arrow-up-right" style="width:18px;height:18px"></i></span>
+            <span class="atomic-card__level"><span class="level-dot">0</span> Fundamentos</span>
+            <h3 class="atomic-card__title">Cores, type, espaço, motion</h3>
+            <p class="atomic-card__desc">Os blocos invisíveis. Clique nas cores para copiar o HEX. Escala tipográfica H1-H6, espaçamentos, sombras e motion.</p>
+            <ul class="atomic-card__list">
+              <li>Cores</li><li>Tipografia</li><li>Espaço</li><li>Sombras</li><li>Motion</li><li>Marca</li>
+            </ul>
+          </a>
+
+          <a class="atomic-card" href="./pages/02-atoms.html">
+            <span class="atomic-card__arrow"><i data-lucide="arrow-up-right" style="width:18px;height:18px"></i></span>
+            <span class="atomic-card__level"><span class="level-dot">A</span> Átomos</span>
+            <h3 class="atomic-card__title">Os menores blocos funcionais</h3>
+            <p class="atomic-card__desc">Botões em 4 estados, inputs, ícones Lucide, badges, avatares, spinners, dividers, links.</p>
+            <ul class="atomic-card__list">
+              <li>Button</li><li>Input</li><li>Badge</li><li>Icon</li><li>Avatar</li><li>Spinner</li>
+            </ul>
+          </a>
+
+          <a class="atomic-card" href="./pages/03-molecules.html">
+            <span class="atomic-card__arrow"><i data-lucide="arrow-up-right" style="width:18px;height:18px"></i></span>
+            <span class="atomic-card__level"><span class="level-dot">M</span> Moléculas</span>
+            <h3 class="atomic-card__title">Combinações funcionais</h3>
+            <p class="atomic-card__desc">Form fields, cards com Lucide, toasts dinâmicos, tooltips, dropdowns, search bar, tags.</p>
+            <ul class="atomic-card__list">
+              <li>Card</li><li>FormField</li><li>Toast</li><li>Tooltip</li><li>Dropdown</li>
+            </ul>
+          </a>
+
+          <a class="atomic-card" href="./pages/04-organisms.html">
+            <span class="atomic-card__arrow"><i data-lucide="arrow-up-right" style="width:18px;height:18px"></i></span>
+            <span class="atomic-card__level"><span class="level-dot">O</span> Organismos</span>
+            <h3 class="atomic-card__title">Estruturas completas</h3>
+            <p class="atomic-card__desc">Navbar, <strong>Hero 3D</strong> com cursor tracking, <strong>Carrossel</strong>, Accordion, Tabs, Footer e o famoso <strong>dropdown Pomelo</strong>.</p>
+            <ul class="atomic-card__list">
+              <li>Hero 3D</li><li>Carousel</li><li>Accordion</li><li>Tabs</li><li>Navbar</li>
+            </ul>
+          </a>
+
+          <a class="atomic-card" href="./pages/08-3d-builder.html" style="border-color:rgba(32,215,138,0.4);background:linear-gradient(135deg, rgba(32,215,138,0.08), rgba(0,102,255,0.05))">
+            <span class="atomic-card__arrow"><i data-lucide="arrow-up-right" style="width:18px;height:18px"></i></span>
+            <span class="atomic-card__level" style="color:var(--fds-color-esmeralda)"><i data-lucide="box" style="width:14px;height:14px;vertical-align:middle"></i> Especial</span>
+            <h3 class="atomic-card__title">3D Builder</h3>
+            <p class="atomic-card__desc">Configure o Spark 3D em tempo real — material, luzes, motion, hover, 7 presets brand. Exporta código Three.js + GSAP pronto.</p>
+            <ul class="atomic-card__list">
+              <li>Three.js</li><li>OBJ</li><li>7 presets</li><li>Export code</li>
+            </ul>
+          </a>
+
+          <a class="atomic-card" href="./pages/07-spark-animations.html" style="border-color:rgba(139,92,246,0.4);background:linear-gradient(135deg, rgba(139,92,246,0.08), rgba(0,102,255,0.05))">
+            <span class="atomic-card__arrow"><i data-lucide="arrow-up-right" style="width:18px;height:18px"></i></span>
+            <span class="atomic-card__level" style="color:var(--fds-color-violeta)"><i data-lucide="sparkles" style="width:14px;height:14px;vertical-align:middle"></i> Especial</span>
+            <h3 class="atomic-card__title">Spark Animations</h3>
+            <p class="atomic-card__desc">12 animações CSS puras do símbolo Spark — draw, pulse, orbit, rotate, morph, neon, burst, constellation e mais. Cole no seu CSS.</p>
+            <ul class="atomic-card__list">
+              <li>Draw</li><li>Pulse</li><li>Orbit</li><li>Neon</li><li>Burst</li>
+            </ul>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- GETTING STARTED -->
+    <section class="docs-section" id="getting-started">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow">Setup</span>
+        <h2 class="docs-section__title">Como usar</h2>
+        <p class="docs-section__lead">Importe os 3 CSS de fundação + a biblioteca <code class="fds-inline">FDS</code>. Sem build, sem framework — funciona em qualquer página HTML, incluindo WordPress.</p>
+      </header>
+
+      <div id="stack-snippet" hidden>&lt;!-- 1. Fonts + tokens (3 CSS de fundação) --&gt;
+&lt;link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap"&gt;
+&lt;link rel="stylesheet" href="css/tokens.css"&gt;
+&lt;link rel="stylesheet" href="css/base.css"&gt;
+&lt;link rel="stylesheet" href="css/components.css"&gt;
+&lt;link rel="stylesheet" href="css/molecules.css"&gt;
+
+&lt;!-- 2. Vendors --&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"&gt;&lt;/script&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"&gt;&lt;/script&gt;
+&lt;script src="https://unpkg.com/lucide@latest"&gt;&lt;/script&gt;
+
+&lt;!-- 3. Biblioteca FDS --&gt;
+&lt;script src="js/fds.js"&gt;&lt;/script&gt;
+&lt;script src="js/fds-theme.js"&gt;&lt;/script&gt;
+&lt;script src="js/fds-toast.js"&gt;&lt;/script&gt;
+&lt;script src="js/fds-clipboard.js"&gt;&lt;/script&gt;
+&lt;script src="js/fds-codeblock.js"&gt;&lt;/script&gt;
+&lt;script&gt;lucide.createIcons();&lt;/script&gt;</div>
+
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview demo__stage--stack">
+          <p class="fds-body-m fds-text-center" style="margin:0;max-width:520px">
+            Cole no <code class="fds-inline">&lt;head&gt;</code> do tema WordPress (ou em qualquer HTML).
+            Tudo pronto — botões, cores, animações funcionando.
+          </p>
+        </div>
+        <template data-code="html">
+&lt;!-- 1. Fonts + tokens --&gt;
+&lt;link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap"&gt;
+&lt;link rel="stylesheet" href="css/tokens.css"&gt;
+&lt;link rel="stylesheet" href="css/base.css"&gt;
+&lt;link rel="stylesheet" href="css/components.css"&gt;
+&lt;link rel="stylesheet" href="css/molecules.css"&gt;
+
+&lt;!-- 2. Vendors (GSAP + Lucide) --&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"&gt;&lt;/script&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"&gt;&lt;/script&gt;
+&lt;script src="https://unpkg.com/lucide@latest"&gt;&lt;/script&gt;
+
+&lt;!-- 3. Biblioteca Fortics --&gt;
+&lt;script src="js/fds.js"&gt;&lt;/script&gt;
+&lt;script src="js/fds-theme.js"&gt;&lt;/script&gt;
+&lt;script src="js/fds-toast.js"&gt;&lt;/script&gt;
+&lt;script src="js/fds-clipboard.js"&gt;&lt;/script&gt;
+&lt;script&gt;lucide.createIcons();&lt;/script&gt;
+        </template>
+        <template data-code="js">
+// API global window.FDS — disponível depois que os scripts carregam
+FDS.toast.success('Tudo certo!', 'O Design System está ativo.');
+FDS.theme.set('light');             // ou 'dark'
+FDS.animate.scrollReveal('.card');   // GSAP scroll reveal
+FDS.clipboard.copy('#0066FF', { label: 'HEX' });
+        </template>
+      </div>
+    </section>
+
+    <footer style="padding:var(--fds-space-7) var(--fds-space-8);color:var(--fds-text-tertiary);font-size:var(--fds-text-caption);border-top:1px solid var(--fds-border-subtle)">
+      © Fortics · Design System v1.0 · Construído com Atomic Design + GSAP + Lucide.
+    </footer>
+
+  </main>
+</div>
+
+<!-- Vendors -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<!-- FDS Library -->
+<script src="js/fds.js"></script>
+<script src="js/fds-theme.js"></script>
+<script src="js/fds-toast.js"></script>
+<script src="js/fds-clipboard.js"></script>
+<script src="js/fds-codeblock.js"></script>
+<script src="js/fds-brand-anim.js"></script>
+
+<script>
+  // Inicializa Lucide
+  lucide.createIcons();
+
+  // Hub stats com count-up
+  document.querySelectorAll('[data-count-to]').forEach(el => {
+    const to = parseFloat(el.dataset.countTo);
+    const suffix = el.dataset.countSuffix || '';
+    FDS.animate.countUp(el, { from: 0, to, duration: 2, suffix });
+  });
+
+  // Hero entrance
+  FDS.animate.scrollReveal('.hub__hero > *', { y: 24, stagger: 0.08, start: 'top 95%' });
+  FDS.animate.scrollReveal('.atomic-card',   { y: 40, stagger: 0.06 });
+
+  // Logo swap por tema
+  function syncLogos() {
+    const dark = FDS.theme.current() === 'dark';
+    document.querySelectorAll('.logo-dark').forEach(el => el.hidden  = !dark);
+    document.querySelectorAll('.logo-light').forEach(el => el.hidden = dark);
+  }
+  syncLogos();
+  document.addEventListener('fds:theme-change', syncLogos);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fundamentos · Fortics DS</title>
+
+<link rel="icon" type="image/svg+xml" href="../assets/icons/spark-principal.svg" />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="../css/tokens.css" />
+<link rel="stylesheet" href="../css/base.css" />
+<link rel="stylesheet" href="../css/components.css" />
+<link rel="stylesheet" href="../css/molecules.css" />
+<link rel="stylesheet" href="../css/showcase.css" />
+<script>
+  (function(){
+    try {
+      var t = localStorage.getItem('fds-theme');
+      if (!t) t = 'light';  // light como padrão absoluto do brandbook
+      document.documentElement.setAttribute('data-theme', t);
+    } catch(_) {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  })();
+</script>
+</head>
+<body>
+
+<div class="docs">
+
+  <!-- =========================== SIDEBAR =========================== -->
+  <aside class="docs-side">
+    <div class="docs-side__brand">
+      <img class="logo-dark"  src="../assets/logos/horizontal-branco.svg" alt="Fortics" />
+      <img class="logo-light" src="../assets/logos/horizontal-marinho.svg" alt="Fortics" hidden />
+    </div>
+
+    <div class="docs-side__group">
+      <div class="docs-side__title">Início</div>
+      <a class="docs-side__link" href="../index.html"><i data-lucide="home"></i> Visão geral</a>
+    </div>
+
+    <div class="docs-side__group">
+      <div class="docs-side__title">Atomic Design</div>
+      <a class="docs-side__link is-active" href="./01-foundations.html"><span class="level-dot">0</span> Fundamentos</a>
+      <a class="docs-side__link" href="./02-atoms.html"><span class="level-dot">A</span> Átomos</a>
+      <a class="docs-side__link" href="./03-molecules.html"><span class="level-dot">M</span> Moléculas</a>
+      <a class="docs-side__link" href="./04-organisms.html"><span class="level-dot">O</span> Organismos</a>
+      
+      </div>
+
+    <div class="docs-side__group">
+      <div class="docs-side__title">Nesta página</div>
+      <a class="docs-side__link" href="#colors"><i data-lucide="palette"></i> Cores</a>
+      <a class="docs-side__link" href="#typography"><i data-lucide="type"></i> Tipografia</a>
+      <a class="docs-side__link" href="#spacing"><i data-lucide="move"></i> Espaçamento</a>
+      <a class="docs-side__link" href="#radius"><i data-lucide="square-dashed"></i> Raios</a>
+      <a class="docs-side__link" href="#elevation"><i data-lucide="layers"></i> Elevação</a>
+      <a class="docs-side__link" href="#motion"><i data-lucide="zap"></i> Motion</a>
+      <a class="docs-side__link" href="#brand"><i data-lucide="award"></i> Marca</a>
+    </div>
+
+    <div class="docs-side__footer">
+      <div class="fds-theme-toggle" data-fds-theme-toggle role="group" aria-label="Tema">
+        <button class="fds-theme-toggle__btn" data-theme-set="light" aria-pressed="true" aria-label="Tema claro">
+          <i data-lucide="sun" style="width:16px;height:16px"></i>
+        </button>
+        <button class="fds-theme-toggle__btn" data-theme-set="dark" aria-pressed="false" aria-label="Tema escuro">
+          <i data-lucide="moon" style="width:16px;height:16px"></i>
+        </button>
+      </div>
+      <p class="fds-caption" style="margin:0">Fortics DS v1.0</p>
+    </div>
+  </aside>
+
+  <!-- =========================== MAIN =========================== -->
+  <main class="docs-main">
+
+    <header class="docs-top">
+      <div class="docs-top__crumb">~ / design-system / fundamentos</div>
+      <div class="docs-top__actions">
+        <span class="fds-badge fds-badge--nucleo"><span class="fds-badge__dot"></span>Nível 0</span>
+      </div>
+    </header>
+
+    <!-- HEADER -->
+    <section class="docs-section">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow"><span class="level-dot">0</span> Fundamentos</span>
+        <h1 class="docs-section__title">As fundações invisíveis</h1>
+        <p class="docs-section__lead">
+          São os menores blocos do sistema — variáveis brutas sem contexto de uso, que sustentam
+          todos os componentes acima. <strong>Clique em qualquer chip de cor</strong> para copiar
+          o HEX automaticamente para a área de transferência.
+        </p>
+      </header>
+    </section>
+
+    <!-- ============================================================
+         CORES
+         ============================================================ -->
+    <section class="docs-section" id="colors">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow"><i data-lucide="palette" style="width:14px;height:14px;vertical-align:middle"></i> Color</span>
+        <h2 class="docs-section__title">Paleta de cores</h2>
+        <p class="docs-section__lead">4 cores de marca + branco. Núcleo Azul é a primária; Marinho a base; Esmeralda e Violeta acentos. Clique para copiar o HEX.</p>
+      </header>
+
+      <div class="docs-subhead">
+        <h3 class="fds-h3">Cores de marca</h3>
+        <p>Imutáveis · uso direto</p>
+      </div>
+      <div class="color-grid">
+        <button class="fds-color-chip" data-copy="#0066FF" data-copy-label="Núcleo Azul">
+          <div class="fds-color-chip__swatch" style="background:#0066FF"><span class="fds-color-chip__copy-hint">Copiar HEX</span></div>
+          <div class="fds-color-chip__meta">
+            <p class="fds-color-chip__name">Núcleo Azul</p>
+            <p class="fds-color-chip__hex">#0066FF · rgb(0 102 255)</p>
+          </div>
+        </button>
+        <button class="fds-color-chip" data-copy="#0B1121" data-copy-label="Marinho">
+          <div class="fds-color-chip__swatch" style="background:#0B1121"><span class="fds-color-chip__copy-hint">Copiar HEX</span></div>
+          <div class="fds-color-chip__meta">
+            <p class="fds-color-chip__name">Marinho</p>
+            <p class="fds-color-chip__hex">#0B1121 · rgb(11 17 36)</p>
+          </div>
+        </button>
+        <button class="fds-color-chip" data-copy="#8B5CF6" data-copy-label="Violeta">
+          <div class="fds-color-chip__swatch" style="background:#8B5CF6"><span class="fds-color-chip__copy-hint">Copiar HEX</span></div>
+          <div class="fds-color-chip__meta">
+            <p class="fds-color-chip__name">Violeta</p>
+            <p class="fds-color-chip__hex">#8B5CF6 · rgb(139 92 246)</p>
+          </div>
+        </button>
+        <button class="fds-color-chip" data-copy="#20D78A" data-copy-label="Esmeralda">
+          <div class="fds-color-chip__swatch" style="background:#20D78A"><span class="fds-color-chip__copy-hint">Copiar HEX</span></div>
+          <div class="fds-color-chip__meta">
+            <p class="fds-color-chip__name">Esmeralda</p>
+            <p class="fds-color-chip__hex">#20D78A · rgb(32 215 138)</p>
+          </div>
+        </button>
+        <button class="fds-color-chip" data-copy="#FFFFFF" data-copy-label="Branco">
+          <div class="fds-color-chip__swatch" style="background:#FFFFFF;border:1px solid var(--fds-border-default)"><span class="fds-color-chip__copy-hint">Copiar HEX</span></div>
+          <div class="fds-color-chip__meta">
+            <p class="fds-color-chip__name">Branco</p>
+            <p class="fds-color-chip__hex">#FFFFFF · rgb(255 255 255)</p>
+          </div>
+        </button>
+      </div>
+
+      <div class="docs-subhead">
+        <h3 class="fds-h3">Escala do Núcleo</h3>
+        <p>Hover · estados · backgrounds</p>
+      </div>
+      <div class="color-grid">
+        <button class="fds-color-chip" data-copy="#1A75FF" data-copy-label="Núcleo 90"><div class="fds-color-chip__swatch" style="background:#1A75FF"><span class="fds-color-chip__copy-hint">Copiar</span></div><div class="fds-color-chip__meta"><p class="fds-color-chip__name">Núcleo 90</p><p class="fds-color-chip__hex">#1A75FF</p></div></button>
+        <button class="fds-color-chip" data-copy="#3385FF" data-copy-label="Núcleo 80"><div class="fds-color-chip__swatch" style="background:#3385FF"><span class="fds-color-chip__copy-hint">Copiar</span></div><div class="fds-color-chip__meta"><p class="fds-color-chip__name">Núcleo 80</p><p class="fds-color-chip__hex">#3385FF</p></div></button>
+        <button class="fds-color-chip" data-copy="#CCE0FF" data-copy-label="Núcleo 20"><div class="fds-color-chip__swatch" style="background:#CCE0FF"><span class="fds-color-chip__copy-hint">Copiar</span></div><div class="fds-color-chip__meta"><p class="fds-color-chip__name">Núcleo 20</p><p class="fds-color-chip__hex">#CCE0FF</p></div></button>
+        <button class="fds-color-chip" data-copy="#E5EFFF" data-copy-label="Núcleo 10"><div class="fds-color-chip__swatch" style="background:#E5EFFF"><span class="fds-color-chip__copy-hint">Copiar</span></div><div class="fds-color-chip__meta"><p class="fds-color-chip__name">Núcleo 10</p><p class="fds-color-chip__hex">#E5EFFF</p></div></button>
+      </div>
+
+      <div class="docs-subhead">
+        <h3 class="fds-h3">Escala do Marinho</h3>
+        <p>Texto · superfícies · bordas</p>
+      </div>
+      <div class="color-grid">
+        <button class="fds-color-chip" data-copy="#1C2235" data-copy-label="Marinho 90"><div class="fds-color-chip__swatch" style="background:#1C2235"><span class="fds-color-chip__copy-hint">Copiar</span></div><div class="fds-color-chip__meta"><p class="fds-color-chip__name">Marinho 90</p><p class="fds-color-chip__hex">#1C2235</p></div></button>
+        <button class="fds-color-chip" data-copy="#2C3449" data-copy-label="Marinho 80"><div class="fds-color-chip__swatch" style="background:#2C3449"><span class="fds-color-chip__copy-hint">Copiar</span></div><div class="fds-color-chip__meta"><p class="fds-color-chip__name">Marinho 80</p><p class="fds-color-chip__hex">#2C3449</p></div></button>
+        <button class="fds-color-chip" data-copy="#3D465D" data-copy-label="Marinho 70"><div class="fds-color-chip__swatch" style="background:#3D465D"><span class="fds-color-chip__copy-hint">Copiar</span></div><div class="fds-color-chip__meta"><p class="fds-color-chip__name">Marinho 70</p><p class="fds-color-chip__hex">#3D465D</p></div></button>
+        <button class="fds-color-chip" data-copy="#5E6678" data-copy-label="Marinho 50"><div class="fds-color-chip__swatch" style="background:#5E6678"><span class="fds-color-chip__copy-hint">Copiar</span></div><div class="fds-color-chip__meta"><p class="fds-color-chip__name">Marinho 50</p><p class="fds-color-chip__hex">#5E6678</p></div></button>
+        <button class="fds-color-chip" data-copy="#9DA3B0" data-copy-label="Marinho 30"><div class="fds-color-chip__swatch" style="background:#9DA3B0"><span class="fds-color-chip__copy-hint">Copiar</span></div><div class="fds-color-chip__meta"><p class="fds-color-chip__name">Marinho 30</p><p class="fds-color-chip__hex">#9DA3B0</p></div></button>
+        <button class="fds-color-chip" data-copy="#E1E3E8" data-copy-label="Marinho 10"><div class="fds-color-chip__swatch" style="background:#E1E3E8"><span class="fds-color-chip__copy-hint">Copiar</span></div><div class="fds-color-chip__meta"><p class="fds-color-chip__name">Marinho 10</p><p class="fds-color-chip__hex">#E1E3E8</p></div></button>
+      </div>
+
+      <div class="docs-subhead">
+        <h3 class="fds-h3">Cores semânticas</h3>
+        <p>Estados · feedback · sistema</p>
+      </div>
+      <div class="color-grid">
+        <button class="fds-color-chip" data-copy="#20D78A" data-copy-label="Success"><div class="fds-color-chip__swatch" style="background:#20D78A"><span class="fds-color-chip__copy-hint">Copiar</span></div><div class="fds-color-chip__meta"><p class="fds-color-chip__name">Success</p><p class="fds-color-chip__hex">#20D78A</p></div></button>
+        <button class="fds-color-chip" data-copy="#0066FF" data-copy-label="Info"><div class="fds-color-chip__swatch" style="background:#0066FF"><span class="fds-color-chip__copy-hint">Copiar</span></div><div class="fds-color-chip__meta"><p class="fds-color-chip__name">Info</p><p class="fds-color-chip__hex">#0066FF</p></div></button>
+        <button class="fds-color-chip" data-copy="#F5B100" data-copy-label="Warning"><div class="fds-color-chip__swatch" style="background:#F5B100"><span class="fds-color-chip__copy-hint">Copiar</span></div><div class="fds-color-chip__meta"><p class="fds-color-chip__name">Warning</p><p class="fds-color-chip__hex">#F5B100</p></div></button>
+        <button class="fds-color-chip" data-copy="#FF4D4F" data-copy-label="Danger"><div class="fds-color-chip__swatch" style="background:#FF4D4F"><span class="fds-color-chip__copy-hint">Copiar</span></div><div class="fds-color-chip__meta"><p class="fds-color-chip__name">Danger</p><p class="fds-color-chip__hex">#FF4D4F</p></div></button>
+      </div>
+
+      <div class="docs-subhead">
+        <h3 class="fds-h3">Gradientes oficiais</h3>
+        <p>Apenas backgrounds e destaques</p>
+      </div>
+      <div class="color-grid">
+        <button class="fds-color-chip" data-copy="linear-gradient(135deg, #0066FF 0%, #0B1121 100%)" data-copy-label="Gradiente"><div class="fds-color-chip__swatch" style="background:linear-gradient(135deg, #0066FF 0%, #0B1121 100%)"><span class="fds-color-chip__copy-hint">Copiar CSS</span></div><div class="fds-color-chip__meta"><p class="fds-color-chip__name">Núcleo → Marinho</p><p class="fds-color-chip__hex">backgrounds, heroes</p></div></button>
+        <button class="fds-color-chip" data-copy="linear-gradient(135deg, #0066FF 0%, #20D78A 100%)" data-copy-label="Gradiente"><div class="fds-color-chip__swatch" style="background:linear-gradient(135deg, #0066FF 0%, #20D78A 100%)"><span class="fds-color-chip__copy-hint">Copiar CSS</span></div><div class="fds-color-chip__meta"><p class="fds-color-chip__name">Núcleo → Esmeralda</p><p class="fds-color-chip__hex">sucesso, métricas</p></div></button>
+        <button class="fds-color-chip" data-copy="linear-gradient(135deg, #0066FF 0%, #8B5CF6 100%)" data-copy-label="Gradiente"><div class="fds-color-chip__swatch" style="background:linear-gradient(135deg, #0066FF 0%, #8B5CF6 100%)"><span class="fds-color-chip__copy-hint">Copiar CSS</span></div><div class="fds-color-chip__meta"><p class="fds-color-chip__name">Núcleo → Violeta</p><p class="fds-color-chip__hex">CTA, destaque IA</p></div></button>
+        <button class="fds-color-chip" data-copy="linear-gradient(135deg, #0066FF 0%, #8B5CF6 50%, #20D78A 100%)" data-copy-label="Gradiente"><div class="fds-color-chip__swatch" style="background:linear-gradient(135deg, #0066FF 0%, #8B5CF6 50%, #20D78A 100%)"><span class="fds-color-chip__copy-hint">Copiar CSS</span></div><div class="fds-color-chip__meta"><p class="fds-color-chip__name">Tri-color hero</p><p class="fds-color-chip__hex">backgrounds heroicos</p></div></button>
+      </div>
+
+      <div class="docs-subhead">
+        <h3 class="fds-h3">Como usar no código</h3>
+      </div>
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview demo__stage--stack">
+          <p class="fds-body-m fds-text-center" style="max-width:520px;margin:0">
+            Sempre use as <strong>CSS custom properties</strong> — nunca hardcode HEX direto.
+            Assim o tema light/dark aplica automaticamente.
+          </p>
+        </div>
+        <template data-code="css">
+/* CSS — use as variáveis, não os HEX diretamente */
+.meu-componente {
+  background: var(--fds-color-nucleo);
+  color: var(--fds-text-primary);
+  border: 1px solid var(--fds-border-default);
+}
+
+/* Para gradientes oficiais */
+.hero {
+  background: var(--fds-gradient-nucleo-violeta);
+}
+        </template>
+        <template data-code="html">
+&lt;div class="meu-componente"&gt;
+  Conteúdo respeita o tema atual
+&lt;/div&gt;
+        </template>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         TIPOGRAFIA
+         ============================================================ -->
+    <section class="docs-section" id="typography">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow"><i data-lucide="type" style="width:14px;height:14px;vertical-align:middle"></i> Type</span>
+        <h2 class="docs-section__title">Tipografia</h2>
+        <p class="docs-section__lead">
+          Fonte única <strong>Sora</strong> (Google Fonts) · 7 pesos disponíveis ·
+          escala responsiva via <code class="fds-inline">clamp()</code> — ajusta automaticamente entre 320px e 1440px.
+        </p>
+      </header>
+
+      <div class="docs-subhead">
+        <h3 class="fds-h3">Escala H1–H6 + parágrafos</h3>
+        <p>Clique para copiar o seletor</p>
+      </div>
+
+      <div class="type-scale">
+        <div class="type-row">
+          <span class="type-row__label">h1 · &lt;h1&gt;</span>
+          <h1 style="margin:0">A revolução do relacionamento IA</h1>
+          <button class="fds-btn fds-btn--ghost fds-btn--sm" data-copy="h1" data-copy-label="Seletor">Copiar</button>
+        </div>
+        <div class="type-row">
+          <span class="type-row__label">h2 · &lt;h2&gt;</span>
+          <h2 style="margin:0">Confiabilidade operacional</h2>
+          <button class="fds-btn fds-btn--ghost fds-btn--sm" data-copy="h2" data-copy-label="Seletor">Copiar</button>
+        </div>
+        <div class="type-row">
+          <span class="type-row__label">h3 · &lt;h3&gt;</span>
+          <h3 style="margin:0">Inteligência integrada</h3>
+          <button class="fds-btn fds-btn--ghost fds-btn--sm" data-copy="h3" data-copy-label="Seletor">Copiar</button>
+        </div>
+        <div class="type-row">
+          <span class="type-row__label">h4 · &lt;h4&gt;</span>
+          <h4 style="margin:0">Simplicidade operável</h4>
+          <button class="fds-btn fds-btn--ghost fds-btn--sm" data-copy="h4" data-copy-label="Seletor">Copiar</button>
+        </div>
+        <div class="type-row">
+          <span class="type-row__label">h5 · &lt;h5&gt;</span>
+          <h5 style="margin:0">Ecossistema conectável</h5>
+          <button class="fds-btn fds-btn--ghost fds-btn--sm" data-copy="h5" data-copy-label="Seletor">Copiar</button>
+        </div>
+        <div class="type-row">
+          <span class="type-row__label">h6 · &lt;h6&gt;</span>
+          <h6 style="margin:0">CATEGORIA · MÓDULO</h6>
+          <button class="fds-btn fds-btn--ghost fds-btn--sm" data-copy="h6" data-copy-label="Seletor">Copiar</button>
+        </div>
+        <div class="type-row">
+          <span class="type-row__label">body-l · .fds-lead</span>
+          <p class="fds-lead" style="margin:0">A Fortics integra mensageria, voz e automação em uma infraestrutura única — com IA dentro dos fluxos.</p>
+          <button class="fds-btn fds-btn--ghost fds-btn--sm" data-copy=".fds-lead" data-copy-label="Classe">Copiar</button>
+        </div>
+        <div class="type-row">
+          <span class="type-row__label">body-m · &lt;p&gt;</span>
+          <p style="margin:0">Texto base de parágrafos, descrições de cards e conteúdo geral. Lê confortavelmente em larguras de até 70ch.</p>
+          <button class="fds-btn fds-btn--ghost fds-btn--sm" data-copy="p" data-copy-label="Tag">Copiar</button>
+        </div>
+        <div class="type-row">
+          <span class="type-row__label">body-s · .fds-body-s</span>
+          <p class="fds-body-s" style="margin:0">Texto secundário, descrições curtas, metadados. Pode usar peso semibold para hierarquia interna.</p>
+          <button class="fds-btn fds-btn--ghost fds-btn--sm" data-copy=".fds-body-s" data-copy-label="Classe">Copiar</button>
+        </div>
+        <div class="type-row">
+          <span class="type-row__label">caption · .fds-caption</span>
+          <p class="fds-caption" style="margin:0">Legenda · timestamp · descrição auxiliar (12px)</p>
+          <button class="fds-btn fds-btn--ghost fds-btn--sm" data-copy=".fds-caption" data-copy-label="Classe">Copiar</button>
+        </div>
+        <div class="type-row">
+          <span class="type-row__label">overline · .fds-overline</span>
+          <span class="fds-overline">EYEBROW · CATEGORIA</span>
+          <button class="fds-btn fds-btn--ghost fds-btn--sm" data-copy=".fds-overline" data-copy-label="Classe">Copiar</button>
+        </div>
+      </div>
+
+      <div class="docs-subhead">
+        <h3 class="fds-h3">Como usar</h3>
+      </div>
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview">
+          <h2 style="margin:0">Hierarquia natural via tags HTML</h2>
+        </div>
+        <template data-code="html">
+&lt;!-- Use as tags H1-H6 naturalmente --&gt;
+&lt;h1&gt;Título principal da página&lt;/h1&gt;
+&lt;h2&gt;Seção&lt;/h2&gt;
+&lt;h3&gt;Subseção&lt;/h3&gt;
+
+&lt;p class="fds-lead"&gt;Parágrafo introdutório de destaque.&lt;/p&gt;
+&lt;p&gt;Texto base padrão.&lt;/p&gt;
+&lt;span class="fds-overline"&gt;EYEBROW&lt;/span&gt;
+&lt;span class="fds-caption"&gt;Legenda&lt;/span&gt;
+        </template>
+        <template data-code="css">
+/* Tokens disponíveis */
+--fds-text-h1: clamp(2.5rem, 4.5vw, 3.5rem);
+--fds-text-h2: clamp(2rem, 3.5vw, 2.75rem);
+/* ...etc */
+
+/* Pesos */
+--fds-weight-regular:   400;
+--fds-weight-semibold:  600;
+--fds-weight-bold:      700;
+--fds-weight-extrabold: 800;
+        </template>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ESPAÇAMENTO
+         ============================================================ -->
+    <section class="docs-section" id="spacing">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow"><i data-lucide="move" style="width:14px;height:14px;vertical-align:middle"></i> Space</span>
+        <h2 class="docs-section__title">Espaçamento</h2>
+        <p class="docs-section__lead">Sistema baseado em <strong>4px</strong> com 13 níveis. Use as variáveis <code class="fds-inline">--fds-space-*</code> para padding, margin e gap.</p>
+      </header>
+
+      <div class="token-grid">
+        <button class="token-tile" data-copy="var(--fds-space-1)" data-copy-label="Token">
+          <div class="token-tile__demo" style="height:4px;align-self:stretch"></div>
+          <div class="token-tile__name">space-1</div>
+          <div class="token-tile__value">4px · 0.25rem</div>
+        </button>
+        <button class="token-tile" data-copy="var(--fds-space-2)" data-copy-label="Token">
+          <div class="token-tile__demo" style="height:8px;align-self:stretch"></div>
+          <div class="token-tile__name">space-2</div>
+          <div class="token-tile__value">8px · 0.5rem</div>
+        </button>
+        <button class="token-tile" data-copy="var(--fds-space-3)" data-copy-label="Token">
+          <div class="token-tile__demo" style="height:12px;align-self:stretch"></div>
+          <div class="token-tile__name">space-3</div>
+          <div class="token-tile__value">12px · 0.75rem</div>
+        </button>
+        <button class="token-tile" data-copy="var(--fds-space-4)" data-copy-label="Token">
+          <div class="token-tile__demo" style="height:16px;align-self:stretch"></div>
+          <div class="token-tile__name">space-4</div>
+          <div class="token-tile__value">16px · 1rem</div>
+        </button>
+        <button class="token-tile" data-copy="var(--fds-space-5)" data-copy-label="Token">
+          <div class="token-tile__demo" style="height:24px;align-self:stretch"></div>
+          <div class="token-tile__name">space-5</div>
+          <div class="token-tile__value">24px · 1.5rem</div>
+        </button>
+        <button class="token-tile" data-copy="var(--fds-space-6)" data-copy-label="Token">
+          <div class="token-tile__demo" style="height:32px;align-self:stretch"></div>
+          <div class="token-tile__name">space-6</div>
+          <div class="token-tile__value">32px · 2rem</div>
+        </button>
+        <button class="token-tile" data-copy="var(--fds-space-7)" data-copy-label="Token">
+          <div class="token-tile__demo" style="height:40px;align-self:stretch"></div>
+          <div class="token-tile__name">space-7</div>
+          <div class="token-tile__value">40px · 2.5rem</div>
+        </button>
+        <button class="token-tile" data-copy="var(--fds-space-8)" data-copy-label="Token">
+          <div class="token-tile__demo" style="height:48px;align-self:stretch"></div>
+          <div class="token-tile__name">space-8</div>
+          <div class="token-tile__value">48px · 3rem</div>
+        </button>
+        <button class="token-tile" data-copy="var(--fds-space-9)" data-copy-label="Token">
+          <div class="token-tile__demo" style="height:64px;align-self:stretch"></div>
+          <div class="token-tile__name">space-9</div>
+          <div class="token-tile__value">64px · 4rem</div>
+        </button>
+        <button class="token-tile" data-copy="var(--fds-space-10)" data-copy-label="Token">
+          <div class="token-tile__demo" style="height:80px;align-self:stretch"></div>
+          <div class="token-tile__name">space-10</div>
+          <div class="token-tile__value">80px · 5rem</div>
+        </button>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         RAIOS
+         ============================================================ -->
+    <section class="docs-section" id="radius">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow"><i data-lucide="square" style="width:14px;height:14px;vertical-align:middle"></i> Radius</span>
+        <h2 class="docs-section__title">Border radius</h2>
+        <p class="docs-section__lead">7 níveis · do XS (4px) ao Full (pílula). Use <code class="fds-inline">--fds-radius-md</code> como default para cards e inputs.</p>
+      </header>
+
+      <div class="token-grid">
+        <button class="token-tile" data-copy="var(--fds-radius-xs)" data-copy-label="Token"><div class="token-tile__demo" style="border-radius:var(--fds-radius-xs)"></div><div class="token-tile__name">radius-xs</div><div class="token-tile__value">4px</div></button>
+        <button class="token-tile" data-copy="var(--fds-radius-sm)" data-copy-label="Token"><div class="token-tile__demo" style="border-radius:var(--fds-radius-sm)"></div><div class="token-tile__name">radius-sm</div><div class="token-tile__value">8px</div></button>
+        <button class="token-tile" data-copy="var(--fds-radius-md)" data-copy-label="Token"><div class="token-tile__demo" style="border-radius:var(--fds-radius-md)"></div><div class="token-tile__name">radius-md</div><div class="token-tile__value">12px · default</div></button>
+        <button class="token-tile" data-copy="var(--fds-radius-lg)" data-copy-label="Token"><div class="token-tile__demo" style="border-radius:var(--fds-radius-lg)"></div><div class="token-tile__name">radius-lg</div><div class="token-tile__value">16px</div></button>
+        <button class="token-tile" data-copy="var(--fds-radius-xl)" data-copy-label="Token"><div class="token-tile__demo" style="border-radius:var(--fds-radius-xl)"></div><div class="token-tile__name">radius-xl</div><div class="token-tile__value">24px</div></button>
+        <button class="token-tile" data-copy="var(--fds-radius-2xl)" data-copy-label="Token"><div class="token-tile__demo" style="border-radius:var(--fds-radius-2xl)"></div><div class="token-tile__name">radius-2xl</div><div class="token-tile__value">32px</div></button>
+        <button class="token-tile" data-copy="var(--fds-radius-full)" data-copy-label="Token"><div class="token-tile__demo" style="border-radius:var(--fds-radius-full)"></div><div class="token-tile__name">radius-full</div><div class="token-tile__value">pílula · 9999px</div></button>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ELEVAÇÃO
+         ============================================================ -->
+    <section class="docs-section" id="elevation">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow"><i data-lucide="layers" style="width:14px;height:14px;vertical-align:middle"></i> Elevation</span>
+        <h2 class="docs-section__title">Elevação</h2>
+        <p class="docs-section__lead">5 sombras + 3 glow coloridos. As sombras se adaptam automaticamente ao tema (light/dark).</p>
+      </header>
+
+      <div class="token-grid">
+        <button class="token-tile" data-copy="var(--fds-shadow-xs)" data-copy-label="Token"><div class="token-tile__demo shadow-tile" style="background:var(--fds-surface-2);box-shadow:var(--fds-shadow-xs)"></div><div class="token-tile__name">shadow-xs</div></button>
+        <button class="token-tile" data-copy="var(--fds-shadow-sm)" data-copy-label="Token"><div class="token-tile__demo shadow-tile" style="background:var(--fds-surface-2);box-shadow:var(--fds-shadow-sm)"></div><div class="token-tile__name">shadow-sm</div></button>
+        <button class="token-tile" data-copy="var(--fds-shadow-md)" data-copy-label="Token"><div class="token-tile__demo shadow-tile" style="background:var(--fds-surface-2);box-shadow:var(--fds-shadow-md)"></div><div class="token-tile__name">shadow-md</div></button>
+        <button class="token-tile" data-copy="var(--fds-shadow-lg)" data-copy-label="Token"><div class="token-tile__demo shadow-tile" style="background:var(--fds-surface-2);box-shadow:var(--fds-shadow-lg)"></div><div class="token-tile__name">shadow-lg</div></button>
+        <button class="token-tile" data-copy="var(--fds-shadow-xl)" data-copy-label="Token"><div class="token-tile__demo shadow-tile" style="background:var(--fds-surface-2);box-shadow:var(--fds-shadow-xl)"></div><div class="token-tile__name">shadow-xl</div></button>
+        <button class="token-tile" data-copy="var(--fds-shadow-glow-nucleo)" data-copy-label="Token"><div class="token-tile__demo shadow-tile" style="background:var(--fds-surface-2);box-shadow:var(--fds-shadow-glow-nucleo)"></div><div class="token-tile__name">glow-nucleo</div></button>
+        <button class="token-tile" data-copy="var(--fds-shadow-glow-esmeralda)" data-copy-label="Token"><div class="token-tile__demo shadow-tile" style="background:var(--fds-surface-2);box-shadow:var(--fds-shadow-glow-esmeralda)"></div><div class="token-tile__name">glow-esmeralda</div></button>
+        <button class="token-tile" data-copy="var(--fds-shadow-glow-violeta)" data-copy-label="Token"><div class="token-tile__demo shadow-tile" style="background:var(--fds-surface-2);box-shadow:var(--fds-shadow-glow-violeta)"></div><div class="token-tile__name">glow-violeta</div></button>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         MOTION
+         ============================================================ -->
+    <section class="docs-section" id="motion">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow"><i data-lucide="zap" style="width:14px;height:14px;vertical-align:middle"></i> Motion</span>
+        <h2 class="docs-section__title">Motion</h2>
+        <p class="docs-section__lead">Durations + easings padronizados. A biblioteca <code class="fds-inline">FDS.animate</code> usa estes mesmos valores via GSAP.</p>
+      </header>
+
+      <div class="docs-subhead">
+        <h3 class="fds-h3">Durations</h3>
+      </div>
+      <div class="token-grid">
+        <button class="token-tile" data-copy="var(--fds-duration-instant)" data-copy-label="Token"><div class="token-tile__demo"></div><div class="token-tile__name">instant</div><div class="token-tile__value">100ms</div></button>
+        <button class="token-tile" data-copy="var(--fds-duration-fast)" data-copy-label="Token"><div class="token-tile__demo"></div><div class="token-tile__name">fast</div><div class="token-tile__value">200ms</div></button>
+        <button class="token-tile" data-copy="var(--fds-duration-base)" data-copy-label="Token"><div class="token-tile__demo"></div><div class="token-tile__name">base · default</div><div class="token-tile__value">320ms</div></button>
+        <button class="token-tile" data-copy="var(--fds-duration-slow)" data-copy-label="Token"><div class="token-tile__demo"></div><div class="token-tile__name">slow</div><div class="token-tile__value">480ms</div></button>
+        <button class="token-tile" data-copy="var(--fds-duration-slower)" data-copy-label="Token"><div class="token-tile__demo"></div><div class="token-tile__name">slower</div><div class="token-tile__value">720ms</div></button>
+      </div>
+
+      <div class="docs-subhead">
+        <h3 class="fds-h3">Easings</h3>
+        <p>O quadradinho azul roda a curva em loop</p>
+      </div>
+      <div class="token-grid">
+        <button class="token-tile" data-copy="var(--fds-ease-out)" data-copy-label="Token">
+          <div class="token-tile__demo" style="height:auto;padding:var(--fds-space-3) 0;background:transparent"><div class="motion-demo" style="animation-timing-function:cubic-bezier(0.16,1,0.3,1)"></div></div>
+          <div class="token-tile__name">ease-out</div>
+          <div class="token-tile__value">cubic-bezier(.16,1,.3,1)</div>
+        </button>
+        <button class="token-tile" data-copy="var(--fds-ease-in-out)" data-copy-label="Token">
+          <div class="token-tile__demo" style="height:auto;padding:var(--fds-space-3) 0;background:transparent"><div class="motion-demo" style="animation-timing-function:cubic-bezier(0.65,0,0.35,1)"></div></div>
+          <div class="token-tile__name">ease-in-out</div>
+          <div class="token-tile__value">cubic-bezier(.65,0,.35,1)</div>
+        </button>
+        <button class="token-tile" data-copy="var(--fds-ease-spring)" data-copy-label="Token">
+          <div class="token-tile__demo" style="height:auto;padding:var(--fds-space-3) 0;background:transparent"><div class="motion-demo" style="animation-timing-function:cubic-bezier(0.34,1.56,0.64,1)"></div></div>
+          <div class="token-tile__name">ease-spring</div>
+          <div class="token-tile__value">overshoot</div>
+        </button>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         MARCA
+         ============================================================ -->
+    <section class="docs-section" id="brand">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow"><i data-lucide="award" style="width:14px;height:14px;vertical-align:middle"></i> Brand</span>
+        <h2 class="docs-section__title">Regras de aplicação da marca</h2>
+        <p class="docs-section__lead">
+          O símbolo <strong>Spark</strong> + wordmark <strong>Fortics</strong>.
+          Tamanho mínimo digital: <strong>100px</strong> (horizontal), <strong>40px</strong> (só símbolo).
+        </p>
+      </header>
+
+      <div class="docs-subhead"><h3 class="fds-h3">Logotipos</h3></div>
+      <div class="brand-grid">
+        <div class="brand-tile"><div class="brand-tile__preview"><img src="../assets/logos/horizontal-principal.svg" alt="" /></div><div class="brand-tile__caption">horizontal-principal</div></div>
+        <div class="brand-tile"><div class="brand-tile__preview brand-tile__preview--dark"><img src="../assets/logos/horizontal-branco.svg" alt="" /></div><div class="brand-tile__caption">horizontal-branco</div></div>
+        <div class="brand-tile"><div class="brand-tile__preview brand-tile__preview--nucleo"><img src="../assets/logos/horizontal-branco-spark-marinho.svg" alt="" /></div><div class="brand-tile__caption">branco-spark-marinho</div></div>
+        <div class="brand-tile"><div class="brand-tile__preview brand-tile__preview--light"><img src="../assets/logos/horizontal-marinho.svg" alt="" /></div><div class="brand-tile__caption">horizontal-marinho</div></div>
+        <div class="brand-tile"><div class="brand-tile__preview"><img src="../assets/logos/horizontal-azul-nucleo.svg" alt="" /></div><div class="brand-tile__caption">horizontal-azul-nucleo</div></div>
+        <div class="brand-tile"><div class="brand-tile__preview" style="height:240px"><img src="../assets/logos/vertical-principal.svg" alt="" style="max-height:200px" /></div><div class="brand-tile__caption">vertical-principal</div></div>
+      </div>
+
+      <div class="docs-subhead"><h3 class="fds-h3">Ícones de marca</h3></div>
+      <div class="brand-grid">
+        <div class="brand-tile"><div class="brand-tile__preview"><img src="../assets/icons/spark-principal.svg" style="width:80px" alt="" /></div><div class="brand-tile__caption">spark-principal</div></div>
+        <div class="brand-tile"><div class="brand-tile__preview brand-tile__preview--nucleo"><img src="../assets/icons/spark-fundo-nucleo.svg" style="width:80px" alt="" /></div><div class="brand-tile__caption">spark-fundo-nucleo</div></div>
+        <div class="brand-tile"><div class="brand-tile__preview brand-tile__preview--dark"><img src="../assets/icons/spark-fundo-escuro.svg" style="width:80px" alt="" /></div><div class="brand-tile__caption">spark-fundo-escuro</div></div>
+        <div class="brand-tile"><div class="brand-tile__preview"><img src="../assets/icons/f-spark-principal.svg" style="width:80px" alt="" /></div><div class="brand-tile__caption">f-spark</div></div>
+        <div class="brand-tile"><div class="brand-tile__preview"><img src="../assets/icons/ia-spark-principal.svg" style="width:80px" alt="" /></div><div class="brand-tile__caption">ia-spark</div></div>
+      </div>
+
+      <div class="docs-subhead"><h3 class="fds-h3">Patterns oficiais</h3></div>
+      <div class="brand-grid">
+        <div class="brand-tile" style="position:relative;overflow:hidden"><div style="height:140px;background:var(--fds-color-nucleo);background-image:url(../assets/patterns/pattern-marinho.svg);background-size:200px"></div><div class="brand-tile__caption">pattern-marinho sobre núcleo</div></div>
+        <div class="brand-tile" style="position:relative;overflow:hidden"><div style="height:140px;background:var(--fds-color-marinho);background-image:url(../assets/patterns/pattern-azul-nucleo.svg);background-size:200px"></div><div class="brand-tile__caption">pattern-nucleo sobre marinho</div></div>
+        <div class="brand-tile" style="position:relative;overflow:hidden"><div style="height:140px;background:var(--fds-color-marinho);background-image:url(../assets/patterns/pattern-esmeralda.svg);background-size:200px"></div><div class="brand-tile__caption">pattern-esmeralda</div></div>
+        <div class="brand-tile" style="position:relative;overflow:hidden"><div style="height:140px;background:var(--fds-color-marinho);background-image:url(../assets/patterns/pattern-violeta.svg);background-size:200px"></div><div class="brand-tile__caption">pattern-violeta</div></div>
+      </div>
+
+      <div class="docs-subhead">
+        <h3 class="fds-h3">Símbolo 3D</h3>
+        <p>Render PNG · uso em destaques</p>
+      </div>
+      <div class="brand-grid">
+        <div class="brand-tile" style="grid-column:span 2"><div class="brand-tile__preview" style="height:280px;background:radial-gradient(circle at 50% 50%, rgba(0,102,255,0.12), transparent 70%), var(--fds-surface-1)"><img src="../assets/shapes/simbolo-3d.png" style="max-height:240px" alt="" /></div><div class="brand-tile__caption">simbolo-3d.png · 1024×1024</div></div>
+        <div class="brand-tile"><div class="brand-tile__preview brand-tile__preview--dark" style="height:280px"><img src="../assets/shapes/simbolo-3d.png" style="max-height:240px" alt="" /></div><div class="brand-tile__caption">sobre marinho</div></div>
+        <div class="brand-tile"><div class="brand-tile__preview brand-tile__preview--nucleo" style="height:280px"><img src="../assets/shapes/simbolo-3d.png" style="max-height:240px" alt="" /></div><div class="brand-tile__caption">sobre núcleo</div></div>
+      </div>
+
+      <div class="docs-subhead">
+        <h3 class="fds-h3">Shapes — formas auxiliares</h3>
+        <p>10 PNGs decorativos · use como adorno de fundo</p>
+      </div>
+      <div class="brand-grid" style="grid-template-columns:repeat(auto-fill,minmax(160px,1fr))">
+        <div class="brand-tile"><div class="brand-tile__preview"><img src="../assets/shapes/forma-1.png" style="max-height:100%" alt="" /></div><div class="brand-tile__caption">forma-1</div></div>
+        <div class="brand-tile"><div class="brand-tile__preview"><img src="../assets/shapes/forma-2.png" style="max-height:100%" alt="" /></div><div class="brand-tile__caption">forma-2</div></div>
+        <div class="brand-tile"><div class="brand-tile__preview"><img src="../assets/shapes/forma-3.png" style="max-height:100%" alt="" /></div><div class="brand-tile__caption">forma-3</div></div>
+        <div class="brand-tile"><div class="brand-tile__preview"><img src="../assets/shapes/forma-4.png" style="max-height:100%" alt="" /></div><div class="brand-tile__caption">forma-4</div></div>
+        <div class="brand-tile"><div class="brand-tile__preview"><img src="../assets/shapes/forma-5.png" style="max-height:100%" alt="" /></div><div class="brand-tile__caption">forma-5</div></div>
+        <div class="brand-tile"><div class="brand-tile__preview"><img src="../assets/shapes/forma-6.png" style="max-height:100%" alt="" /></div><div class="brand-tile__caption">forma-6</div></div>
+        <div class="brand-tile"><div class="brand-tile__preview"><img src="../assets/shapes/forma-7.png" style="max-height:100%" alt="" /></div><div class="brand-tile__caption">forma-7</div></div>
+        <div class="brand-tile"><div class="brand-tile__preview"><img src="../assets/shapes/forma-8.png" style="max-height:100%" alt="" /></div><div class="brand-tile__caption">forma-8</div></div>
+        <div class="brand-tile"><div class="brand-tile__preview"><img src="../assets/shapes/forma-9.png" style="max-height:100%" alt="" /></div><div class="brand-tile__caption">forma-9</div></div>
+        <div class="brand-tile"><div class="brand-tile__preview"><img src="../assets/shapes/forma-10.png" style="max-height:100%" alt="" /></div><div class="brand-tile__caption">forma-10</div></div>
+      </div>
+
+      <div class="docs-subhead"><h3 class="fds-h3">Do's &amp; Don'ts</h3></div>
+      <div class="dos-donts">
+        <div class="dos-donts__item dos-donts__item--do">
+          <div class="dos-donts__lbl">✓ Faça</div>
+          <ul class="fds-ul fds-body-s" style="margin-bottom:0">
+            <li>Respeite a margem de segurança igual ao tamanho do prisma do símbolo</li>
+            <li>Use contraste excelente (Branco sobre Marinho/Núcleo/Violeta · Marinho sobre Esmeralda)</li>
+            <li>Use apenas as cores oficiais do brandbook</li>
+            <li>Use SVG quando possível — escalável e nítido</li>
+          </ul>
+        </div>
+        <div class="dos-donts__item dos-donts__item--dont">
+          <div class="dos-donts__lbl">✕ Não faça</div>
+          <ul class="fds-ul fds-body-s" style="margin-bottom:0">
+            <li>Distorcer, esticar ou rotacionar o logo</li>
+            <li>Aplicar outline, sombra ou transparência</li>
+            <li>Usar cores fora do brandbook</li>
+            <li>Posicionar o logo entre dois elementos distintos</li>
+            <li>Usar abaixo do tamanho mínimo de 100px</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="docs-subhead"><h3 class="fds-h3">Como usar no código</h3></div>
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview">
+          <img src="../assets/logos/horizontal-branco.svg" alt="Fortics" style="height:32px" />
+        </div>
+        <template data-code="html">
+&lt;!-- Logo principal (use a versão correta para o background) --&gt;
+&lt;img src="assets/logos/horizontal-branco.svg" alt="Fortics"
+     class="logo" /&gt;
+
+&lt;!-- Spark icon como favicon ou identidade reduzida --&gt;
+&lt;img src="assets/icons/spark-principal.svg" alt=""
+     width="32" height="32" /&gt;
+
+&lt;!-- Pattern como background --&gt;
+&lt;div class="hero" style="background-image: url(assets/patterns/pattern-marinho.svg);
+                          background-color: var(--fds-color-nucleo);"&gt;
+  ...
+&lt;/div&gt;
+        </template>
+      </div>
+    </section>
+
+    <footer style="padding:var(--fds-space-7) var(--fds-space-8);color:var(--fds-text-tertiary);font-size:var(--fds-text-caption);border-top:1px solid var(--fds-border-subtle)">
+      Próximo nível →
+      <a href="./02-atoms.html" style="color:var(--fds-color-nucleo);font-weight:var(--fds-weight-semibold)">Átomos</a>
+      · Componentes funcionais mínimos
+    </footer>
+
+  </main>
+</div>
+
+<!-- Vendors -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<!-- FDS Library -->
+<script src="../js/fds.js"></script>
+<script src="../js/fds-theme.js"></script>
+<script src="../js/fds-toast.js"></script>
+<script src="../js/fds-clipboard.js"></script>
+<script src="../js/fds-codeblock.js"></script>
+
+<script>
+  lucide.createIcons();
+
+  // Scroll-reveal das seções
+  FDS.animate.scrollReveal('.docs-section__head', { y: 24, stagger: 0.05 });
+
+  // Logo swap por tema
+  function syncLogos() {
+    const dark = FDS.theme.current() === 'dark';
+    document.querySelectorAll('.logo-dark').forEach(el => el.hidden  = !dark);
+    document.querySelectorAll('.logo-light').forEach(el => el.hidden = dark);
+  }
+  syncLogos();
+  document.addEventListener('fds:theme-change', syncLogos);
+</script>
+
+</body>
+</html>

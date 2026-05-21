@@ -1,0 +1,362 @@
+/* ============================================================
+   FORTICS DS — 3D BUILDER
+   Layout split (viewport + controles) + componentes específicos
+   ============================================================ */
+
+.builder3d {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--fds-color-marinho);
+}
+
+/* ---------------- VIEWPORT ---------------- */
+.builder3d__viewport {
+  position: relative;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(0,102,255,0.12), transparent 70%),
+    var(--fds-color-marinho);
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.builder3d__viewport canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+.builder3d__loading {
+  position: absolute;
+  inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: var(--fds-space-4);
+  color: var(--fds-text-tertiary);
+  font-size: var(--fds-text-body-s);
+  pointer-events: none;
+  transition: opacity var(--fds-duration-slow);
+}
+.builder3d__loading.is-hidden { opacity: 0; visibility: hidden; }
+.builder3d__loading .fds-spinner { border-color: rgba(255,255,255,0.1); border-top-color: var(--fds-color-nucleo); }
+
+/* Floating topbar over viewport */
+.builder3d__topbar {
+  position: absolute;
+  top: var(--fds-space-4); left: var(--fds-space-4);
+  right: var(--fds-space-4);
+  display: flex; justify-content: space-between; align-items: center;
+  pointer-events: none;
+  z-index: 2;
+}
+.builder3d__crumb {
+  pointer-events: auto;
+  font-family: var(--fds-font-mono);
+  font-size: var(--fds-text-caption);
+  color: rgba(255,255,255,0.6);
+  padding: 6px 12px;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--fds-radius-full);
+  backdrop-filter: blur(12px);
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.builder3d__crumb a { color: inherit; }
+.builder3d__crumb a:hover { color: #fff; }
+.builder3d__topbar-actions { pointer-events: auto; display: flex; gap: var(--fds-space-2); }
+
+/* Preset bar (over viewport bottom) */
+.builder3d__presets {
+  position: absolute;
+  bottom: var(--fds-space-4); left: 50%;
+  transform: translateX(-50%);
+  display: flex; align-items: center; gap: var(--fds-space-1);
+  padding: 6px;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--fds-radius-full);
+  z-index: 2;
+  max-width: calc(100% - var(--fds-space-7));
+  overflow-x: auto;
+}
+.builder3d__preset {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 14px;
+  background: transparent;
+  border: 0;
+  border-radius: var(--fds-radius-full);
+  color: rgba(255,255,255,0.7);
+  font-family: var(--fds-font-family);
+  font-size: var(--fds-text-caption);
+  font-weight: var(--fds-weight-semibold);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--fds-duration-fast), color var(--fds-duration-fast);
+}
+.builder3d__preset:hover { color: #fff; background: rgba(255,255,255,0.08); }
+.builder3d__preset.is-active {
+  background: var(--fds-color-nucleo);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(0,102,255,0.4);
+}
+.builder3d__preset-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+}
+
+/* ---------------- CONTROLS PANEL ---------------- */
+.builder3d__panel {
+  background: #06091A;
+  border-left: 1px solid rgba(255,255,255,0.08);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.builder3d__panel-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--fds-space-4) var(--fds-space-5);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  color: #fff;
+}
+.builder3d__panel-head img { height: 22px; }
+.builder3d__panel-body {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: var(--fds-space-7);
+}
+
+/* Section blocks (accordion-like) */
+.b3d-section {
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.b3d-section__head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--fds-space-3) var(--fds-space-5);
+  cursor: pointer;
+  user-select: none;
+  background: transparent;
+  border: 0; width: 100%;
+  color: #fff;
+  font-family: var(--fds-font-family);
+  text-align: left;
+}
+.b3d-section__title {
+  font-size: var(--fds-text-caption);
+  font-weight: var(--fds-weight-bold);
+  letter-spacing: var(--fds-tracking-wider);
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+  display: flex; align-items: center; gap: 8px;
+}
+.b3d-section__title svg { color: var(--fds-color-nucleo); }
+.b3d-section__chev {
+  width: 18px; height: 18px;
+  transition: transform var(--fds-duration-fast);
+  color: rgba(255,255,255,0.4);
+}
+.b3d-section[data-open="true"] .b3d-section__chev { transform: rotate(180deg); }
+.b3d-section__body {
+  padding: 0 var(--fds-space-5) var(--fds-space-5);
+  display: none;
+  flex-direction: column;
+  gap: var(--fds-space-2);
+}
+.b3d-section[data-open="true"] .b3d-section__body { display: flex; }
+
+/* Form rows */
+.b3d-row {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 36px;
+  align-items: center;
+  gap: var(--fds-space-3);
+}
+.b3d-row label {
+  font-size: var(--fds-text-caption);
+  color: rgba(255,255,255,0.6);
+  font-weight: var(--fds-weight-regular);
+}
+.b3d-row input[type="range"] {
+  appearance: none; -webkit-appearance: none;
+  height: 3px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 999px;
+  outline: none;
+  cursor: pointer;
+  margin: 0;
+}
+.b3d-row input[type="range"]::-webkit-slider-thumb {
+  appearance: none; -webkit-appearance: none;
+  width: 14px; height: 14px;
+  background: var(--fds-color-nucleo);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 0 4px rgba(0,102,255,0);
+  transition: box-shadow var(--fds-duration-fast);
+}
+.b3d-row input[type="range"]::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 0 4px rgba(0,102,255,0.25);
+}
+.b3d-row input[type="range"]::-moz-range-thumb {
+  width: 14px; height: 14px;
+  background: var(--fds-color-nucleo);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.b3d-row__val {
+  font-family: var(--fds-font-mono);
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  text-align: right;
+}
+
+/* Color row */
+.b3d-color-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--fds-space-3);
+}
+.b3d-color-row label {
+  font-size: var(--fds-text-caption);
+  color: rgba(255,255,255,0.6);
+}
+.b3d-hex {
+  display: flex; align-items: center; gap: 8px;
+  padding: 4px 8px 4px 4px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--fds-radius-sm);
+}
+.b3d-hex__swatch {
+  width: 24px; height: 24px;
+  border-radius: var(--fds-radius-xs);
+  border: 1px solid rgba(255,255,255,0.2);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.b3d-hex__swatch input[type="color"] {
+  position: absolute; inset: 0;
+  opacity: 0; cursor: pointer; border: 0; padding: 0;
+}
+.b3d-hex__input {
+  background: transparent;
+  border: 0;
+  width: 80px;
+  color: rgba(255,255,255,0.85);
+  font-family: var(--fds-font-mono);
+  font-size: 11px;
+  outline: none;
+}
+
+/* Toggle */
+.b3d-toggle-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--fds-space-3);
+}
+.b3d-toggle-row label {
+  font-size: var(--fds-text-caption);
+  color: rgba(255,255,255,0.6);
+}
+.b3d-toggle {
+  width: 32px; height: 18px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 999px;
+  position: relative;
+  cursor: pointer;
+  transition: background var(--fds-duration-fast);
+}
+.b3d-toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 14px; height: 14px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform var(--fds-duration-base) var(--fds-ease-spring);
+}
+.b3d-toggle.is-on { background: var(--fds-color-nucleo); }
+.b3d-toggle.is-on::after { transform: translateX(14px); }
+
+/* Pills (motion / hover) */
+.b3d-pills {
+  display: flex; flex-wrap: wrap; gap: 4px;
+  margin-bottom: var(--fds-space-2);
+}
+.b3d-pill {
+  padding: 5px 10px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--fds-radius-full);
+  color: rgba(255,255,255,0.6);
+  font-family: var(--fds-font-family);
+  font-size: 10px;
+  font-weight: var(--fds-weight-semibold);
+  cursor: pointer;
+  transition: all var(--fds-duration-fast);
+}
+.b3d-pill:hover { color: #fff; background: rgba(255,255,255,0.1); }
+.b3d-pill.is-active {
+  background: var(--fds-color-nucleo);
+  border-color: var(--fds-color-nucleo);
+  color: #fff;
+}
+
+/* Buttons */
+.b3d-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 8px 14px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--fds-radius-sm);
+  color: #fff;
+  font-family: var(--fds-font-family);
+  font-size: var(--fds-text-caption);
+  font-weight: var(--fds-weight-semibold);
+  cursor: pointer;
+  transition: background var(--fds-duration-fast);
+}
+.b3d-btn:hover { background: rgba(255,255,255,0.12); }
+.b3d-btn--primary {
+  background: var(--fds-color-nucleo);
+  border-color: var(--fds-color-nucleo);
+  color: #fff;
+}
+.b3d-btn--primary:hover { background: var(--fds-color-nucleo-90); }
+.b3d-btn--ghost { background: transparent; border-color: transparent; color: rgba(255,255,255,0.7); }
+.b3d-btn--ghost:hover { background: rgba(255,255,255,0.06); color: #fff; }
+
+/* Code block */
+.b3d-code-block {
+  margin: 0 var(--fds-space-5);
+  padding: var(--fds-space-3);
+  background: #000;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--fds-radius-sm);
+  font-family: var(--fds-font-mono);
+  font-size: 10px;
+  line-height: 1.55;
+  color: #C8D4F0;
+  max-height: 240px;
+  overflow: auto;
+  white-space: pre;
+}
+.b3d-code-block .tk-key { color: #6FA8FF; }
+.b3d-code-block .tk-str { color: var(--fds-color-esmeralda); }
+.b3d-code-block .tk-num { color: #F5C547; }
+.b3d-code-block .tk-com { color: #6E7894; font-style: italic; }
+
+.b3d-code-actions {
+  display: flex; gap: var(--fds-space-2);
+  padding: var(--fds-space-3) var(--fds-space-5);
+}
+
+/* Toast (uses FDS toast region — already in molecules.css) */
+
+/* Responsive */
+@media (max-width: 900px) {
+  .builder3d { grid-template-columns: 1fr; grid-template-rows: 1fr auto; height: 100vh; }
+  .builder3d__panel { max-height: 50vh; }
+}

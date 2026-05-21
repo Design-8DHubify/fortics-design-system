@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Moléculas · Fortics DS</title>
+<link rel="icon" type="image/svg+xml" href="../assets/icons/spark-principal.svg" />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/tokens.css" />
+<link rel="stylesheet" href="../css/base.css" />
+<link rel="stylesheet" href="../css/components.css" />
+<link rel="stylesheet" href="../css/atoms.css" />
+<link rel="stylesheet" href="../css/molecules.css" />
+<link rel="stylesheet" href="../css/showcase.css" />
+<script>
+  (function(){
+    try {
+      var t = localStorage.getItem('fds-theme');
+      if (!t) t = 'light';  // light como padrão absoluto do brandbook
+      document.documentElement.setAttribute('data-theme', t);
+    } catch(_) { document.documentElement.setAttribute('data-theme', 'light'); }
+  })();
+</script>
+</head>
+<body>
+
+<div class="docs">
+  <aside class="docs-side">
+    <div class="docs-side__brand">
+      <img class="logo-dark"  src="../assets/logos/horizontal-branco.svg" alt="Fortics" />
+      <img class="logo-light" src="../assets/logos/horizontal-marinho.svg" alt="Fortics" hidden />
+    </div>
+    <div class="docs-side__group">
+      <div class="docs-side__title">Início</div>
+      <a class="docs-side__link" href="../index.html"><i data-lucide="home"></i> Visão geral</a>
+    </div>
+    <div class="docs-side__group">
+      <div class="docs-side__title">Atomic Design</div>
+      <a class="docs-side__link" href="./01-foundations.html"><span class="level-dot">0</span> Fundamentos</a>
+      <a class="docs-side__link" href="./02-atoms.html"><span class="level-dot">A</span> Átomos</a>
+      <a class="docs-side__link is-active" href="./03-molecules.html"><span class="level-dot">M</span> Moléculas</a>
+      <a class="docs-side__link" href="./04-organisms.html"><span class="level-dot">O</span> Organismos</a>
+      
+      </div>
+    <div class="docs-side__group">
+      <div class="docs-side__title">Nesta página</div>
+      <a class="docs-side__link" href="#feature-card"><i data-lucide="layout-grid"></i> Feature Card</a>
+      <a class="docs-side__link" href="#stat-card"><i data-lucide="trending-up"></i> Stat Card</a>
+      <a class="docs-side__link" href="#price-card"><i data-lucide="receipt"></i> Price Card</a>
+      <a class="docs-side__link" href="#testimonial"><i data-lucide="quote"></i> Testimonial</a>
+      <a class="docs-side__link" href="#form-field"><i data-lucide="form-input"></i> Form Field</a>
+      <a class="docs-side__link" href="#toast-demo"><i data-lucide="bell"></i> Toasts</a>
+      <a class="docs-side__link" href="#tooltip"><i data-lucide="message-square"></i> Tooltip</a>
+      <a class="docs-side__link" href="#dropdown"><i data-lucide="chevron-down"></i> Dropdown</a>
+      <a class="docs-side__link" href="#search"><i data-lucide="search"></i> Search</a>
+      <a class="docs-side__link" href="#notification"><i data-lucide="bell-ring"></i> Notification</a>
+      <a class="docs-side__link" href="#alert"><i data-lucide="info"></i> Alert</a>
+    </div>
+    <div class="docs-side__footer">
+      <div class="fds-theme-toggle" data-fds-theme-toggle role="group" aria-label="Tema">
+        <button class="fds-theme-toggle__btn" data-theme-set="light" aria-pressed="true"><i data-lucide="sun" style="width:16px;height:16px"></i></button>
+        <button class="fds-theme-toggle__btn" data-theme-set="dark" aria-pressed="false"><i data-lucide="moon" style="width:16px;height:16px"></i></button>
+      </div>
+      <p class="fds-caption" style="margin:0">Fortics DS v1.0</p>
+    </div>
+  </aside>
+
+  <main class="docs-main">
+    <header class="docs-top">
+      <div class="docs-top__crumb">~ / design-system / moléculas</div>
+      <div class="docs-top__actions"><span class="fds-badge fds-badge--nucleo"><span class="fds-badge__dot"></span>Nível M · 11 moléculas</span></div>
+    </header>
+
+    <section class="docs-section">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow"><span class="level-dot">M</span> Moléculas</span>
+        <h1 class="docs-section__title">Combinações funcionais</h1>
+        <p class="docs-section__lead">Átomos agrupados com propósito. Cada molécula tem um único trabalho — mas já carrega lógica e estado. Todos os cards usam <strong>ícones Lucide</strong>.</p>
+      </header>
+    </section>
+
+    <!-- ============ FEATURE CARD ============ -->
+    <section class="docs-section" id="feature-card">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow">Feature Card</span>
+        <h2 class="docs-section__title">Feature Card · com ícone Lucide</h2>
+        <p class="docs-section__lead">Card de feature/benefício — ícone + título + descrição + CTA opcional.</p>
+      </header>
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview" style="align-items:stretch;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));width:100%">
+          <div class="fds-feature-card">
+            <div class="fds-feature-card__icon"><i data-lucide="message-circle"></i></div>
+            <h3 class="fds-feature-card__title">Atendimento omnichannel</h3>
+            <p class="fds-feature-card__desc">Uma inbox unificada para WhatsApp, Voz, E-mail e Webchat — com contexto IA preservado entre canais.</p>
+            <a href="#" class="fds-feature-card__cta">Saiba mais <i data-lucide="arrow-right" style="width:14px;height:14px"></i></a>
+          </div>
+          <div class="fds-feature-card fds-feature-card--esmeralda">
+            <div class="fds-feature-card__icon"><i data-lucide="zap"></i></div>
+            <h3 class="fds-feature-card__title">Automação operacional</h3>
+            <p class="fds-feature-card__desc">Workflows que executam ações reais no sistema — não só respostas, mas resoluções.</p>
+            <a href="#" class="fds-feature-card__cta">Ver workflows <i data-lucide="arrow-right" style="width:14px;height:14px"></i></a>
+          </div>
+          <div class="fds-feature-card fds-feature-card--violeta">
+            <div class="fds-feature-card__icon"><i data-lucide="brain-circuit"></i></div>
+            <h3 class="fds-feature-card__title">IA dentro do fluxo</h3>
+            <p class="fds-feature-card__desc">Agentes que entendem contexto, escalam para humano e aprendem com cada interação.</p>
+            <a href="#" class="fds-feature-card__cta">Demo IA <i data-lucide="arrow-right" style="width:14px;height:14px"></i></a>
+          </div>
+        </div>
+        <template data-code="html">
+&lt;div class="fds-feature-card"&gt;
+  &lt;div class="fds-feature-card__icon"&gt;
+    &lt;i data-lucide="message-circle"&gt;&lt;/i&gt;
+  &lt;/div&gt;
+  &lt;h3 class="fds-feature-card__title"&gt;Atendimento omnichannel&lt;/h3&gt;
+  &lt;p class="fds-feature-card__desc"&gt;
+    Uma inbox unificada para WhatsApp, Voz, E-mail e Webchat.
+  &lt;/p&gt;
+  &lt;a href="#" class="fds-feature-card__cta"&gt;
+    Saiba mais &lt;i data-lucide="arrow-right"&gt;&lt;/i&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;!-- Variantes de cor: --esmeralda | --violeta | --warning --&gt;
+        </template>
+      </div>
+    </section>
+
+    <!-- ============ STAT CARD ============ -->
+    <section class="docs-section" id="stat-card">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow">Stat Card</span>
+        <h2 class="docs-section__title">Stat Card</h2>
+      </header>
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));width:100%;gap:var(--fds-space-4)">
+          <div class="fds-stat-card">
+            <p class="fds-stat-card__label">Conversas/dia</p>
+            <p class="fds-stat-card__value">12.4k</p>
+            <span class="fds-stat-card__delta fds-stat-card__delta--up"><i data-lucide="trending-up" style="width:12px;height:12px"></i> +18%</span>
+          </div>
+          <div class="fds-stat-card">
+            <p class="fds-stat-card__label">Tempo médio</p>
+            <p class="fds-stat-card__value">42<span style="font-size:0.5em">s</span></p>
+            <span class="fds-stat-card__delta fds-stat-card__delta--down"><i data-lucide="trending-down" style="width:12px;height:12px"></i> -12%</span>
+          </div>
+          <div class="fds-stat-card">
+            <p class="fds-stat-card__label">CSAT</p>
+            <p class="fds-stat-card__value">94%</p>
+            <span class="fds-stat-card__delta fds-stat-card__delta--up"><i data-lucide="trending-up" style="width:12px;height:12px"></i> +3pp</span>
+          </div>
+        </div>
+        <template data-code="html">
+&lt;div class="fds-stat-card"&gt;
+  &lt;p class="fds-stat-card__label"&gt;Conversas/dia&lt;/p&gt;
+  &lt;p class="fds-stat-card__value"&gt;12.4k&lt;/p&gt;
+  &lt;span class="fds-stat-card__delta fds-stat-card__delta--up"&gt;
+    &lt;i data-lucide="trending-up"&gt;&lt;/i&gt; +18%
+  &lt;/span&gt;
+&lt;/div&gt;
+        </template>
+      </div>
+    </section>
+
+    <!-- ============ PRICE CARD ============ -->
+    <section class="docs-section" id="price-card">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow">Price Card</span>
+        <h2 class="docs-section__title">Price Card</h2>
+      </header>
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));width:100%;gap:var(--fds-space-5)">
+          <div class="fds-price-card">
+            <p class="fds-price-card__name">Starter</p>
+            <p class="fds-price-card__price">R$ 0<span class="fds-price-card__price-period">/mês</span></p>
+            <ul class="fds-price-card__features">
+              <li class="fds-price-card__feature"><i data-lucide="check"></i> 1 canal</li>
+              <li class="fds-price-card__feature"><i data-lucide="check"></i> 500 conversas/mês</li>
+              <li class="fds-price-card__feature"><i data-lucide="check"></i> Suporte por email</li>
+            </ul>
+            <button class="fds-btn fds-btn--secondary">Começar grátis</button>
+          </div>
+          <div class="fds-price-card fds-price-card--featured">
+            <span class="fds-price-card__featured-tag">Popular</span>
+            <p class="fds-price-card__name">Pro</p>
+            <p class="fds-price-card__price">R$ 199<span class="fds-price-card__price-period">/mês</span></p>
+            <ul class="fds-price-card__features">
+              <li class="fds-price-card__feature"><i data-lucide="check"></i> Canais ilimitados</li>
+              <li class="fds-price-card__feature"><i data-lucide="check"></i> 10k conversas/mês</li>
+              <li class="fds-price-card__feature"><i data-lucide="check"></i> Agente IA incluído</li>
+              <li class="fds-price-card__feature"><i data-lucide="check"></i> Suporte prioritário</li>
+            </ul>
+            <button class="fds-btn fds-btn--gradient" style="background:#fff;color:var(--fds-color-marinho)">Assinar Pro</button>
+          </div>
+          <div class="fds-price-card">
+            <p class="fds-price-card__name">Enterprise</p>
+            <p class="fds-price-card__price" style="font-size:var(--fds-text-h2)">Custom</p>
+            <ul class="fds-price-card__features">
+              <li class="fds-price-card__feature"><i data-lucide="check"></i> SLA dedicado</li>
+              <li class="fds-price-card__feature"><i data-lucide="check"></i> CSM exclusivo</li>
+              <li class="fds-price-card__feature"><i data-lucide="check"></i> Integrações custom</li>
+            </ul>
+            <button class="fds-btn fds-btn--secondary">Falar com vendas</button>
+          </div>
+        </div>
+        <template data-code="html">
+&lt;div class="fds-price-card fds-price-card--featured"&gt;
+  &lt;span class="fds-price-card__featured-tag"&gt;Popular&lt;/span&gt;
+  &lt;p class="fds-price-card__name"&gt;Pro&lt;/p&gt;
+  &lt;p class="fds-price-card__price"&gt;
+    R$ 199&lt;span class="fds-price-card__price-period"&gt;/mês&lt;/span&gt;
+  &lt;/p&gt;
+  &lt;ul class="fds-price-card__features"&gt;
+    &lt;li class="fds-price-card__feature"&gt;
+      &lt;i data-lucide="check"&gt;&lt;/i&gt; Canais ilimitados
+    &lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;button class="fds-btn fds-btn--primary"&gt;Assinar&lt;/button&gt;
+&lt;/div&gt;
+        </template>
+      </div>
+    </section>
+
+    <!-- ============ TESTIMONIAL ============ -->
+    <section class="docs-section" id="testimonial">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow">Testimonial</span>
+        <h2 class="docs-section__title">Testimonial</h2>
+      </header>
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));width:100%;gap:var(--fds-space-4)">
+          <div class="fds-testimonial">
+            <p class="fds-testimonial__quote">A Fortics reduziu nosso tempo médio de atendimento em 40% sem perder qualidade. A IA realmente entende o contexto do cliente."</p>
+            <div class="fds-testimonial__author">
+              <span class="fds-avatar">MA</span>
+              <div>
+                <p class="fds-testimonial__name">Marina Alves</p>
+                <p class="fds-testimonial__role">Head de Customer Success · Acme Co</p>
+              </div>
+            </div>
+          </div>
+          <div class="fds-testimonial">
+            <p class="fds-testimonial__quote">Migrar para a Fortics foi o melhor investimento de tecnologia que fizemos no ano. Conseguimos escalar sem dobrar a operação."</p>
+            <div class="fds-testimonial__author">
+              <span class="fds-avatar" style="background:var(--fds-gradient-nucleo-esmeralda)">RC</span>
+              <div>
+                <p class="fds-testimonial__name">Rafael Carvalho</p>
+                <p class="fds-testimonial__role">COO · Nimbus Tech</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <template data-code="html">
+&lt;div class="fds-testimonial"&gt;
+  &lt;p class="fds-testimonial__quote"&gt;
+    A Fortics reduziu nosso tempo médio em 40%.
+  &lt;/p&gt;
+  &lt;div class="fds-testimonial__author"&gt;
+    &lt;span class="fds-avatar"&gt;MA&lt;/span&gt;
+    &lt;div&gt;
+      &lt;p class="fds-testimonial__name"&gt;Marina Alves&lt;/p&gt;
+      &lt;p class="fds-testimonial__role"&gt;Head CS · Acme Co&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+        </template>
+      </div>
+    </section>
+
+    <!-- ============ FORM FIELD ============ -->
+    <section class="docs-section" id="form-field">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow">Form Field</span>
+        <h2 class="docs-section__title">Form Field</h2>
+        <p class="docs-section__lead">Label + Input + Hint/Error em um único componente — base para construir formulários.</p>
+      </header>
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview demo__stage--stack" style="max-width:480px;margin:0 auto;width:100%">
+          <div class="fds-field">
+            <label class="fds-field__label" for="ff1">E-mail corporativo</label>
+            <input type="email" id="ff1" class="fds-input" placeholder="voce@empresa.com" />
+            <p class="fds-field__hint">Usaremos para enviar o magic link.</p>
+          </div>
+          <div class="fds-field" data-state="error">
+            <label class="fds-field__label" for="ff2">Token de API</label>
+            <input type="text" id="ff2" class="fds-input fds-input--error" value="xyz_invalid" />
+            <p class="fds-field__error"><i data-lucide="alert-circle" style="width:12px;height:12px;vertical-align:middle"></i> Token expirado — gere um novo no painel.</p>
+          </div>
+        </div>
+        <template data-code="html">
+&lt;div class="fds-field"&gt;
+  &lt;label class="fds-field__label"&gt;E-mail&lt;/label&gt;
+  &lt;input class="fds-input" type="email" /&gt;
+  &lt;p class="fds-field__hint"&gt;Usaremos para o login.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- Estado de erro --&gt;
+&lt;div class="fds-field" data-state="error"&gt;
+  &lt;label class="fds-field__label"&gt;Token&lt;/label&gt;
+  &lt;input class="fds-input fds-input--error" /&gt;
+  &lt;p class="fds-field__error"&gt;Token expirado&lt;/p&gt;
+&lt;/div&gt;
+        </template>
+      </div>
+    </section>
+
+    <!-- ============ TOASTS ============ -->
+    <section class="docs-section" id="toast-demo">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow">Toast · Notificação</span>
+        <h2 class="docs-section__title">Toasts dinâmicos</h2>
+        <p class="docs-section__lead">Sistema de notificação temporária. Clique nos botões abaixo para disparar.</p>
+      </header>
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview">
+          <button class="fds-btn fds-btn--success" onclick="FDS.toast.success('Tudo certo!', 'Sua campanha foi publicada com sucesso.')">Trigger Success</button>
+          <button class="fds-btn fds-btn--danger"  onclick="FDS.toast.error('Falha na conexão', 'Verifique sua internet.')">Trigger Error</button>
+          <button class="fds-btn fds-btn--secondary" onclick="FDS.toast.warning('Atenção', 'Você está a 92% do limite mensal.')">Trigger Warning</button>
+          <button class="fds-btn fds-btn--primary" onclick="FDS.toast.info('Nova versão', 'Atualização disponível — recarregue a página.')">Trigger Info</button>
+        </div>
+        <template data-code="js">
+// API
+FDS.toast.success(titulo, mensagem);
+FDS.toast.error(titulo, mensagem);
+FDS.toast.warning(titulo, mensagem);
+FDS.toast.info(titulo, mensagem);
+
+// Opções avançadas
+FDS.toast.show({
+  variant: 'success',
+  title: 'Pronto!',
+  message: 'Detalhes da ação',
+  duration: 4000  // 0 = persistente
+});
+        </template>
+      </div>
+    </section>
+
+    <!-- ============ TOOLTIP ============ -->
+    <section class="docs-section" id="tooltip">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow">Tooltip</span>
+        <h2 class="docs-section__title">Tooltip</h2>
+      </header>
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview" style="gap:var(--fds-space-7);padding-top:var(--fds-space-10)">
+          <span class="fds-tooltip">
+            <button class="fds-btn fds-btn--secondary fds-btn--icon" aria-label="Settings"><i data-lucide="settings" style="width:18px;height:18px"></i></button>
+            <span class="fds-tooltip__bubble">Configurações</span>
+          </span>
+          <span class="fds-tooltip">
+            <button class="fds-btn fds-btn--secondary fds-btn--icon" aria-label="Notifications"><i data-lucide="bell" style="width:18px;height:18px"></i></button>
+            <span class="fds-tooltip__bubble">3 notificações novas</span>
+          </span>
+          <span class="fds-tooltip">
+            <button class="fds-btn fds-btn--secondary fds-btn--icon" aria-label="Help"><i data-lucide="help-circle" style="width:18px;height:18px"></i></button>
+            <span class="fds-tooltip__bubble">Atalho: <kbd class="fds-kbd">⌘ ?</kbd></span>
+          </span>
+        </div>
+        <template data-code="html">
+&lt;span class="fds-tooltip"&gt;
+  &lt;button class="fds-btn fds-btn--secondary fds-btn--icon"&gt;
+    &lt;i data-lucide="settings"&gt;&lt;/i&gt;
+  &lt;/button&gt;
+  &lt;span class="fds-tooltip__bubble"&gt;Configurações&lt;/span&gt;
+&lt;/span&gt;
+        </template>
+      </div>
+    </section>
+
+    <!-- ============ DROPDOWN ============ -->
+    <section class="docs-section" id="dropdown">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow">Dropdown · Menu</span>
+        <h2 class="docs-section__title">Dropdown</h2>
+        <p class="docs-section__lead">Menu de ações. Clique fora ou pressione <kbd class="fds-kbd">Esc</kbd> para fechar.</p>
+      </header>
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview" style="gap:var(--fds-space-5);min-height:300px">
+          <div class="fds-dropdown">
+            <button class="fds-dropdown__trigger">
+              <i data-lucide="user" style="width:16px;height:16px"></i>
+              Conta
+              <i data-lucide="chevron-down" style="width:14px;height:14px"></i>
+            </button>
+            <div class="fds-dropdown__menu">
+              <button class="fds-dropdown__item"><i data-lucide="user"></i> Perfil</button>
+              <button class="fds-dropdown__item"><i data-lucide="settings"></i> Configurações</button>
+              <button class="fds-dropdown__item"><i data-lucide="credit-card"></i> Faturamento</button>
+              <div class="fds-dropdown__divider"></div>
+              <button class="fds-dropdown__item" style="color:var(--fds-color-danger)"><i data-lucide="log-out"></i> Sair</button>
+            </div>
+          </div>
+
+          <div class="fds-dropdown">
+            <button class="fds-dropdown__trigger">
+              <i data-lucide="filter" style="width:16px;height:16px"></i>
+              Filtrar por
+              <i data-lucide="chevron-down" style="width:14px;height:14px"></i>
+            </button>
+            <div class="fds-dropdown__menu">
+              <button class="fds-dropdown__item"><i data-lucide="circle-dot"></i> Todos</button>
+              <button class="fds-dropdown__item"><i data-lucide="circle-check"></i> Resolvidos</button>
+              <button class="fds-dropdown__item"><i data-lucide="circle-alert"></i> Aguardando</button>
+              <button class="fds-dropdown__item"><i data-lucide="circle-x"></i> Falhou</button>
+            </div>
+          </div>
+        </div>
+        <template data-code="html">
+&lt;div class="fds-dropdown"&gt;
+  &lt;button class="fds-dropdown__trigger"&gt;
+    Conta &lt;i data-lucide="chevron-down"&gt;&lt;/i&gt;
+  &lt;/button&gt;
+  &lt;div class="fds-dropdown__menu"&gt;
+    &lt;button class="fds-dropdown__item"&gt;Perfil&lt;/button&gt;
+    &lt;button class="fds-dropdown__item"&gt;Configurações&lt;/button&gt;
+    &lt;div class="fds-dropdown__divider"&gt;&lt;/div&gt;
+    &lt;button class="fds-dropdown__item"&gt;Sair&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+        </template>
+        <template data-code="js">
+&lt;script src="js/fds-dropdown.js"&gt;&lt;/script&gt;
+        </template>
+      </div>
+    </section>
+
+    <!-- ============ SEARCH ============ -->
+    <section class="docs-section" id="search">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow">Search Bar</span>
+        <h2 class="docs-section__title">Search Bar</h2>
+      </header>
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview" style="width:100%;justify-content:center">
+          <div class="fds-search">
+            <span class="fds-search__icon"><i data-lucide="search"></i></span>
+            <input type="search" class="fds-input" placeholder="Buscar componentes, tokens, animações..." />
+            <span class="fds-search__kbd">⌘K</span>
+          </div>
+        </div>
+        <template data-code="html">
+&lt;div class="fds-search"&gt;
+  &lt;span class="fds-search__icon"&gt;&lt;i data-lucide="search"&gt;&lt;/i&gt;&lt;/span&gt;
+  &lt;input type="search" class="fds-input" placeholder="Buscar..." /&gt;
+  &lt;span class="fds-search__kbd"&gt;⌘K&lt;/span&gt;
+&lt;/div&gt;
+        </template>
+      </div>
+    </section>
+
+    <!-- ============ NOTIFICATION ============ -->
+    <section class="docs-section" id="notification">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow">Notification (inline)</span>
+        <h2 class="docs-section__title">Notification</h2>
+      </header>
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview demo__stage--stack" style="width:100%">
+          <div class="fds-notification">
+            <div class="fds-notification__icon"><i data-lucide="message-circle" style="width:18px;height:18px"></i></div>
+            <div class="fds-notification__body">
+              <p class="fds-notification__title">Marina respondeu sua mensagem</p>
+              <p class="fds-notification__text">"Vou analisar o caso e retorno em breve com a resolução."</p>
+            </div>
+            <span class="fds-notification__time">há 3min</span>
+          </div>
+          <div class="fds-notification" style="border-left-color:var(--fds-color-esmeralda)">
+            <div class="fds-notification__icon" style="background:rgba(32,215,138,0.12);color:var(--fds-color-esmeralda)"><i data-lucide="check-circle" style="width:18px;height:18px"></i></div>
+            <div class="fds-notification__body">
+              <p class="fds-notification__title">Campanha "Black Friday" publicada</p>
+              <p class="fds-notification__text">Disparo iniciado para 12.428 contatos · 2.140 entregues</p>
+            </div>
+            <span class="fds-notification__time">há 12min</span>
+          </div>
+        </div>
+        <template data-code="html">
+&lt;div class="fds-notification"&gt;
+  &lt;div class="fds-notification__icon"&gt;
+    &lt;i data-lucide="message-circle"&gt;&lt;/i&gt;
+  &lt;/div&gt;
+  &lt;div class="fds-notification__body"&gt;
+    &lt;p class="fds-notification__title"&gt;Marina respondeu&lt;/p&gt;
+    &lt;p class="fds-notification__text"&gt;Mensagem curta...&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;span class="fds-notification__time"&gt;há 3min&lt;/span&gt;
+&lt;/div&gt;
+        </template>
+      </div>
+    </section>
+
+    <!-- ============ ALERT ============ -->
+    <section class="docs-section" id="alert">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow">Alert</span>
+        <h2 class="docs-section__title">Alert</h2>
+      </header>
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview demo__stage--stack" style="width:100%">
+          <div class="fds-alert fds-alert--info">
+            <div class="fds-alert__icon" style="background:rgba(0,102,255,0.2);color:#6FA8FF"><i data-lucide="info" style="width:14px;height:14px"></i></div>
+            <div class="fds-alert__body"><p class="fds-alert__title">Manutenção programada</p><p class="fds-alert__text">A API de envio terá uma janela de 5min em 12/06 às 02h.</p></div>
+          </div>
+          <div class="fds-alert fds-alert--success">
+            <div class="fds-alert__icon" style="background:rgba(32,215,138,0.2);color:var(--fds-color-esmeralda)"><i data-lucide="check-circle" style="width:14px;height:14px"></i></div>
+            <div class="fds-alert__body"><p class="fds-alert__title">Tudo conectado</p><p class="fds-alert__text">WhatsApp, Voz e E-mail integrados com sucesso.</p></div>
+          </div>
+          <div class="fds-alert fds-alert--warning">
+            <div class="fds-alert__icon" style="background:rgba(245,177,0,0.2);color:#F5C547"><i data-lucide="alert-triangle" style="width:14px;height:14px"></i></div>
+            <div class="fds-alert__body"><p class="fds-alert__title">Limite próximo</p><p class="fds-alert__text">Você usou 89% do plano deste mês.</p></div>
+          </div>
+          <div class="fds-alert fds-alert--danger">
+            <div class="fds-alert__icon" style="background:rgba(255,77,79,0.2);color:#FF8082"><i data-lucide="x-circle" style="width:14px;height:14px"></i></div>
+            <div class="fds-alert__body"><p class="fds-alert__title">Falha na integração</p><p class="fds-alert__text">Verifique as credenciais do canal WhatsApp.</p></div>
+          </div>
+        </div>
+        <template data-code="html">
+&lt;div class="fds-alert fds-alert--info"&gt;
+  &lt;div class="fds-alert__icon"&gt;
+    &lt;i data-lucide="info"&gt;&lt;/i&gt;
+  &lt;/div&gt;
+  &lt;div class="fds-alert__body"&gt;
+    &lt;p class="fds-alert__title"&gt;Manutenção&lt;/p&gt;
+    &lt;p class="fds-alert__text"&gt;Mensagem do alerta.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Variantes: --info | --success | --warning | --danger --&gt;
+        </template>
+      </div>
+    </section>
+
+    <footer style="padding:var(--fds-space-7) var(--fds-space-8);color:var(--fds-text-tertiary);font-size:var(--fds-text-caption);border-top:1px solid var(--fds-border-subtle)">
+      Próximo nível → <a href="./04-organisms.html" class="fds-link">Organismos</a> · estruturas completas
+    </footer>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="../js/fds.js"></script>
+<script src="../js/fds-theme.js"></script>
+<script src="../js/fds-toast.js"></script>
+<script src="../js/fds-clipboard.js"></script>
+<script src="../js/fds-codeblock.js"></script>
+<script src="../js/fds-dropdown.js"></script>
+<script>
+  lucide.createIcons();
+  FDS.animate.scrollReveal('.docs-section__head', { y: 20, stagger: 0.04 });
+</script>
+
+</body>
+</html>

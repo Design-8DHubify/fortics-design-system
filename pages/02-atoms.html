@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Átomos · Fortics DS</title>
+<link rel="icon" type="image/svg+xml" href="../assets/icons/spark-principal.svg" />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/tokens.css" />
+<link rel="stylesheet" href="../css/base.css" />
+<link rel="stylesheet" href="../css/components.css" />
+<link rel="stylesheet" href="../css/atoms.css" />
+<link rel="stylesheet" href="../css/molecules.css" />
+<link rel="stylesheet" href="../css/organisms.css" />
+<link rel="stylesheet" href="../css/showcase.css" />
+<script>
+  (function(){
+    try {
+      var t = localStorage.getItem('fds-theme');
+      if (!t) t = 'light';  // light como padrão absoluto do brandbook
+      document.documentElement.setAttribute('data-theme', t);
+    } catch(_) { document.documentElement.setAttribute('data-theme', 'light'); }
+  })();
+</script>
+</head>
+<body>
+
+<div class="docs">
+
+  <aside class="docs-side">
+    <div class="docs-side__brand">
+      <img class="logo-dark"  src="../assets/logos/horizontal-branco.svg" alt="Fortics" />
+      <img class="logo-light" src="../assets/logos/horizontal-marinho.svg" alt="Fortics" hidden />
+    </div>
+
+    <div class="docs-side__group">
+      <div class="docs-side__title">Início</div>
+      <a class="docs-side__link" href="../index.html"><i data-lucide="home"></i> Visão geral</a>
+    </div>
+    <div class="docs-side__group">
+      <div class="docs-side__title">Atomic Design</div>
+      <a class="docs-side__link" href="./01-foundations.html"><span class="level-dot">0</span> Fundamentos</a>
+      <a class="docs-side__link is-active" href="./02-atoms.html"><span class="level-dot">A</span> Átomos</a>
+      <a class="docs-side__link" href="./03-molecules.html"><span class="level-dot">M</span> Moléculas</a>
+      <a class="docs-side__link" href="./04-organisms.html"><span class="level-dot">O</span> Organismos</a>
+      
+      </div>
+    <div class="docs-side__group">
+      <div class="docs-side__title">Nesta página</div>
+      <a class="docs-side__link" href="#button"><i data-lucide="mouse-pointer-click"></i> Button</a>
+      <a class="docs-side__link" href="#input"><i data-lucide="text-cursor-input"></i> Input</a>
+      <a class="docs-side__link" href="#select"><i data-lucide="chevrons-up-down"></i> Select</a>
+      <a class="docs-side__link" href="#checkbox"><i data-lucide="square-check"></i> Checkbox</a>
+      <a class="docs-side__link" href="#radio"><i data-lucide="circle-dot"></i> Radio</a>
+      <a class="docs-side__link" href="#switch"><i data-lucide="toggle-right"></i> Switch</a>
+      <a class="docs-side__link" href="#badge"><i data-lucide="tag"></i> Badge</a>
+      <a class="docs-side__link" href="#icon"><i data-lucide="sparkles"></i> Icon</a>
+      <a class="docs-side__link" href="#avatar"><i data-lucide="user"></i> Avatar</a>
+      <a class="docs-side__link" href="#spinner"><i data-lucide="loader"></i> Spinner</a>
+      <a class="docs-side__link" href="#divider"><i data-lucide="minus"></i> Divider</a>
+      <a class="docs-side__link" href="#link"><i data-lucide="link"></i> Link</a>
+      <a class="docs-side__link" href="#progress"><i data-lucide="trending-up"></i> Progress</a>
+    </div>
+
+    <div class="docs-side__footer">
+      <div class="fds-theme-toggle" data-fds-theme-toggle role="group" aria-label="Tema">
+        <button class="fds-theme-toggle__btn" data-theme-set="light" aria-pressed="true" aria-label="Tema claro"><i data-lucide="sun" style="width:16px;height:16px"></i></button>
+        <button class="fds-theme-toggle__btn" data-theme-set="dark" aria-pressed="false" aria-label="Tema escuro"><i data-lucide="moon" style="width:16px;height:16px"></i></button>
+      </div>
+      <p class="fds-caption" style="margin:0">Fortics DS v1.0</p>
+    </div>
+  </aside>
+
+  <main class="docs-main">
+    <header class="docs-top">
+      <div class="docs-top__crumb">~ / design-system / átomos</div>
+      <div class="docs-top__actions"><span class="fds-badge fds-badge--nucleo"><span class="fds-badge__dot"></span>Nível A · 13 átomos</span></div>
+    </header>
+
+    <section class="docs-section">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow"><span class="level-dot">A</span> Átomos</span>
+        <h1 class="docs-section__title">Componentes funcionais mínimos</h1>
+        <p class="docs-section__lead">Os menores blocos do sistema. Têm propósito único e não fazem sentido sozinhos — mas combinados formam toda a interface. Cada um traz preview + HTML + CSS copiáveis.</p>
+      </header>
+    </section>
+
+    <!-- ============ BUTTON ============ -->
+    <section class="docs-section" id="button">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow">Button · btn</span>
+        <h2 class="docs-section__title">Button</h2>
+        <p class="docs-section__lead">6 variantes · 3 tamanhos · estado disabled · suporta ícone Lucide.</p>
+      </header>
+
+      <div class="docs-subhead"><h3 class="fds-h3">Variantes</h3></div>
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview">
+          <button class="fds-btn fds-btn--primary">Primary</button>
+          <button class="fds-btn fds-btn--secondary">Secondary</button>
+          <button class="fds-btn fds-btn--ghost">Ghost</button>
+          <button class="fds-btn fds-btn--gradient">Gradient</button>
+          <button class="fds-btn fds-btn--success">Success</button>
+          <button class="fds-btn fds-btn--danger">Danger</button>
+          <button class="fds-btn fds-btn--primary" disabled>Disabled</button>
+        </div>
+        <template data-code="html">
+&lt;button class="fds-btn fds-btn--primary"&gt;Primary&lt;/button&gt;
+&lt;button class="fds-btn fds-btn--secondary"&gt;Secondary&lt;/button&gt;
+&lt;button class="fds-btn fds-btn--ghost"&gt;Ghost&lt;/button&gt;
+&lt;button class="fds-btn fds-btn--gradient"&gt;Gradient&lt;/button&gt;
+&lt;button class="fds-btn fds-btn--success"&gt;Success&lt;/button&gt;
+&lt;button class="fds-btn fds-btn--danger"&gt;Danger&lt;/button&gt;
+&lt;button class="fds-btn fds-btn--primary" disabled&gt;Disabled&lt;/button&gt;
+        </template>
+      </div>
+
+      <div class="docs-subhead"><h3 class="fds-h3">Tamanhos</h3></div>
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview">
+          <button class="fds-btn fds-btn--primary fds-btn--sm">Small</button>
+          <button class="fds-btn fds-btn--primary">Default</button>
+          <button class="fds-btn fds-btn--primary fds-btn--lg">Large</button>
+        </div>
+        <template data-code="html">
+&lt;button class="fds-btn fds-btn--primary fds-btn--sm"&gt;Small&lt;/button&gt;
+&lt;button class="fds-btn fds-btn--primary"&gt;Default&lt;/button&gt;
+&lt;button class="fds-btn fds-btn--primary fds-btn--lg"&gt;Large&lt;/button&gt;
+        </template>
+      </div>
+
+      <div class="docs-subhead"><h3 class="fds-h3">Com ícone</h3></div>
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview">
+          <button class="fds-btn fds-btn--primary"><i data-lucide="rocket" style="width:16px;height:16px"></i> Iniciar</button>
+          <button class="fds-btn fds-btn--secondary">Continuar <i data-lucide="arrow-right" style="width:16px;height:16px"></i></button>
+          <button class="fds-btn fds-btn--ghost fds-btn--icon" aria-label="Configurações"><i data-lucide="settings" style="width:18px;height:18px"></i></button>
+        </div>
+        <template data-code="html">
+&lt;button class="fds-btn fds-btn--primary"&gt;
+  &lt;i data-lucide="rocket"&gt;&lt;/i&gt; Iniciar
+&lt;/button&gt;
+&lt;button class="fds-btn fds-btn--ghost fds-btn--icon" aria-label="Settings"&gt;
+  &lt;i data-lucide="settings"&gt;&lt;/i&gt;
+&lt;/button&gt;
+        </template>
+      </div>
+    </section>
+
+    <!-- ============ INPUT ============ -->
+    <section class="docs-section" id="input">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow">Input · text field</span>
+        <h2 class="docs-section__title">Input</h2>
+        <p class="docs-section__lead">Texto, email, password, search. Estados default, focus, error e disabled.</p>
+      </header>
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview demo__stage--stack" style="max-width:480px;margin:0 auto;width:100%">
+          <input type="text" class="fds-input" placeholder="Seu nome completo" />
+          <input type="email" class="fds-input" value="ana@fortics.com" />
+          <input type="text" class="fds-input fds-input--error" value="entrada inválida" />
+          <input type="text" class="fds-input" disabled placeholder="Disabled" />
+          <textarea class="fds-input" placeholder="Mensagem..."></textarea>
+        </div>
+        <template data-code="html">
+&lt;input type="text"  class="fds-input" placeholder="Seu nome" /&gt;
+&lt;input type="email" class="fds-input" value="ana@fortics.com" /&gt;
+&lt;input type="text"  class="fds-input fds-input--error" /&gt;
+&lt;input type="text"  class="fds-input" disabled /&gt;
+&lt;textarea class="fds-input" placeholder="Mensagem..."&gt;&lt;/textarea&gt;
+        </template>
+      </div>
+    </section>
+
+    <!-- ============ SELECT ============ -->
+    <section class="docs-section" id="select">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow">Select</span>
+        <h2 class="docs-section__title">Select</h2>
+        <p class="docs-section__lead">Select nativo HTML5 estilizado — acessível, sem JS extra.</p>
+      </header>
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview" style="max-width:480px;margin:0 auto;width:100%">
+          <div class="fds-select" style="width:100%">
+            <select aria-label="Produto Fortics">
+              <option>Fortics Ecossistema IA</option>
+              <option>Fortics Chat Center</option>
+              <option>Fortics Contact Center</option>
+              <option>Fortics Campanha</option>
+              <option>Fortics Voz</option>
+            </select>
+          </div>
+        </div>
+        <template data-code="html">
+&lt;div class="fds-select"&gt;
+  &lt;select aria-label="Produto"&gt;
+    &lt;option&gt;Fortics Ecossistema IA&lt;/option&gt;
+    &lt;option&gt;Fortics Chat Center&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/div&gt;
+        </template>
+      </div>
+    </section>
+
+    <!-- ============ CHECKBOX ============ -->
+    <section class="docs-section" id="checkbox">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow">Checkbox</span>
+        <h2 class="docs-section__title">Checkbox</h2>
+        <p class="docs-section__lead">Default, checked, indeterminate e disabled.</p>
+      </header>
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview" style="gap:var(--fds-space-5)">
+          <label class="fds-check"><input type="checkbox"><span class="fds-check__box"></span><span>Aceito os termos</span></label>
+          <label class="fds-check"><input type="checkbox" checked><span class="fds-check__box"></span><span>Receber novidades</span></label>
+          <label class="fds-check"><input type="checkbox" id="ck-indet"><span class="fds-check__box"></span><span>Indeterminate</span></label>
+          <label class="fds-check"><input type="checkbox" disabled><span class="fds-check__box"></span><span>Disabled</span></label>
+        </div>
+        <template data-code="html">
+&lt;label class="fds-check"&gt;
+  &lt;input type="checkbox"&gt;
+  &lt;span class="fds-check__box"&gt;&lt;/span&gt;
+  &lt;span&gt;Aceito os termos&lt;/span&gt;
+&lt;/label&gt;
+        </template>
+        <template data-code="js">
+// Estado indeterminate (só via JS)
+document.getElementById('ck-indet').indeterminate = true;
+        </template>
+      </div>
+    </section>
+
+    <!-- ============ RADIO ============ -->
+    <section class="docs-section" id="radio">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow">Radio</span>
+        <h2 class="docs-section__title">Radio</h2>
+      </header>
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview" style="gap:var(--fds-space-5)">
+          <label class="fds-radio"><input type="radio" name="plan" checked><span class="fds-radio__dot"></span><span>Mensal · R$ 99</span></label>
+          <label class="fds-radio"><input type="radio" name="plan"><span class="fds-radio__dot"></span><span>Anual · R$ 990</span></label>
+          <label class="fds-radio"><input type="radio" name="plan" disabled><span class="fds-radio__dot"></span><span>Enterprise (em breve)</span></label>
+        </div>
+        <template data-code="html">
+&lt;label class="fds-radio"&gt;
+  &lt;input type="radio" name="plan" checked&gt;
+  &lt;span class="fds-radio__dot"&gt;&lt;/span&gt;
+  &lt;span&gt;Mensal&lt;/span&gt;
+&lt;/label&gt;
+        </template>
+      </div>
+    </section>
+
+    <!-- ============ SWITCH ============ -->
+    <section class="docs-section" id="switch">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow">Switch · Toggle</span>
+        <h2 class="docs-section__title">Switch</h2>
+      </header>
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview" style="gap:var(--fds-space-5)">
+          <label class="fds-switch"><input type="checkbox"><span class="fds-switch__track"></span><span>Notificações</span></label>
+          <label class="fds-switch"><input type="checkbox" checked><span class="fds-switch__track"></span><span>Auto-resposta IA</span></label>
+          <label class="fds-switch fds-switch--sm"><input type="checkbox" checked><span class="fds-switch__track"></span><span>Small</span></label>
+          <label class="fds-switch"><input type="checkbox" disabled><span class="fds-switch__track"></span><span>Disabled</span></label>
+        </div>
+        <template data-code="html">
+&lt;label class="fds-switch"&gt;
+  &lt;input type="checkbox" checked&gt;
+  &lt;span class="fds-switch__track"&gt;&lt;/span&gt;
+  &lt;span&gt;Auto-resposta IA&lt;/span&gt;
+&lt;/label&gt;
+        </template>
+      </div>
+    </section>
+
+    <!-- ============ BADGE ============ -->
+    <section class="docs-section" id="badge">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow">Badge · Tag</span>
+        <h2 class="docs-section__title">Badge</h2>
+      </header>
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview">
+          <span class="fds-badge"><span class="fds-badge__dot"></span>Default</span>
+          <span class="fds-badge fds-badge--nucleo"><span class="fds-badge__dot"></span>Online</span>
+          <span class="fds-badge fds-badge--esmeralda"><span class="fds-badge__dot"></span>Ativo</span>
+          <span class="fds-badge fds-badge--violeta"><i data-lucide="sparkles" style="width:12px;height:12px"></i> IA</span>
+          <span class="fds-badge fds-badge--warning">Pendente</span>
+          <span class="fds-badge fds-badge--danger">Falha</span>
+        </div>
+        <template data-code="html">
+&lt;span class="fds-badge fds-badge--nucleo"&gt;
+  &lt;span class="fds-badge__dot"&gt;&lt;/span&gt;Online
+&lt;/span&gt;
+&lt;span class="fds-badge fds-badge--esmeralda"&gt;Ativo&lt;/span&gt;
+&lt;span class="fds-badge fds-badge--violeta"&gt;IA&lt;/span&gt;
+        </template>
+      </div>
+    </section>
+
+    <!-- ============ ICON ============ -->
+    <section class="docs-section" id="icon">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow">Icon · Lucide</span>
+        <h2 class="docs-section__title">Icon</h2>
+        <p class="docs-section__lead">Biblioteca <strong>Lucide.dev</strong> integrada — 1400+ ícones. Use <code class="fds-inline">data-lucide="nome"</code>.</p>
+      </header>
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview" style="gap:var(--fds-space-5)">
+          <span class="fds-icon fds-icon--xs"><i data-lucide="zap"></i></span>
+          <span class="fds-icon fds-icon--sm"><i data-lucide="zap"></i></span>
+          <span class="fds-icon fds-icon--md fds-icon--nucleo"><i data-lucide="zap"></i></span>
+          <span class="fds-icon fds-icon--lg fds-icon--esmeralda"><i data-lucide="check-circle"></i></span>
+          <span class="fds-icon fds-icon--xl fds-icon--violeta"><i data-lucide="sparkles"></i></span>
+        </div>
+        <template data-code="html">
+&lt;span class="fds-icon fds-icon--md fds-icon--nucleo"&gt;
+  &lt;i data-lucide="zap"&gt;&lt;/i&gt;
+&lt;/span&gt;
+
+&lt;!-- Ativar Lucide --&gt;
+&lt;script src="https://unpkg.com/lucide@latest"&gt;&lt;/script&gt;
+&lt;script&gt;lucide.createIcons();&lt;/script&gt;
+        </template>
+      </div>
+    </section>
+
+    <!-- ============ AVATAR ============ -->
+    <section class="docs-section" id="avatar">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow">Avatar</span>
+        <h2 class="docs-section__title">Avatar</h2>
+      </header>
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview" style="gap:var(--fds-space-5)">
+          <span class="fds-avatar fds-avatar--sm">AB</span>
+          <span class="fds-avatar">CD</span>
+          <span class="fds-avatar fds-avatar--lg">EF<span class="fds-avatar__status fds-avatar__status--online"></span></span>
+          <span class="fds-avatar fds-avatar--xl"><i data-lucide="user" style="width:36px;height:36px"></i></span>
+          <span class="fds-avatar-group">
+            <span class="fds-avatar fds-avatar--sm">AB</span>
+            <span class="fds-avatar fds-avatar--sm" style="background:var(--fds-gradient-nucleo-esmeralda)">CD</span>
+            <span class="fds-avatar fds-avatar--sm" style="background:var(--fds-gradient-nucleo-marinho)">EF</span>
+            <span class="fds-avatar fds-avatar--sm" style="background:var(--fds-surface-2);color:var(--fds-text-secondary)">+5</span>
+          </span>
+        </div>
+        <template data-code="html">
+&lt;span class="fds-avatar"&gt;AB&lt;/span&gt;
+&lt;span class="fds-avatar fds-avatar--lg"&gt;
+  EF
+  &lt;span class="fds-avatar__status fds-avatar__status--online"&gt;&lt;/span&gt;
+&lt;/span&gt;
+
+&lt;span class="fds-avatar-group"&gt;
+  &lt;span class="fds-avatar fds-avatar--sm"&gt;AB&lt;/span&gt;
+  &lt;span class="fds-avatar fds-avatar--sm"&gt;CD&lt;/span&gt;
+&lt;/span&gt;
+        </template>
+      </div>
+    </section>
+
+    <!-- ============ SPINNER ============ -->
+    <section class="docs-section" id="spinner">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow">Spinner · Loader</span>
+        <h2 class="docs-section__title">Spinner</h2>
+      </header>
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview" style="gap:var(--fds-space-6)">
+          <span class="fds-spinner fds-spinner--sm"></span>
+          <span class="fds-spinner"></span>
+          <span class="fds-spinner fds-spinner--lg"></span>
+          <span class="fds-spinner fds-spinner--xl"></span>
+          <span class="fds-spinner fds-spinner--esmeralda"></span>
+          <span class="fds-spinner fds-spinner--violeta"></span>
+          <span class="fds-dots"><span></span><span></span><span></span></span>
+        </div>
+        <template data-code="html">
+&lt;span class="fds-spinner"&gt;&lt;/span&gt;
+&lt;span class="fds-spinner fds-spinner--lg"&gt;&lt;/span&gt;
+&lt;span class="fds-spinner fds-spinner--esmeralda"&gt;&lt;/span&gt;
+
+&lt;span class="fds-dots"&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;
+        </template>
+      </div>
+    </section>
+
+    <!-- ============ DIVIDER ============ -->
+    <section class="docs-section" id="divider">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow">Divider</span>
+        <h2 class="docs-section__title">Divider</h2>
+        <p class="docs-section__lead">4 variantes — do mais simples ao branded com Spark central.</p>
+      </header>
+
+      <!-- Variante 1 — Linha simples -->
+      <div class="docs-subhead" style="margin-top:0"><h3 class="fds-h3">1. Linha simples</h3></div>
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview fds-codeblock__preview--stack" style="width:100%;max-width:560px;margin-inline:auto">
+          <p style="margin:0">Conteúdo acima do divider</p>
+          <hr class="fds-divider" />
+          <p style="margin:0;color:var(--fds-text-tertiary)">Conteúdo abaixo do divider</p>
+        </div>
+        <template data-code="html">
+<hr class="fds-divider" />
+        </template>
+      </div>
+
+      <!-- Variante 2 — Gradient -->
+      <div class="docs-subhead"><h3 class="fds-h3">2. Gradient — fade nas pontas</h3></div>
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview fds-codeblock__preview--stack" style="width:100%;max-width:560px;margin-inline:auto">
+          <p style="margin:0">Conteúdo acima</p>
+          <hr class="fds-divider fds-divider--gradient" />
+          <p style="margin:0;color:var(--fds-text-tertiary)">Mais sutil que a linha sólida — recomendado para seções calmas</p>
+        </div>
+        <template data-code="html">
+<hr class="fds-divider fds-divider--gradient" />
+        </template>
+      </div>
+
+      <!-- Variante 3 — Com label "OU" -->
+      <div class="docs-subhead"><h3 class="fds-h3">3. Com label — para alternativas</h3></div>
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview fds-codeblock__preview--stack" style="width:100%;max-width:560px;margin-inline:auto">
+          <button class="fds-btn fds-btn--primary" style="width:100%">Entrar com e-mail</button>
+          <div class="fds-divider-label" style="margin:var(--fds-space-3) 0">OU</div>
+          <button class="fds-btn fds-btn--secondary" style="width:100%">Entrar com Google</button>
+        </div>
+        <template data-code="html">
+<div class="fds-divider-label">OU</div>
+        </template>
+      </div>
+
+      <!-- Variante 4 — Spark divider (branded) -->
+      <div class="docs-subhead"><h3 class="fds-h3">4. Spark divider — branded</h3></div>
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview fds-codeblock__preview--stack" style="width:100%;max-width:560px;margin-inline:auto">
+          <p style="margin:0;text-align:center">Encerra uma seção, abre outra.</p>
+          <div class="fds-spark-divider" style="margin:var(--fds-space-3) 0">
+            <div class="fds-spark-divider__icon"></div>
+          </div>
+          <p style="margin:0;color:var(--fds-text-tertiary);text-align:center">Use no final de blocos importantes para marcar transição</p>
+        </div>
+        <template data-code="html">
+<div class="fds-spark-divider">
+  <div class="fds-spark-divider__icon"></div>
+</div>
+        </template>
+        <template data-code="css">
+/* Já incluído em css/organisms.css — usa o ícone Spark como divisor central */
+.fds-spark-divider {
+  display: flex; align-items: center; gap: var(--fds-space-4);
+  color: var(--fds-text-tertiary);
+}
+.fds-spark-divider::before,
+.fds-spark-divider::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(to right, transparent, var(--fds-border-default), transparent);
+}
+.fds-spark-divider__icon {
+  width: 24px; height: 24px;
+  background-color: var(--fds-color-nucleo);
+  -webkit-mask: url('../assets/icons/spark-principal.svg') no-repeat center / contain;
+          mask: url('../assets/icons/spark-principal.svg') no-repeat center / contain;
+}
+        </template>
+      </div>
+
+      <!-- Variante 5 — Vertical (bonus) -->
+      <div class="docs-subhead"><h3 class="fds-h3">5. Vertical — para barras de ferramentas</h3></div>
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview" style="width:100%;max-width:560px;margin-inline:auto;gap:var(--fds-space-3);justify-content:center">
+          <button class="fds-btn fds-btn--ghost fds-btn--sm"><i data-lucide="bold" style="width:14px;height:14px"></i></button>
+          <button class="fds-btn fds-btn--ghost fds-btn--sm"><i data-lucide="italic" style="width:14px;height:14px"></i></button>
+          <span class="fds-divider--vertical" style="height:24px"></span>
+          <button class="fds-btn fds-btn--ghost fds-btn--sm"><i data-lucide="align-left" style="width:14px;height:14px"></i></button>
+          <button class="fds-btn fds-btn--ghost fds-btn--sm"><i data-lucide="align-center" style="width:14px;height:14px"></i></button>
+          <span class="fds-divider--vertical" style="height:24px"></span>
+          <button class="fds-btn fds-btn--ghost fds-btn--sm"><i data-lucide="link" style="width:14px;height:14px"></i></button>
+        </div>
+        <template data-code="html">
+<span class="fds-divider--vertical"></span>
+        </template>
+      </div>
+    </section>
+
+    <!-- ============ LINK ============ -->
+    <section class="docs-section" id="link">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow">Link</span>
+        <h2 class="docs-section__title">Link</h2>
+      </header>
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview demo__stage--stack" style="text-align:center">
+          <p style="margin:0">Conheça nossa <a href="#" class="fds-link">documentação completa</a> para começar.</p>
+          <p style="margin:0">Texto com <a href="#" class="fds-link fds-link--inline">link inline</a> destacado.</p>
+          <p style="margin:0"><a href="#" class="fds-link fds-link--external">Acessar dashboard</a></p>
+          <p style="margin:0"><a href="#" class="fds-link fds-link--muted">Termos de uso</a></p>
+        </div>
+        <template data-code="html">
+&lt;a href="#" class="fds-link"&gt;Link padrão&lt;/a&gt;
+&lt;a href="#" class="fds-link fds-link--inline"&gt;Link inline&lt;/a&gt;
+&lt;a href="#" class="fds-link fds-link--external"&gt;Link externo&lt;/a&gt;
+&lt;a href="#" class="fds-link fds-link--muted"&gt;Link muted&lt;/a&gt;
+        </template>
+      </div>
+    </section>
+
+    <!-- ============ PROGRESS ============ -->
+    <section class="docs-section" id="progress">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow">Progress</span>
+        <h2 class="docs-section__title">Progress bar</h2>
+      </header>
+      <div class="fds-codeblock">
+        <div class="fds-codeblock__preview demo__stage--stack" style="width:100%">
+          <div>
+            <div class="fds-row fds-justify-between" style="margin-bottom:6px">
+              <span class="fds-body-s">Uso da API</span>
+              <span class="fds-caption">68%</span>
+            </div>
+            <div class="fds-progress"><div class="fds-progress__bar" style="width:68%"></div></div>
+          </div>
+          <div>
+            <div class="fds-row fds-justify-between" style="margin-bottom:6px">
+              <span class="fds-body-s">Treinamento do agente</span>
+              <span class="fds-caption">92%</span>
+            </div>
+            <div class="fds-progress fds-progress--gradient"><div class="fds-progress__bar" style="width:92%"></div></div>
+          </div>
+        </div>
+        <template data-code="html">
+&lt;div class="fds-progress"&gt;
+  &lt;div class="fds-progress__bar" style="width:68%"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="fds-progress fds-progress--gradient"&gt;
+  &lt;div class="fds-progress__bar" style="width:92%"&gt;&lt;/div&gt;
+&lt;/div&gt;
+        </template>
+      </div>
+    </section>
+
+    <footer style="padding:var(--fds-space-7) var(--fds-space-8);color:var(--fds-text-tertiary);font-size:var(--fds-text-caption);border-top:1px solid var(--fds-border-subtle)">
+      Próximo nível → <a href="./03-molecules.html" class="fds-link">Moléculas</a> · combinações funcionais
+    </footer>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="../js/fds.js"></script>
+<script src="../js/fds-theme.js"></script>
+<script src="../js/fds-toast.js"></script>
+<script src="../js/fds-clipboard.js"></script>
+<script src="../js/fds-codeblock.js"></script>
+<script>
+  lucide.createIcons();
+  document.getElementById('ck-indet').indeterminate = true;
+  FDS.animate.scrollReveal('.docs-section__head', { y: 20, stagger: 0.04 });
+</script>
+
+</body>
+</html>

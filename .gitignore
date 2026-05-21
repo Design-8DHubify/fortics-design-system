@@ -1,0 +1,31 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# Dependências (não usamos build, mas previne)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Claude Code local
+.claude/
+
+# Temp / build
+dist/
+build/
+.cache/
+tmp/

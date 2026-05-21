@@ -1,0 +1,229 @@
+/* ============================================================
+   FORTICS DESIGN SYSTEM — TOKENS
+   Brandbook 2026 · fonte única de verdade do sistema visual
+   Suporta tema light e dark via [data-theme="light|dark"]
+   ============================================================ */
+
+:root {
+  /* -------------------------------------------------------- */
+  /* CORES DE MARCA (idênticas em ambos os temas)             */
+  /* -------------------------------------------------------- */
+  --fds-color-nucleo:        #0066FF;
+  --fds-color-marinho:       #0B1121;
+  --fds-color-violeta:       #8B5CF6;
+  --fds-color-esmeralda:     #20D78A;
+  --fds-color-branco:        #FFFFFF;
+
+  /* Escalas do Núcleo */
+  --fds-color-nucleo-90:     #1A75FF;
+  --fds-color-nucleo-80:     #3385FF;
+  --fds-color-nucleo-20:     #CCE0FF;
+  --fds-color-nucleo-10:     #E5EFFF;
+
+  /* Escalas do Marinho */
+  --fds-color-marinho-90:    #1C2235;
+  --fds-color-marinho-80:    #2C3449;
+  --fds-color-marinho-70:    #3D465D;
+  --fds-color-marinho-50:    #5E6678;
+  --fds-color-marinho-30:    #9DA3B0;
+  --fds-color-marinho-10:    #E1E3E8;
+
+  /* Semânticas */
+  --fds-color-success:       var(--fds-color-esmeralda);
+  --fds-color-info:          var(--fds-color-nucleo);
+  --fds-color-warning:       #F5B100;
+  --fds-color-danger:        #FF4D4F;
+
+  /* -------------------------------------------------------- */
+  /* GRADIENTES                                               */
+  /* -------------------------------------------------------- */
+  --fds-gradient-nucleo-marinho:   linear-gradient(135deg, #0066FF 0%, #0B1121 100%);
+  --fds-gradient-nucleo-esmeralda: linear-gradient(135deg, #0066FF 0%, #20D78A 100%);
+  --fds-gradient-nucleo-violeta:   linear-gradient(135deg, #0066FF 0%, #8B5CF6 100%);
+  --fds-gradient-nucleo-branco:    linear-gradient(135deg, #0066FF 0%, #FFFFFF 100%);
+  --fds-gradient-marinho-nucleo:   linear-gradient(180deg, #0B1121 0%, #0066FF 100%);
+  --fds-gradient-hero:             linear-gradient(135deg, #0066FF 0%, #8B5CF6 50%, #20D78A 100%);
+
+  /* -------------------------------------------------------- */
+  /* TIPOGRAFIA — Sora (única fonte da marca)                 */
+  /* -------------------------------------------------------- */
+  --fds-font-family:    'Sora', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --fds-font-mono:      'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, monospace;
+
+  --fds-weight-thin:        100;
+  --fds-weight-extralight:  200;
+  --fds-weight-light:       300;
+  --fds-weight-regular:     400;
+  --fds-weight-semibold:    600;
+  --fds-weight-bold:        700;
+  --fds-weight-extrabold:   800;
+
+  /* Escala H1-H6 + display + corpo (responsiva via clamp) */
+  --fds-text-display-xl: clamp(3.5rem,  6vw,   5.5rem);   /* 56-88px */
+  --fds-text-display-l:  clamp(2.75rem, 5vw,   4.25rem);  /* 44-68px */
+  --fds-text-display-m:  clamp(2.25rem, 4vw,   3.25rem);  /* 36-52px */
+  --fds-text-h1:         clamp(2.5rem,  4.5vw, 3.5rem);   /* 40-56px */
+  --fds-text-h2:         clamp(2rem,    3.5vw, 2.75rem);  /* 32-44px */
+  --fds-text-h3:         clamp(1.625rem,2.5vw, 2.125rem); /* 26-34px */
+  --fds-text-h4:         clamp(1.375rem,2vw,   1.625rem); /* 22-26px */
+  --fds-text-h5:         1.25rem;                          /* 20 */
+  --fds-text-h6:         1.125rem;                         /* 18 */
+  --fds-text-body-xl:    1.25rem;                          /* 20 */
+  --fds-text-body-l:     1.125rem;                         /* 18 */
+  --fds-text-body-m:     1rem;                             /* 16 */
+  --fds-text-body-s:     0.875rem;                         /* 14 */
+  --fds-text-caption:    0.75rem;                          /* 12 */
+  --fds-text-overline:   0.6875rem;                        /* 11 */
+
+  --fds-leading-tight:   1.1;
+  --fds-leading-snug:    1.25;
+  --fds-leading-normal:  1.5;
+  --fds-leading-relaxed: 1.7;
+
+  --fds-tracking-tighter: -0.04em;
+  --fds-tracking-tight:   -0.02em;
+  --fds-tracking-normal:  0;
+  --fds-tracking-wide:    0.02em;
+  --fds-tracking-wider:   0.08em;
+
+  /* -------------------------------------------------------- */
+  /* ESPAÇAMENTO (base 4)                                     */
+  /* -------------------------------------------------------- */
+  --fds-space-0: 0;
+  --fds-space-1: 0.25rem;
+  --fds-space-2: 0.5rem;
+  --fds-space-3: 0.75rem;
+  --fds-space-4: 1rem;
+  --fds-space-5: 1.5rem;
+  --fds-space-6: 2rem;
+  --fds-space-7: 2.5rem;
+  --fds-space-8: 3rem;
+  --fds-space-9: 4rem;
+  --fds-space-10: 5rem;
+  --fds-space-11: 6rem;
+  --fds-space-12: 8rem;
+
+  /* -------------------------------------------------------- */
+  /* RAIOS                                                    */
+  /* -------------------------------------------------------- */
+  --fds-radius-xs:   4px;
+  --fds-radius-sm:   8px;
+  --fds-radius-md:   12px;
+  --fds-radius-lg:   16px;
+  --fds-radius-xl:   24px;
+  --fds-radius-2xl:  32px;
+  --fds-radius-full: 9999px;
+
+  /* -------------------------------------------------------- */
+  /* MOTION                                                   */
+  /* -------------------------------------------------------- */
+  --fds-duration-instant: 100ms;
+  --fds-duration-fast:    200ms;
+  --fds-duration-base:    320ms;
+  --fds-duration-slow:    480ms;
+  --fds-duration-slower:  720ms;
+
+  --fds-ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --fds-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --fds-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* -------------------------------------------------------- */
+  /* LAYOUT                                                   */
+  /* -------------------------------------------------------- */
+  --fds-container-sm:  640px;
+  --fds-container-md:  768px;
+  --fds-container-lg:  1024px;
+  --fds-container-xl:  1280px;
+  --fds-container-2xl: 1440px;
+
+  --fds-z-base:     1;
+  --fds-z-dropdown: 100;
+  --fds-z-sticky:   200;
+  --fds-z-modal:    1000;
+  --fds-z-toast:    2000;
+
+  /* -------------------------------------------------------- */
+  /* PATTERNS                                                  */
+  /* -------------------------------------------------------- */
+  --fds-pattern-nucleo:    url('../assets/patterns/pattern-azul-nucleo.svg');
+  --fds-pattern-marinho:   url('../assets/patterns/pattern-marinho.svg');
+  --fds-pattern-esmeralda: url('../assets/patterns/pattern-esmeralda.svg');
+  --fds-pattern-violeta:   url('../assets/patterns/pattern-violeta.svg');
+}
+
+/* ============================================================
+   TEMA — LIGHT (DEFAULT — Brandbook)
+   ============================================================ */
+:root,
+[data-theme="light"] {
+  --fds-surface-0:        #FFFFFF;
+  --fds-surface-1:        #F7F8FA;
+  --fds-surface-2:        #EEF1F6;
+  --fds-surface-3:        #E1E5EE;
+  --fds-surface-elevated: rgba(11,17,33,0.04);
+  --fds-surface-glass:    rgba(255,255,255,0.65);
+  --fds-surface-inverse:  var(--fds-color-marinho);
+
+  /* Texto com contraste WCAG AA garantido sobre superfícies claras */
+  --fds-text-primary:     #0B1121;     /* contra branco: 17.2:1 (AAA) */
+  --fds-text-secondary:   #2C3449;     /* contra branco: 12.4:1 (AAA) */
+  --fds-text-tertiary:    #5E6678;     /* contra branco: 5.6:1 (AA) */
+  --fds-text-inverse:     #FFFFFF;
+  --fds-text-link:        var(--fds-color-nucleo);
+
+  --fds-border-subtle:    rgba(11,17,33,0.08);
+  --fds-border-default:   rgba(11,17,33,0.14);
+  --fds-border-strong:    rgba(11,17,33,0.24);
+  --fds-border-focus:     var(--fds-color-nucleo);
+
+  --fds-shadow-xs:   0 1px 2px rgba(11,17,33,0.06);
+  --fds-shadow-sm:   0 2px 8px rgba(11,17,33,0.08);
+  --fds-shadow-md:   0 8px 24px rgba(11,17,33,0.10);
+  --fds-shadow-lg:   0 16px 48px rgba(11,17,33,0.12);
+  --fds-shadow-xl:   0 24px 72px rgba(11,17,33,0.16);
+  --fds-shadow-glow-nucleo:    0 0 32px rgba(0,102,255,0.30);
+  --fds-shadow-glow-esmeralda: 0 0 32px rgba(32,215,138,0.30);
+  --fds-shadow-glow-violeta:   0 0 32px rgba(139,92,246,0.30);
+
+  --fds-code-bg:        #0B1121;
+  --fds-pattern-bg:     var(--fds-pattern-nucleo);
+}
+
+/* ============================================================
+   TEMA — DARK (opt-in)
+   ============================================================ */
+[data-theme="dark"] {
+  --fds-surface-0:        #0B1121;
+  --fds-surface-1:        #121A2E;
+  --fds-surface-2:        #1A2238;
+  --fds-surface-3:        #232D45;
+  --fds-surface-elevated: rgba(255,255,255,0.04);
+  --fds-surface-glass:    rgba(255,255,255,0.06);
+  --fds-surface-inverse:  #FFFFFF;
+
+  /* Texto com contraste WCAG AA garantido sobre superfícies escuras */
+  --fds-text-primary:     #FFFFFF;     /* contra marinho: 17.2:1 (AAA) */
+  --fds-text-secondary:   #C8D1E5;     /* contra marinho: 11.1:1 (AAA) */
+  --fds-text-tertiary:    #9098AE;     /* contra marinho: 5.4:1 (AA)  */
+  --fds-text-inverse:     var(--fds-color-marinho);
+  --fds-text-link:        #6FA8FF;     /* núcleo lighter para AA em dark */
+
+  --fds-border-subtle:    rgba(255,255,255,0.08);
+  --fds-border-default:   rgba(255,255,255,0.14);
+  --fds-border-strong:    rgba(255,255,255,0.24);
+  --fds-border-focus:     #6FA8FF;
+
+  --fds-shadow-xs:   0 1px 2px rgba(0,0,0,0.20);
+  --fds-shadow-sm:   0 2px 8px rgba(0,0,0,0.28);
+  --fds-shadow-md:   0 8px 24px rgba(0,0,0,0.32);
+  --fds-shadow-lg:   0 16px 48px rgba(0,0,0,0.40);
+  --fds-shadow-xl:   0 24px 72px rgba(0,0,0,0.50);
+  --fds-shadow-glow-nucleo:    0 0 32px rgba(0,102,255,0.45);
+  --fds-shadow-glow-esmeralda: 0 0 32px rgba(32,215,138,0.45);
+  --fds-shadow-glow-violeta:   0 0 32px rgba(139,92,246,0.45);
+
+  --fds-code-bg:        #06091A;
+  --fds-pattern-bg:     var(--fds-pattern-marinho);
+}
+
+/* Light é o padrão absoluto do brandbook — dark é opt-in via [data-theme="dark"] */

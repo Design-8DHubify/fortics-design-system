@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Organismos · Fortics DS</title>
+<link rel="icon" type="image/svg+xml" href="../assets/icons/spark-principal.svg" />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/tokens.css" />
+<link rel="stylesheet" href="../css/base.css" />
+<link rel="stylesheet" href="../css/components.css" />
+<link rel="stylesheet" href="../css/atoms.css" />
+<link rel="stylesheet" href="../css/molecules.css" />
+<link rel="stylesheet" href="../css/organisms.css" />
+<link rel="stylesheet" href="../css/spark-animations.css" />
+<link rel="stylesheet" href="../css/showcase.css" />
+<script>
+  (function(){
+    try {
+      var t = localStorage.getItem('fds-theme');
+      if (!t) t = 'light';
+      document.documentElement.setAttribute('data-theme', t);
+    } catch(_) { document.documentElement.setAttribute('data-theme', 'light'); }
+  })();
+</script>
+<style>
+  /* Demos container — branded preview wrapper para cada organismo */
+  .org-demo {
+    border: 1px solid var(--fds-border-subtle);
+    border-radius: var(--fds-radius-xl);
+    overflow: hidden;
+    margin-bottom: var(--fds-space-7);
+    background: var(--fds-surface-1);
+  }
+  .org-demo__label {
+    padding: var(--fds-space-3) var(--fds-space-5);
+    background: var(--fds-surface-2);
+    border-bottom: 1px solid var(--fds-border-subtle);
+    display: flex; align-items: center; justify-content: space-between;
+    font-family: var(--fds-font-mono);
+    font-size: var(--fds-text-caption);
+    color: var(--fds-text-tertiary);
+  }
+  .org-demo__label-tag {
+    color: var(--fds-color-nucleo);
+    font-weight: var(--fds-weight-bold);
+  }
+  .org-demo__body { padding: 0; }
+
+  /* Inline spark icon helper for navbar/buttons */
+  .nav-spark {
+    display: inline-block;
+    width: 22px; height: 22px;
+    background: url('../assets/icons/spark-principal.svg') no-repeat center / contain;
+  }
+</style>
+</head>
+<body>
+
+<div class="docs">
+  <aside class="docs-side">
+    <div class="docs-side__brand">
+      <img class="logo-dark"  src="../assets/logos/horizontal-branco.svg" alt="Fortics" />
+      <img class="logo-light" src="../assets/logos/horizontal-marinho.svg" alt="Fortics" hidden />
+    </div>
+    <div class="docs-side__group">
+      <div class="docs-side__title">Início</div>
+      <a class="docs-side__link" href="../index.html"><i data-lucide="home"></i> Visão geral</a>
+    </div>
+    <div class="docs-side__group">
+      <div class="docs-side__title">Atomic Design</div>
+      <a class="docs-side__link" href="./01-foundations.html"><span class="level-dot">0</span> Fundamentos</a>
+      <a class="docs-side__link" href="./02-atoms.html"><span class="level-dot">A</span> Átomos</a>
+      <a class="docs-side__link" href="./03-molecules.html"><span class="level-dot">M</span> Moléculas</a>
+      <a class="docs-side__link is-active" href="./04-organisms.html"><span class="level-dot">O</span> Organismos</a>
+    </div>
+    <div class="docs-side__group">
+      <div class="docs-side__title">Nesta página</div>
+      <a class="docs-side__link" href="#navbar"><i data-lucide="menu"></i> Navbar</a>
+      <a class="docs-side__link" href="#logo-strip"><i data-lucide="grip-horizontal"></i> Logo Strip</a>
+      <a class="docs-side__link" href="#features"><i data-lucide="layout-grid"></i> Features</a>
+      <a class="docs-side__link" href="#stats"><i data-lucide="bar-chart-3"></i> Stats</a>
+      <a class="docs-side__link" href="#pomelo"><i data-lucide="layout-list"></i> Pomelo</a>
+      <a class="docs-side__link" href="#carousel"><i data-lucide="gallery-horizontal"></i> Carousel</a>
+      <a class="docs-side__link" href="#testimonial"><i data-lucide="quote"></i> Testimonial</a>
+      <a class="docs-side__link" href="#accordion"><i data-lucide="chevron-down-square"></i> Accordion</a>
+      <a class="docs-side__link" href="#tabs"><i data-lucide="layout-panel-top"></i> Tabs</a>
+      <a class="docs-side__link" href="#cta"><i data-lucide="megaphone"></i> CTA</a>
+      <a class="docs-side__link" href="#footer"><i data-lucide="panel-bottom"></i> Footer</a>
+    </div>
+    <div class="docs-side__footer">
+      <div class="fds-theme-toggle" data-fds-theme-toggle role="group" aria-label="Tema">
+        <button class="fds-theme-toggle__btn" data-theme-set="light" aria-pressed="true"><i data-lucide="sun" style="width:16px;height:16px"></i></button>
+        <button class="fds-theme-toggle__btn" data-theme-set="dark" aria-pressed="false"><i data-lucide="moon" style="width:16px;height:16px"></i></button>
+      </div>
+      <p class="fds-caption" style="margin:0">Fortics DS v1.0</p>
+    </div>
+  </aside>
+
+  <main class="docs-main">
+    <header class="docs-top">
+      <div class="docs-top__crumb">~ / design-system / organismos</div>
+      <div class="docs-top__actions"><span class="fds-badge fds-badge--nucleo"><span class="fds-badge__dot"></span>Nível O · expressão de marca</span></div>
+    </header>
+
+    <section class="docs-section">
+      <header class="docs-section__head">
+        <span class="fds-brand-eyebrow">Organismos</span>
+        <h1 class="docs-section__title">Estruturas completas <span class="fds-gradient-text--tri">vivas de marca</span>.</h1>
+        <p class="docs-section__lead">
+          Cada organismo carrega a alma da Fortics: o <strong>Spark</strong> aparece como decoração,
+          divisor, ícone e ritmo; <strong>patterns</strong> ambientam o fundo;
+          <strong>gradientes</strong> mostram movimento; <strong>shapes</strong> flutuam para dar vida.
+          Tudo respeitando o brandbook.
+        </p>
+      </header>
+    </section>
+
+    <!-- ============== NAVBAR ============== -->
+    <section class="docs-section" id="navbar">
+      <div class="docs-subhead">
+        <h3 class="fds-h3"><span class="fds-brand-eyebrow" style="margin:0">01 · Navbar</span><br/>Navegação com identidade</h3>
+        <p>Logo + Spark + glow no CTA</p>
+      </div>
+
+      <div class="org-demo">
+        <div class="org-demo__label"><span>Navbar default</span><span class="org-demo__label-tag">.fds-navbar</span></div>
+        <div class="org-demo__body">
+          <nav class="fds-navbar" style="border-radius:0;border-bottom:none">
+            <div class="fds-navbar__brand">
+              <img src="../assets/logos/horizontal-marinho.svg" alt="Fortics" class="logo-light-inv" style="height:28px" />
+              <img src="../assets/logos/horizontal-branco.svg" alt="Fortics" class="logo-dark-inv" style="height:28px;display:none" />
+            </div>
+            <div class="fds-navbar__nav">
+              <a href="#" class="fds-navbar__link">Produtos</a>
+              <a href="#" class="fds-navbar__link">Soluções</a>
+              <a href="#" class="fds-navbar__link">Preços</a>
+              <a href="#" class="fds-navbar__link">Recursos</a>
+            </div>
+            <div class="fds-navbar__actions">
+              <a href="#" class="fds-btn fds-btn--ghost fds-btn--sm">Entrar</a>
+              <a href="#" class="fds-btn fds-btn--primary fds-btn--sm fds-glow-nucleo">
+                <span class="nav-spark" style="width:14px;height:14px;background-color:#fff;-webkit-mask:url('../assets/icons/spark-principal.svg') no-repeat center/contain;mask:url('../assets/icons/spark-principal.svg') no-repeat center/contain"></span>
+                Falar com vendas
+              </a>
+            </div>
+          </nav>
+        </div>
+      </div>
+
+      <div class="org-demo">
+        <div class="org-demo__label"><span>Navbar sobre fundo marinho — para hero dark</span><span class="org-demo__label-tag">.fds-navbar + .fds-branded-surface--dark</span></div>
+        <div class="org-demo__body fds-branded-surface--dark" style="padding:0">
+          <div class="fds-pattern-bg fds-pattern-bg--nucleo" style="opacity:0.12"></div>
+          <nav class="fds-navbar" style="position:relative;background:transparent;border-bottom:1px solid rgba(255,255,255,0.08)">
+            <div class="fds-navbar__brand">
+              <img src="../assets/logos/horizontal-branco.svg" alt="Fortics" style="height:28px" />
+            </div>
+            <div class="fds-navbar__nav">
+              <a href="#" class="fds-navbar__link" style="color:rgba(255,255,255,0.85)">Produtos</a>
+              <a href="#" class="fds-navbar__link" style="color:rgba(255,255,255,0.85)">IA</a>
+              <a href="#" class="fds-navbar__link" style="color:rgba(255,255,255,0.85)">Cases</a>
+              <a href="#" class="fds-navbar__link" style="color:rgba(255,255,255,0.85)">Preços</a>
+            </div>
+            <div class="fds-navbar__actions">
+              <a href="#" class="fds-btn fds-btn--ghost fds-btn--sm" style="color:#fff">Entrar</a>
+              <a href="#" class="fds-btn fds-btn--lg" style="background:#fff;color:var(--fds-color-marinho);font-weight:700;font-size:var(--fds-text-body-s);height:36px;padding:0 16px">Demo grátis</a>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== LOGO STRIP ============== -->
+    <section class="docs-section" id="logo-strip">
+      <div class="docs-subhead">
+        <h3 class="fds-h3"><span class="fds-brand-eyebrow" style="margin:0">03 · Logo Strip</span><br/>Clientes com separadores Spark</h3>
+        <p>Cada separador é um Spark girando — assina cada empresa com a marca</p>
+      </div>
+      <div class="org-demo">
+        <div class="org-demo__label"><span>Logo strip animada</span><span class="org-demo__label-tag">.fds-logo-strip</span></div>
+        <div class="org-demo__body" style="padding:var(--fds-space-6)">
+          <p class="fds-overline fds-text-center" style="margin-bottom:var(--fds-space-4);color:var(--fds-text-tertiary)">+800 empresas confiam na Fortics</p>
+          <div class="fds-logo-strip">
+            <span>ACME Co</span>
+            <span class="fds-logo-strip__sep"></span>
+            <span>Nimbus</span>
+            <span class="fds-logo-strip__sep"></span>
+            <span>Olympus</span>
+            <span class="fds-logo-strip__sep"></span>
+            <span>Vertex</span>
+            <span class="fds-logo-strip__sep"></span>
+            <span>Aurora</span>
+            <span class="fds-logo-strip__sep"></span>
+            <span>Quanta</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== FEATURES ============== -->
+    <section class="docs-section" id="features">
+      <div class="docs-subhead">
+        <h3 class="fds-h3"><span class="fds-brand-eyebrow" style="margin:0">04 · Features Grid</span><br/>Grade de recursos com Spark em cada card</h3>
+        <p>Cada card tem Spark no canto · gradient na borda quando ativo</p>
+      </div>
+      <div class="org-demo">
+        <div class="org-demo__label"><span>Features 3 colunas</span><span class="org-demo__label-tag">.fds-feature-card + .fds-spark-corner</span></div>
+        <div class="org-demo__body" style="padding:var(--fds-space-7);background:var(--fds-surface-0)">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--fds-space-5)">
+            <div class="fds-feature-card" style="position:relative;overflow:hidden">
+              <span class="fds-spark-corner fds-spark-corner--tr"></span>
+              <div class="fds-feature-card__icon"><i data-lucide="message-circle"></i></div>
+              <h3 class="fds-feature-card__title">Inbox omnichannel</h3>
+              <p class="fds-feature-card__desc">WhatsApp, Voz, E-mail e Webchat numa única tela — com contexto IA preservado.</p>
+              <a href="#" class="fds-feature-card__cta">Saiba mais <i data-lucide="arrow-right" style="width:14px;height:14px"></i></a>
+            </div>
+            <div class="fds-feature-card fds-feature-card--violeta" style="position:relative;overflow:hidden">
+              <span class="fds-spark-corner fds-spark-corner--tr"></span>
+              <div class="fds-feature-card__icon"><i data-lucide="brain-circuit"></i></div>
+              <h3 class="fds-feature-card__title">Agente IA que age</h3>
+              <p class="fds-feature-card__desc">Não responde só — executa ações reais no seu CRM ou ERP.</p>
+              <a href="#" class="fds-feature-card__cta">Demo IA <i data-lucide="arrow-right" style="width:14px;height:14px"></i></a>
+            </div>
+            <div class="fds-feature-card fds-feature-card--esmeralda" style="position:relative;overflow:hidden">
+              <span class="fds-spark-corner fds-spark-corner--tr"></span>
+              <div class="fds-feature-card__icon"><i data-lucide="zap"></i></div>
+              <h3 class="fds-feature-card__title">Automação operacional</h3>
+              <p class="fds-feature-card__desc">Workflows visuais que resolvem casos repetitivos sem código.</p>
+              <a href="#" class="fds-feature-card__cta">Ver workflows <i data-lucide="arrow-right" style="width:14px;height:14px"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== STATS ============== -->
+    <section class="docs-section" id="stats">
+      <div class="docs-subhead">
+        <h3 class="fds-h3"><span class="fds-brand-eyebrow" style="margin:0">05 · Stats</span><br/>Métricas com presença</h3>
+        <p>Números gradient · acentos de marca · sparkline animada</p>
+      </div>
+      <div class="org-demo">
+        <div class="org-demo__label"><span>Stats grid sobre marinho</span><span class="org-demo__label-tag">.fds-stat-card</span></div>
+        <div class="org-demo__body fds-branded-surface--dark" style="padding:var(--fds-space-9);position:relative">
+          <div class="fds-pattern-bg fds-pattern-bg--violeta" style="opacity:0.12"></div>
+          <div style="position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--fds-space-5)">
+            <div style="background:rgba(255,255,255,0.04);padding:var(--fds-space-6);border:1px solid rgba(255,255,255,0.08);border-radius:var(--fds-radius-lg);position:relative;overflow:hidden">
+              <span class="fds-spark-corner fds-spark-corner--tr" style="opacity:0.18"></span>
+              <p style="font-size:var(--fds-text-caption);color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:var(--fds-tracking-wider);margin:0 0 var(--fds-space-2)">Conversas/mês</p>
+              <p class="fds-gradient-text--tri" style="font-size:var(--fds-text-display-l);font-weight:var(--fds-weight-extrabold);line-height:1;margin:0">12M+</p>
+              <div class="fds-sparkline" style="margin-top:var(--fds-space-3)"></div>
+            </div>
+            <div style="background:rgba(255,255,255,0.04);padding:var(--fds-space-6);border:1px solid rgba(255,255,255,0.08);border-radius:var(--fds-radius-lg);position:relative;overflow:hidden">
+              <span class="fds-spark-corner fds-spark-corner--tr" style="opacity:0.18"></span>
+              <p style="font-size:var(--fds-text-caption);color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:var(--fds-tracking-wider);margin:0 0 var(--fds-space-2)">Uptime</p>
+              <p style="background:linear-gradient(135deg,#fff,var(--fds-color-esmeralda));-webkit-background-clip:text;background-clip:text;color:transparent;font-size:var(--fds-text-display-l);font-weight:var(--fds-weight-extrabold);line-height:1;margin:0">99.99%</p>
+              <span style="font-size:var(--fds-text-caption);color:var(--fds-color-esmeralda);font-weight:600;margin-top:var(--fds-space-3);display:block">SLA garantido</span>
+            </div>
+            <div style="background:rgba(255,255,255,0.04);padding:var(--fds-space-6);border:1px solid rgba(255,255,255,0.08);border-radius:var(--fds-radius-lg);position:relative;overflow:hidden">
+              <span class="fds-spark-corner fds-spark-corner--tr" style="opacity:0.18"></span>
+              <p style="font-size:var(--fds-text-caption);color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:var(--fds-tracking-wider);margin:0 0 var(--fds-space-2)">Clientes</p>
+              <p style="background:linear-gradient(135deg,#fff,var(--fds-color-violeta));-webkit-background-clip:text;background-clip:text;color:transparent;font-size:var(--fds-text-display-l);font-weight:var(--fds-weight-extrabold);line-height:1;margin:0">800+</p>
+              <div class="fds-sparkline" style="margin-top:var(--fds-space-3)"></div>
+            </div>
+            <div style="background:rgba(255,255,255,0.04);padding:var(--fds-space-6);border:1px solid rgba(255,255,255,0.08);border-radius:var(--fds-radius-lg);position:relative;overflow:hidden">
+              <span class="fds-spark-corner fds-spark-corner--tr" style="opacity:0.18"></span>
+              <p style="font-size:var(--fds-text-caption);color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:var(--fds-tracking-wider);margin:0 0 var(--fds-space-2)">CSAT médio</p>
+              <p style="background:linear-gradient(135deg,#fff,var(--fds-color-nucleo));-webkit-background-clip:text;background-clip:text;color:transparent;font-size:var(--fds-text-display-l);font-weight:var(--fds-weight-extrabold);line-height:1;margin:0">94%</p>
+              <span style="font-size:var(--fds-text-caption);color:var(--fds-color-esmeralda);font-weight:600;margin-top:var(--fds-space-3);display:block">↑ +3pp</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== POMELO ============== -->
+    <section class="docs-section" id="pomelo">
+      <div class="docs-subhead">
+        <h3 class="fds-h3"><span class="fds-brand-eyebrow" style="margin:0">06 · Pomelo Interactive</span><br/>Lista com painéis brand-colored</h3>
+        <p>Spark girando em cada item ativo · pattern de fundo</p>
+      </div>
+      <div class="org-demo">
+        <div class="org-demo__label"><span>Pomelo branded</span><span class="org-demo__label-tag">.fds-pomelo</span></div>
+        <div class="org-demo__body" style="padding:var(--fds-space-7);background:var(--fds-surface-2);position:relative">
+          <div class="fds-pomelo" data-fds-pomelo style="width:100%;background:var(--fds-surface-1)">
+            <div class="fds-pomelo__list">
+              <button class="fds-pomelo__item"><span class="fds-pomelo__num">01</span><span class="fds-pomelo__lbl">Mensageria</span></button>
+              <button class="fds-pomelo__item"><span class="fds-pomelo__num">02</span><span class="fds-pomelo__lbl">Voz inteligente</span></button>
+              <button class="fds-pomelo__item"><span class="fds-pomelo__num">03</span><span class="fds-pomelo__lbl">Agente IA</span></button>
+              <button class="fds-pomelo__item"><span class="fds-pomelo__num">04</span><span class="fds-pomelo__lbl">Campanhas</span></button>
+              <button class="fds-pomelo__item"><span class="fds-pomelo__num">05</span><span class="fds-pomelo__lbl">Channel Connect</span></button>
+            </div>
+            <div class="fds-pomelo__stage">
+              <div class="fds-pomelo__panel" style="background-image:linear-gradient(135deg, rgba(0,102,255,0.92), rgba(11,17,33,0.95)), var(--fds-pattern-marinho);background-size:cover, 280px">
+                <div class="fds-pomelo__panel-illustration"><i data-lucide="message-circle"></i></div>
+                <span class="fds-pomelo__panel-eyebrow">01 · Mensageria</span>
+                <h3>Inbox unificada</h3>
+                <p>WhatsApp, Instagram, Facebook, Webchat, SMS e e-mail numa só tela — com contexto IA preservado entre canais.</p>
+              </div>
+              <div class="fds-pomelo__panel" style="background-image:linear-gradient(135deg, rgba(32,215,138,0.85), rgba(11,17,33,0.95)), var(--fds-pattern-marinho);background-size:cover, 280px">
+                <div class="fds-pomelo__panel-illustration"><i data-lucide="phone-call"></i></div>
+                <span class="fds-pomelo__panel-eyebrow">02 · Voz</span>
+                <h3>Telefonia integrada</h3>
+                <p>URA inteligente, gravação automática, transcrição em tempo real e roteamento por skill.</p>
+              </div>
+              <div class="fds-pomelo__panel" style="background-image:linear-gradient(135deg, rgba(139,92,246,0.90), rgba(11,17,33,0.95)), var(--fds-pattern-marinho);background-size:cover, 280px">
+                <div class="fds-pomelo__panel-illustration"><i data-lucide="brain-circuit"></i></div>
+                <span class="fds-pomelo__panel-eyebrow">03 · IA</span>
+                <h3>Agente que age</h3>
+                <p>Não responde só — executa ações no CRM e ERP. Resolve enquanto conversa.</p>
+              </div>
+              <div class="fds-pomelo__panel" style="background-image:linear-gradient(135deg, rgba(245,177,0,0.85), rgba(11,17,33,0.95)), var(--fds-pattern-marinho);background-size:cover, 280px">
+                <div class="fds-pomelo__panel-illustration"><i data-lucide="send"></i></div>
+                <span class="fds-pomelo__panel-eyebrow">04 · Campanhas</span>
+                <h3>Disparo controlado</h3>
+                <p>Segmente, agende e meça campanhas com rastreabilidade ponta a ponta.</p>
+              </div>
+              <div class="fds-pomelo__panel" style="background-image:linear-gradient(135deg, rgba(0,102,255,0.90), rgba(139,92,246,0.90)), var(--fds-pattern-marinho);background-size:cover, 280px">
+                <div class="fds-pomelo__panel-illustration"><i data-lucide="cable"></i></div>
+                <span class="fds-pomelo__panel-eyebrow">05 · Channel Connect</span>
+                <h3>Stack conectável</h3>
+                <p>Webhooks, APIs e integrações nativas com seu CRM, ERP e ferramentas existentes.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== CAROUSEL ============== -->
+    <section class="docs-section" id="carousel">
+      <div class="docs-subhead">
+        <h3 class="fds-h3"><span class="fds-brand-eyebrow" style="margin:0">07 · Carousel</span><br/>Slider com pattern em cada slide</h3>
+        <p>Cada slide é uma cor de marca · pattern subtle no fundo · spark gigante</p>
+      </div>
+      <div class="org-demo">
+        <div class="org-demo__label"><span>Carousel branded · autoplay 5s</span><span class="org-demo__label-tag">.fds-carousel</span></div>
+        <div class="org-demo__body">
+          <div class="fds-carousel" data-fds-carousel="autoplay:5000" style="border-radius:0;width:100%">
+            <div class="fds-carousel__viewport">
+              <div class="fds-carousel__track">
+                <div class="fds-carousel__slide" style="background:linear-gradient(135deg, #0066FF, #0B1121);padding:var(--fds-space-9) var(--fds-space-8);min-height:380px;display:flex;align-items:center;position:relative;overflow:hidden">
+                  <div class="fds-pattern-bg fds-pattern-bg--marinho" style="opacity:0.25"></div>
+                  <span class="fds-spark-corner fds-spark-corner--xl fds-spark-corner--br" style="opacity:0.15;background-image:url('../assets/icons/spark-fundo-nucleo.svg')"></span>
+                  <div style="color:#fff;max-width:520px;position:relative;z-index:2">
+                    <span class="fds-brand-eyebrow" style="color:var(--fds-color-esmeralda)">Case · Acme Co</span>
+                    <h3 style="color:#fff;margin:0 0 var(--fds-space-3);font-size:var(--fds-text-h2)">Reduziram TMA em <span class="fds-gradient-text--tri" style="background:linear-gradient(135deg,#fff,var(--fds-color-esmeralda));-webkit-background-clip:text;background-clip:text">40%</span></h3>
+                    <p style="color:rgba(255,255,255,0.85);margin:0 0 var(--fds-space-5)">Implementação em 3 semanas. ROI no primeiro mês.</p>
+                    <a href="#" class="fds-btn fds-btn--lg" style="background:#fff;color:var(--fds-color-marinho)">Ler caso completo</a>
+                  </div>
+                </div>
+                <div class="fds-carousel__slide" style="background:linear-gradient(135deg, #20D78A, #0B1121);padding:var(--fds-space-9) var(--fds-space-8);min-height:380px;display:flex;align-items:center;position:relative;overflow:hidden">
+                  <div class="fds-pattern-bg fds-pattern-bg--marinho" style="opacity:0.20"></div>
+                  <span class="fds-spark-corner fds-spark-corner--xl fds-spark-corner--br" style="opacity:0.18"></span>
+                  <div style="color:#fff;max-width:520px;position:relative;z-index:2">
+                    <span class="fds-brand-eyebrow" style="color:var(--fds-color-esmeralda)">Lançamento · 2026</span>
+                    <h3 style="color:#fff;margin:0 0 var(--fds-space-3);font-size:var(--fds-text-h2)">Fortics IA 2.0 chegou</h3>
+                    <p style="color:rgba(255,255,255,0.85);margin:0 0 var(--fds-space-5)">Agentes que executam ações reais no seu sistema, não só respondem.</p>
+                    <a href="#" class="fds-btn fds-btn--lg" style="background:#fff;color:var(--fds-color-marinho)">Ver IA 2.0</a>
+                  </div>
+                </div>
+                <div class="fds-carousel__slide" style="background:linear-gradient(135deg, #8B5CF6, #0B1121);padding:var(--fds-space-9) var(--fds-space-8);min-height:380px;display:flex;align-items:center;position:relative;overflow:hidden">
+                  <div class="fds-pattern-bg fds-pattern-bg--marinho" style="opacity:0.20"></div>
+                  <span class="fds-spark-corner fds-spark-corner--xl fds-spark-corner--br" style="opacity:0.18"></span>
+                  <div style="color:#fff;max-width:520px;position:relative;z-index:2">
+                    <span class="fds-brand-eyebrow" style="color:#FFB1FF">Webinar · 12 de junho</span>
+                    <h3 style="color:#fff;margin:0 0 var(--fds-space-3);font-size:var(--fds-text-h2)">O futuro do CX com IA generativa</h3>
+                    <p style="color:rgba(255,255,255,0.85);margin:0 0 var(--fds-space-5)">19h · Gratuito · Com casos reais e demo ao vivo.</p>
+                    <a href="#" class="fds-btn fds-btn--lg" style="background:#fff;color:var(--fds-color-marinho)">Garantir vaga</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button class="fds-carousel__prev" aria-label="Anterior"><i data-lucide="chevron-left" style="width:20px;height:20px"></i></button>
+            <button class="fds-carousel__next" aria-label="Próximo"><i data-lucide="chevron-right" style="width:20px;height:20px"></i></button>
+            <div class="fds-carousel__bullets"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== VARIANTE 2: CARDS MULTI-VIEW (scroll-snap) ===== -->
+      <div class="docs-subhead" style="margin-top:var(--fds-space-9)">
+        <h3 class="fds-h3"><span class="fds-brand-eyebrow" style="margin:0">07b · Carousel Cards</span><br/>Multi-card com scroll-snap</h3>
+        <p>3 cards visíveis · arrasta lateral · setas + barra de progresso</p>
+      </div>
+      <div class="org-demo">
+        <div class="org-demo__label"><span>Carousel cards — para casos, blog, recursos</span><span class="org-demo__label-tag">.fds-carousel-cards</span></div>
+        <div class="org-demo__body" style="padding:var(--fds-space-7);background:var(--fds-surface-0)">
+
+          <div class="fds-carousel-cards" data-fds-carousel-cards>
+            <div class="fds-carousel-cards__viewport">
+
+              <article class="fds-carousel-cards__card">
+                <div class="fds-carousel-cards__card-cover fds-carousel-cards__card-cover--nucleo">
+                  <div class="fds-carousel-cards__card-cover-pattern"></div>
+                  <div class="fds-carousel-cards__card-cover-spark"></div>
+                  <div class="fds-carousel-cards__card-cover-tag">
+                    <span class="fds-badge" style="background:rgba(255,255,255,0.20);color:#fff;border-color:rgba(255,255,255,0.32)">Case</span>
+                  </div>
+                </div>
+                <div class="fds-carousel-cards__card-body">
+                  <h4 class="fds-carousel-cards__card-title">Acme Co reduziu TMA em 40%</h4>
+                  <p class="fds-carousel-cards__card-desc">Implementação em 3 semanas. ROI no primeiro mês com inbox unificada + agente IA.</p>
+                </div>
+                <div class="fds-carousel-cards__card-foot">
+                  <span>5 min de leitura</span>
+                  <a href="#">Ler caso <i data-lucide="arrow-right" style="width:12px;height:12px"></i></a>
+                </div>
+              </article>
+
+              <article class="fds-carousel-cards__card">
+                <div class="fds-carousel-cards__card-cover fds-carousel-cards__card-cover--violeta">
+                  <div class="fds-carousel-cards__card-cover-pattern"></div>
+                  <div class="fds-carousel-cards__card-cover-spark"></div>
+                  <div class="fds-carousel-cards__card-cover-tag">
+                    <span class="fds-badge" style="background:rgba(255,255,255,0.20);color:#fff;border-color:rgba(255,255,255,0.32)">IA</span>
+                  </div>
+                </div>
+                <div class="fds-carousel-cards__card-body">
+                  <h4 class="fds-carousel-cards__card-title">Fortics IA 2.0 disponível</h4>
+                  <p class="fds-carousel-cards__card-desc">Agentes que executam ações no seu CRM e ERP. Resolvem enquanto conversam.</p>
+                </div>
+                <div class="fds-carousel-cards__card-foot">
+                  <span>Lançamento</span>
+                  <a href="#">Ver demo <i data-lucide="arrow-right" style="width:12px;height:12px"></i></a>
+                </div>
+              </article>
+
+              <article class="fds-carousel-cards__card">
+                <div class="fds-carousel-cards__card-cover fds-carousel-cards__card-cover--esmeralda">
+                  <div class="fds-carousel-cards__card-cover-pattern"></div>
+                  <div class="fds-carousel-cards__card-cover-spark"></div>
+                  <div class="fds-carousel-cards__card-cover-tag">
+                    <span class="fds-badge" style="background:rgba(255,255,255,0.20);color:#fff;border-color:rgba(255,255,255,0.32)">Webinar</span>
+                  </div>
+                </div>
+                <div class="fds-carousel-cards__card-body">
+                  <h4 class="fds-carousel-cards__card-title">O futuro do CX com IA generativa</h4>
+                  <p class="fds-carousel-cards__card-desc">12 de junho · 19h · Gratuito. Casos reais e demo ao vivo.</p>
+                </div>
+                <div class="fds-carousel-cards__card-foot">
+                  <span>12 jun · 19h</span>
+                  <a href="#">Inscrever <i data-lucide="arrow-right" style="width:12px;height:12px"></i></a>
+                </div>
+              </article>
+
+              <article class="fds-carousel-cards__card">
+                <div class="fds-carousel-cards__card-cover fds-carousel-cards__card-cover--tri">
+                  <div class="fds-carousel-cards__card-cover-pattern"></div>
+                  <div class="fds-carousel-cards__card-cover-spark"></div>
+                  <div class="fds-carousel-cards__card-cover-tag">
+                    <span class="fds-badge" style="background:rgba(255,255,255,0.20);color:#fff;border-color:rgba(255,255,255,0.32)">Blog</span>
+                  </div>
+                </div>
+                <div class="fds-carousel-cards__card-body">
+                  <h4 class="fds-carousel-cards__card-title">7 sinais que seu CRM precisa de IA</h4>
+                  <p class="fds-carousel-cards__card-desc">Checklist prático para identificar quando o atendimento humano sozinho não escala.</p>
+                </div>
+                <div class="fds-carousel-cards__card-foot">
+                  <span>8 min de leitura</span>
+                  <a href="#">Ler post <i data-lucide="arrow-right" style="width:12px;height:12px"></i></a>
+                </div>
+              </article>
+
+              <article class="fds-carousel-cards__card">
+                <div class="fds-carousel-cards__card-cover fds-carousel-cards__card-cover--nucleo">
+                  <div class="fds-carousel-cards__card-cover-pattern"></div>
+                  <div class="fds-carousel-cards__card-cover-spark"></div>
+                  <div class="fds-carousel-cards__card-cover-tag">
+                    <span class="fds-badge" style="background:rgba(255,255,255,0.20);color:#fff;border-color:rgba(255,255,255,0.32)">Guia</span>
+                  </div>
+                </div>
+                <div class="fds-carousel-cards__card-body">
+                  <h4 class="fds-carousel-cards__card-title">WhatsApp Business API em 10 passos</h4>
+                  <p class="fds-carousel-cards__card-desc">Do credenciamento ao primeiro disparo — sem letra miúda.</p>
+                </div>
+                <div class="fds-carousel-cards__card-foot">
+                  <span>15 min de leitura</span>
+                  <a href="#">Baixar guia <i data-lucide="arrow-right" style="width:12px;height:12px"></i></a>
+                </div>
+              </article>
+
+              <article class="fds-carousel-cards__card">
+                <div class="fds-carousel-cards__card-cover fds-carousel-cards__card-cover--violeta">
+                  <div class="fds-carousel-cards__card-cover-pattern"></div>
+                  <div class="fds-carousel-cards__card-cover-spark"></div>
+                  <div class="fds-carousel-cards__card-cover-tag">
+                    <span class="fds-badge" style="background:rgba(255,255,255,0.20);color:#fff;border-color:rgba(255,255,255,0.32)">Comunidade</span>
+                  </div>
+                </div>
+                <div class="fds-carousel-cards__card-body">
+                  <h4 class="fds-carousel-cards__card-title">Fortics Community Day 2026</h4>
+                  <p class="fds-carousel-cards__card-desc">SP, agosto. Cases ao vivo, workshops e roadmap IA.</p>
+                </div>
+                <div class="fds-carousel-cards__card-foot">
+                  <span>Evento presencial</span>
+                  <a href="#">Saber mais <i data-lucide="arrow-right" style="width:12px;height:12px"></i></a>
+                </div>
+              </article>
+
+            </div>
+
+            <div class="fds-carousel-cards__nav">
+              <div class="fds-carousel-cards__progress"><div class="fds-carousel-cards__progress-bar"></div></div>
+              <div class="fds-carousel-cards__nav-spacer"></div>
+              <button class="fds-carousel-cards__nav-btn" data-cc-prev aria-label="Anterior"><i data-lucide="chevron-left" style="width:18px;height:18px"></i></button>
+              <button class="fds-carousel-cards__nav-btn" data-cc-next aria-label="Próximo"><i data-lucide="chevron-right" style="width:18px;height:18px"></i></button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== TESTIMONIAL ============== -->
+    <section class="docs-section" id="testimonial">
+      <div class="docs-subhead">
+        <h3 class="fds-h3"><span class="fds-brand-eyebrow" style="margin:0">08 · Testimonial</span><br/>Depoimentos com Spark gigante atrás</h3>
+        <p>Spark de fundo · gradiente nas aspas · estrelas em cor de marca</p>
+      </div>
+      <div class="org-demo">
+        <div class="org-demo__label"><span>Testimonial branded</span><span class="org-demo__label-tag">.fds-branded-surface</span></div>
+        <div class="org-demo__body fds-branded-surface" style="padding:var(--fds-space-9);position:relative;overflow:hidden">
+          <span class="fds-spark-corner fds-spark-corner--xl" style="top:50%;left:50%;transform:translate(-50%,-50%);opacity:0.06"></span>
+          <div style="position:relative;z-index:2;max-width:760px;margin:0 auto;text-align:center">
+            <div style="margin-bottom:var(--fds-space-4)">
+              <span style="color:var(--fds-color-esmeralda);font-size:24px">★★★★★</span>
+            </div>
+            <p class="fds-display-m" style="margin:0 0 var(--fds-space-6);font-weight:var(--fds-weight-semibold);line-height:1.2">
+              <span class="fds-gradient-text--tri">"</span>Reduzimos o tempo médio de atendimento em <strong style="color:var(--fds-color-nucleo)">40%</strong> sem perder qualidade — a IA realmente entende contexto.<span class="fds-gradient-text--tri">"</span>
+            </p>
+            <div class="fds-row fds-gap-3 fds-justify-center fds-items-center">
+              <span class="fds-avatar fds-avatar--lg" style="background:var(--fds-gradient-nucleo-violeta)">MA</span>
+              <div style="text-align:left">
+                <p style="margin:0;font-weight:var(--fds-weight-semibold)">Marina Alves</p>
+                <p style="margin:0;color:var(--fds-text-tertiary);font-size:var(--fds-text-caption)">Head de CS · Acme Co</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== ACCORDION ============== -->
+    <section class="docs-section" id="accordion">
+      <div class="docs-subhead">
+        <h3 class="fds-h3"><span class="fds-brand-eyebrow" style="margin:0">09 · Accordion · FAQ</span><br/>FAQ com Spark indicador</h3>
+        <p>Spark gira ao abrir · linha gradient à esquerda</p>
+      </div>
+      <div class="org-demo">
+        <div class="org-demo__label"><span>FAQ branded</span><span class="org-demo__label-tag">.fds-accordion</span></div>
+        <div class="org-demo__body" style="padding:var(--fds-space-7)">
+          <div class="fds-accordion" data-fds-accordion="single">
+            <details class="fds-accordion__item" open>
+              <summary class="fds-accordion__head">A Fortics se integra com meu CRM atual?</summary>
+              <div class="fds-accordion__body">Sim — temos integrações nativas com Salesforce, HubSpot, Pipedrive, RD Station, Zendesk e qualquer sistema via API REST/Webhook.</div>
+            </details>
+            <details class="fds-accordion__item">
+              <summary class="fds-accordion__head">Quanto tempo leva para subir uma operação?</summary>
+              <div class="fds-accordion__body">Implementações típicas levam de 2 a 4 semanas. Casos simples (WhatsApp + bot básico) podem ir ao ar em 48h.</div>
+            </details>
+            <details class="fds-accordion__item">
+              <summary class="fds-accordion__head">Como funciona a cobrança do agente IA?</summary>
+              <div class="fds-accordion__body">Cobramos por conversa concluída — não por mensagem. Você só paga quando a IA realmente resolve.</div>
+            </details>
+            <details class="fds-accordion__item">
+              <summary class="fds-accordion__head">Os dados ficam no Brasil?</summary>
+              <div class="fds-accordion__body">Sim — toda a infraestrutura roda em AWS São Paulo, em conformidade com LGPD. SOC2 Tipo II em andamento.</div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== TABS ============== -->
+    <section class="docs-section" id="tabs">
+      <div class="docs-subhead">
+        <h3 class="fds-h3"><span class="fds-brand-eyebrow" style="margin:0">10 · Tabs</span><br/>Abas com underline gradient</h3>
+        <p>Underline em gradient + glow azul · navegação por setas</p>
+      </div>
+      <div class="org-demo">
+        <div class="org-demo__label"><span>Tabs branded</span><span class="org-demo__label-tag">.fds-tabs</span></div>
+        <div class="org-demo__body" style="padding:var(--fds-space-7)">
+          <div class="fds-tabs" data-fds-tabs>
+            <div class="fds-tabs__list" role="tablist">
+              <button class="fds-tabs__tab" role="tab" aria-selected="true">Visão geral</button>
+              <button class="fds-tabs__tab" role="tab">Recursos</button>
+              <button class="fds-tabs__tab" role="tab">Integrações</button>
+              <button class="fds-tabs__tab" role="tab">Preços</button>
+            </div>
+            <div class="fds-tabs__panels">
+              <div class="fds-tabs__panel" role="tabpanel">
+                <h4 style="margin-top:0">Plataforma completa</h4>
+                <p>A Fortics consolida mensageria, voz, automação e IA num único ecossistema operável.</p>
+              </div>
+              <div class="fds-tabs__panel" role="tabpanel" hidden>
+                <h4 style="margin-top:0">Recursos principais</h4>
+                <ul class="fds-ul"><li>Inbox omnichannel</li><li>Agente IA contextual</li><li>Disparo em massa controlado</li><li>Voz inteligente</li></ul>
+              </div>
+              <div class="fds-tabs__panel" role="tabpanel" hidden>
+                <h4 style="margin-top:0">Integrações nativas</h4>
+                <p>Salesforce, HubSpot, RD Station, Zendesk, Slack, Stripe e mais 40+ via API.</p>
+              </div>
+              <div class="fds-tabs__panel" role="tabpanel" hidden>
+                <h4 style="margin-top:0">A partir de R$ 199/mês</h4>
+                <p>Plano Pro com canais ilimitados e 10k conversas/mês. <a href="#" class="fds-link">Ver todos os planos →</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== CTA ============== -->
+    <section class="docs-section" id="cta">
+      <div class="docs-subhead">
+        <h3 class="fds-h3"><span class="fds-brand-eyebrow" style="margin:0">11 · CTA Section</span><br/>Chamada com pattern e Spark</h3>
+        <p>Background gradient + pattern · spark gigante de fundo</p>
+      </div>
+      <div class="org-demo">
+        <div class="org-demo__label"><span>CTA branded</span><span class="org-demo__label-tag">.fds-cta</span></div>
+        <div class="org-demo__body" style="padding:var(--fds-space-7);background:var(--fds-surface-0)">
+          <div class="fds-cta" style="position:relative;overflow:hidden">
+            <span class="fds-spark-corner fds-spark-corner--xl fds-spark-corner--bl" style="opacity:0.10;background-image:url('../assets/icons/spark-fundo-nucleo.svg')"></span>
+            <span class="fds-spark-corner fds-spark-corner--lg fds-spark-corner--tr" style="opacity:0.10;background-image:url('../assets/icons/spark-fundo-nucleo.svg')"></span>
+            <div class="fds-cta__inner" style="position:relative;z-index:2">
+              <h2 style="font-size:var(--fds-text-display-l);font-weight:var(--fds-weight-extrabold);letter-spacing:var(--fds-tracking-tighter)">
+                Pronto para transformar<br/>conversas em <span style="background:linear-gradient(135deg,#fff,var(--fds-color-esmeralda));-webkit-background-clip:text;background-clip:text;color:transparent">ações</span>?
+              </h2>
+              <p style="font-size:var(--fds-text-body-xl)">Grátis em minutos · sem cartão de crédito · suporte em PT-BR.</p>
+              <div class="fds-row fds-gap-3 fds-justify-center fds-wrap">
+                <a href="#" class="fds-btn fds-btn--lg" style="background:#fff;color:var(--fds-color-marinho)">
+                  <i data-lucide="rocket" style="width:18px;height:18px"></i> Começar grátis
+                </a>
+                <a href="#" class="fds-btn fds-btn--ghost fds-btn--lg" style="color:#fff;border:1px solid rgba(255,255,255,0.4)">Falar com vendas</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== FOOTER ============== -->
+    <section class="docs-section" id="footer">
+      <div class="docs-subhead">
+        <h3 class="fds-h3"><span class="fds-brand-eyebrow" style="margin:0">12 · Footer</span><br/>Rodapé com pattern marinho</h3>
+        <p>Pattern de fundo · logo grande · spark divisor</p>
+      </div>
+      <div class="org-demo">
+        <div class="org-demo__label"><span>Footer branded</span><span class="org-demo__label-tag">.fds-footer</span></div>
+        <div class="org-demo__body">
+          <footer class="fds-footer fds-branded-surface--dark" style="position:relative;border-top:none;color:#fff">
+            <div class="fds-pattern-bg fds-pattern-bg--esmeralda" style="opacity:0.08"></div>
+            <div class="fds-footer__inner" style="position:relative;z-index:2">
+              <div class="fds-footer__brand">
+                <img src="../assets/logos/horizontal-branco.svg" alt="Fortics" style="height:36px;margin-bottom:var(--fds-space-4)" />
+                <p style="color:rgba(255,255,255,0.65)">Ecossistema de relacionamento IA. Menos abas, mais ação.</p>
+                <div class="fds-row fds-gap-3" style="margin-top:var(--fds-space-5)">
+                  <a href="#" style="color:rgba(255,255,255,0.65);font-size:var(--fds-text-body-s)" aria-label="LinkedIn"><i data-lucide="briefcase"></i></a>
+                  <a href="#" style="color:rgba(255,255,255,0.65);font-size:var(--fds-text-body-s)" aria-label="Instagram"><i data-lucide="camera"></i></a>
+                  <a href="#" style="color:rgba(255,255,255,0.65);font-size:var(--fds-text-body-s)" aria-label="YouTube"><i data-lucide="play-circle"></i></a>
+                  <a href="#" style="color:rgba(255,255,255,0.65);font-size:var(--fds-text-body-s)" aria-label="GitHub"><i data-lucide="code"></i></a>
+                </div>
+              </div>
+              <div class="fds-footer__col">
+                <h6 style="color:rgba(255,255,255,0.4)">Produto</h6>
+                <ul>
+                  <li><a href="#" style="color:rgba(255,255,255,0.75)">Chat Center</a></li>
+                  <li><a href="#" style="color:rgba(255,255,255,0.75)">Voz</a></li>
+                  <li><a href="#" style="color:rgba(255,255,255,0.75)">Campanha</a></li>
+                  <li><a href="#" style="color:rgba(255,255,255,0.75)">Fortics IA</a></li>
+                </ul>
+              </div>
+              <div class="fds-footer__col">
+                <h6 style="color:rgba(255,255,255,0.4)">Empresa</h6>
+                <ul>
+                  <li><a href="#" style="color:rgba(255,255,255,0.75)">Sobre</a></li>
+                  <li><a href="#" style="color:rgba(255,255,255,0.75)">Cases</a></li>
+                  <li><a href="#" style="color:rgba(255,255,255,0.75)">Carreiras</a></li>
+                  <li><a href="#" style="color:rgba(255,255,255,0.75)">Contato</a></li>
+                </ul>
+              </div>
+              <div class="fds-footer__col">
+                <h6 style="color:rgba(255,255,255,0.4)">Recursos</h6>
+                <ul>
+                  <li><a href="#" style="color:rgba(255,255,255,0.75)">Blog</a></li>
+                  <li><a href="#" style="color:rgba(255,255,255,0.75)">Docs</a></li>
+                  <li><a href="#" style="color:rgba(255,255,255,0.75)">Status</a></li>
+                  <li><a href="#" style="color:rgba(255,255,255,0.75)">Privacidade</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="fds-spark-divider" style="position:relative;z-index:2;max-width:1280px;margin:var(--fds-space-7) auto 0;color:rgba(255,255,255,0.3)">
+              <div class="fds-spark-divider__icon" style="background-color:rgba(255,255,255,0.55)"></div>
+            </div>
+            <div class="fds-footer__bottom" style="position:relative;z-index:2;color:rgba(255,255,255,0.55);border-top:none">
+              <span>© 2026 Fortics · Todos os direitos reservados</span>
+              <span>Brandbook 2026 · v1.0</span>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </section>
+
+    <footer style="padding:var(--fds-space-7) var(--fds-space-8);color:var(--fds-text-tertiary);font-size:var(--fds-text-caption);border-top:1px solid var(--fds-border-subtle)">
+      ← <a href="../index.html" class="fds-link">Voltar ao hub</a>
+    </footer>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="../js/fds.js"></script>
+<script src="../js/fds-theme.js"></script>
+<script src="../js/fds-toast.js"></script>
+<script src="../js/fds-clipboard.js"></script>
+<script src="../js/fds-dropdown.js"></script>
+<script src="../js/fds-accordion.js"></script>
+<script src="../js/fds-tabs.js"></script>
+<script src="../js/fds-carousel.js"></script>
+<script src="../js/fds-carousel-cards.js"></script>
+<script src="../js/fds-pomelo.js"></script>
+<script>
+  lucide.createIcons();
+  // Logo swap nav
+  function syncNavbarLogos() {
+    const dark = (document.documentElement.getAttribute('data-theme') || 'light') === 'dark';
+    document.querySelectorAll('.logo-light-inv').forEach(el => el.style.display = dark ? 'none' : 'block');
+    document.querySelectorAll('.logo-dark-inv').forEach(el => el.style.display = dark ? 'block' : 'none');
+  }
+  syncNavbarLogos();
+  document.addEventListener('fds:theme-change', syncNavbarLogos);
+  FDS.animate.scrollReveal('.docs-section__head', { y: 20, stagger: 0.04 });
+</script>
+
+</body>
+</html>

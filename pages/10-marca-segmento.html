@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Marca por Segmento · Fortics DS</title>
+<link rel="icon" type="image/svg+xml" href="../assets/icons/spark-principal.svg" />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/tokens.css" />
+<link rel="stylesheet" href="../css/base.css" />
+<link rel="stylesheet" href="../css/components.css" />
+<link rel="stylesheet" href="../css/atoms.css" />
+<link rel="stylesheet" href="../css/molecules.css" />
+<link rel="stylesheet" href="../css/organisms.css" />
+<link rel="stylesheet" href="../css/showcase.css" />
+<script>
+  (function(){
+    try {
+      var t = localStorage.getItem('fds-theme');
+      if (!t) t = 'light';  // light como padrão absoluto do brandbook
+      document.documentElement.setAttribute('data-theme', t);
+    } catch(_) { document.documentElement.setAttribute('data-theme', 'light'); }
+  })();
+</script>
+<style>
+  .seg-tab {
+    padding: var(--fds-space-3) var(--fds-space-4);
+    border: 1px solid var(--fds-border-default);
+    background: var(--fds-surface-1);
+    border-radius: var(--fds-radius-full);
+    font-size: var(--fds-text-body-s);
+    font-weight: var(--fds-weight-semibold);
+    color: var(--fds-text-secondary);
+    cursor: pointer;
+    transition: all var(--fds-duration-fast) var(--fds-ease-out);
+  }
+  .seg-tab:hover { border-color: var(--fds-color-nucleo); color: var(--fds-color-nucleo); }
+  .seg-tab.is-active {
+    background: var(--fds-color-nucleo);
+    border-color: var(--fds-color-nucleo);
+    color: #FFFFFF;
+  }
+  .seg-section { display: none; }
+  .seg-section.is-active { display: block; }
+</style>
+</head>
+<body>
+
+<div class="docs">
+  <aside class="docs-side">
+    <div class="docs-side__brand">
+      <img class="logo-dark"  src="../assets/logos/horizontal-branco.svg" alt="Fortics" />
+      <img class="logo-light" src="../assets/logos/horizontal-marinho.svg" alt="Fortics" hidden />
+    </div>
+    <div class="docs-side__group">
+      <div class="docs-side__title">Início</div>
+      <a class="docs-side__link" href="../index.html"><i data-lucide="home"></i> Visão geral</a>
+    </div>
+    <div class="docs-side__group">
+      <div class="docs-side__title">Atomic Design</div>
+      <a class="docs-side__link" href="./01-foundations.html"><span class="level-dot">0</span> Fundamentos</a>
+      <a class="docs-side__link" href="./02-atoms.html"><span class="level-dot">A</span> Átomos</a>
+      <a class="docs-side__link" href="./03-molecules.html"><span class="level-dot">M</span> Moléculas</a>
+      <a class="docs-side__link" href="./04-organisms.html"><span class="level-dot">O</span> Organismos</a>
+      
+      </div>
+    <div class="docs-side__group">
+      <div class="docs-side__title">Especial</div>
+      <a class="docs-side__link" href="./07-spark-animations.html"><i data-lucide="sparkles"></i> Spark Animations</a>
+      <a class="docs-side__link" href="./08-3d-builder.html"><i data-lucide="box"></i> 3D Builder</a>
+      <a class="docs-side__link is-active" href="./10-marca-segmento.html"><i data-lucide="layers-2"></i> Marca por Segmento</a>
+    </div>
+    <div class="docs-side__footer">
+      <div class="fds-theme-toggle" data-fds-theme-toggle role="group" aria-label="Tema">
+        <button class="fds-theme-toggle__btn" data-theme-set="light" aria-pressed="true"><i data-lucide="sun" style="width:16px;height:16px"></i></button>
+        <button class="fds-theme-toggle__btn" data-theme-set="dark" aria-pressed="false"><i data-lucide="moon" style="width:16px;height:16px"></i></button>
+      </div>
+      <p class="fds-caption" style="margin:0">Fortics DS v1.0</p>
+    </div>
+  </aside>
+
+  <main class="docs-main">
+    <header class="docs-top">
+      <div class="docs-top__crumb">~ / design-system / marca-por-segmento</div>
+      <div class="docs-top__actions"><span class="fds-badge fds-badge--nucleo"><i data-lucide="layers-2" style="width:12px;height:12px"></i> 7 produtos · 168 variantes</span></div>
+    </header>
+
+    <section class="docs-section">
+      <header class="docs-section__head">
+        <span class="docs-section__eyebrow"><i data-lucide="layers-2" style="width:14px;height:14px;vertical-align:middle"></i> Brand</span>
+        <h1 class="docs-section__title">Marca por segmento</h1>
+        <p class="docs-section__lead">
+          Cada produto Fortics tem um lockup próprio com 8 variações de cor × 3 layouts (Horizontal, Horizontal Total, Vertical) = <strong>168 SVGs</strong>.
+          Selecione o produto e copie qualquer variante.
+        </p>
+      </header>
+
+      <!-- TABS DE PRODUTO -->
+      <div class="fds-row fds-gap-2 fds-wrap" style="margin-bottom:var(--fds-space-7)">
+        <button class="seg-tab is-active" data-seg="ecossistema-fortics">Ecossistema Fortics</button>
+        <button class="seg-tab" data-seg="ia">IA</button>
+        <button class="seg-tab" data-seg="chat-center">Chat Center</button>
+        <button class="seg-tab" data-seg="contact-center">Contact Center</button>
+        <button class="seg-tab" data-seg="campanha">Campanha</button>
+        <button class="seg-tab" data-seg="voz">Voz</button>
+        <button class="seg-tab" data-seg="channel-connect">Channel Connect</button>
+      </div>
+
+      <!-- 7 SEÇÕES — uma por produto -->
+      <div id="seg-stack"></div>
+    </section>
+
+    <footer style="padding:var(--fds-space-7) var(--fds-space-8);color:var(--fds-text-tertiary);font-size:var(--fds-text-caption);border-top:1px solid var(--fds-border-subtle)">
+      ← <a href="../index.html" class="fds-link">Voltar ao hub</a>
+    </footer>
+  </main>
+</div>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="../js/fds-theme.js"></script>
+<script src="../js/fds-toast.js"></script>
+<script src="../js/fds-clipboard.js"></script>
+<script>
+  const SEGMENTS = [
+    { id: 'ecossistema-fortics', label: 'Ecossistema Fortics' },
+    { id: 'ia',                  label: 'Fortics IA' },
+    { id: 'chat-center',         label: 'Chat Center' },
+    { id: 'contact-center',      label: 'Contact Center' },
+    { id: 'campanha',            label: 'Campanha' },
+    { id: 'voz',                 label: 'Voz' },
+    { id: 'channel-connect',     label: 'Channel Connect' }
+  ];
+  const COLORS = [
+    { id: '', label: 'Principal (padrão)', bg: 'var(--fds-surface-1)', kind: 'principal' },
+    { id: 'azul', label: 'Azul Núcleo', bg: 'var(--fds-surface-1)' },
+    { id: 'marinho', label: 'Marinho', bg: 'var(--fds-surface-1)' },
+    { id: 'branco', label: 'Branco', bg: 'var(--fds-color-marinho)', isLight: true },
+    { id: 'branco-spark-azul', label: 'Branco · Spark Azul', bg: 'var(--fds-color-marinho)', isLight: true },
+    { id: 'branco-spark-marinho', label: 'Branco · Spark Marinho', bg: 'var(--fds-color-nucleo)', isLight: true },
+    { id: 'escala-de-cinza-claro', label: 'Cinza Claro', bg: 'var(--fds-color-marinho)', isLight: true },
+    { id: 'preto', label: 'Preto', bg: '#F7F8FA' }
+  ];
+  const LAYOUTS = [
+    { id: 'horizontal',       label: 'Horizontal', height: 80 },
+    { id: 'horizontal-total', label: 'Horizontal Total', height: 80 },
+    { id: 'vertical',         label: 'Vertical', height: 180 }
+  ];
+
+  const stack = document.getElementById('seg-stack');
+
+  SEGMENTS.forEach((seg, i) => {
+    const sec = document.createElement('div');
+    sec.className = 'seg-section' + (i === 0 ? ' is-active' : '');
+    sec.dataset.seg = seg.id;
+
+    let html = `<h2 class="fds-h2" style="margin-bottom:var(--fds-space-2)">${seg.label}</h2>
+      <p class="fds-lead" style="margin-bottom:var(--fds-space-6)">3 layouts × 8 variantes de cor — clique em qualquer logo para copiar o caminho do SVG.</p>`;
+
+    LAYOUTS.forEach(layout => {
+      html += `<div class="docs-subhead"><h3 class="fds-h3">${layout.label}</h3></div>
+        <div class="brand-grid" style="grid-template-columns:repeat(auto-fill,minmax(240px,1fr))">`;
+      COLORS.forEach(col => {
+        const fileName = col.id ? `${col.id}-${seg.id}.svg` : `${seg.id}.svg`;
+        const path = `../assets/segments/${layout.id}/${fileName}`;
+        const copyPath = `assets/segments/${layout.id}/${fileName}`;
+        const bgClass = col.isLight
+          ? (col.id.includes('marinho') ? 'brand-tile__preview brand-tile__preview--dark'
+            : col.id === 'branco-spark-marinho' ? 'brand-tile__preview brand-tile__preview--nucleo'
+            : 'brand-tile__preview brand-tile__preview--dark')
+          : 'brand-tile__preview';
+
+        html += `<div class="brand-tile">
+          <button class="${bgClass}" style="height:${layout.height + 60}px;cursor:pointer;border:0;width:100%;display:flex;align-items:center;justify-content:center;padding:var(--fds-space-4)"
+                  data-copy="${copyPath}" data-copy-label="Caminho">
+            <img src="${path}" style="max-height:${layout.height}px;max-width:100%" alt="${seg.label} · ${col.label} · ${layout.label}" loading="lazy" />
+          </button>
+          <div class="brand-tile__caption">${col.label || 'Principal'}</div>
+        </div>`;
+      });
+      html += `</div>`;
+    });
+    sec.innerHTML = html;
+    stack.appendChild(sec);
+  });
+
+  // tab switching
+  document.querySelectorAll('.seg-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const id = tab.dataset.seg;
+      document.querySelectorAll('.seg-tab').forEach(t => t.classList.toggle('is-active', t.dataset.seg === id));
+      document.querySelectorAll('.seg-section').forEach(s => s.classList.toggle('is-active', s.dataset.seg === id));
+    });
+  });
+
+  lucide.createIcons();
+
+  // logo swap
+  function syncLogos() {
+    const dark = (document.documentElement.getAttribute('data-theme') || 'light') === 'dark';
+    document.querySelectorAll('.logo-dark').forEach(el => el.hidden = !dark);
+    document.querySelectorAll('.logo-light').forEach(el => el.hidden = dark);
+  }
+  syncLogos();
+  document.addEventListener('fds:theme-change', syncLogos);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,313 @@
+/* ============================================================
+   FORTICS DS — ATOMS
+   Estende components.css com:
+   Checkbox, Radio, Switch, Select customizado, Spinner,
+   Divider, Link, Tag, Icon wrapper
+   ============================================================ */
+
+/* =============== ICON WRAPPER =============== */
+.fds-icon { display: inline-flex; align-items: center; justify-content: center; line-height: 0; }
+.fds-icon svg { width: 1em; height: 1em; }
+.fds-icon--xs { font-size: 12px; }
+.fds-icon--sm { font-size: 16px; }
+.fds-icon--md { font-size: 20px; }
+.fds-icon--lg { font-size: 24px; }
+.fds-icon--xl { font-size: 32px; }
+.fds-icon--nucleo { color: var(--fds-color-nucleo); }
+.fds-icon--esmeralda { color: var(--fds-color-esmeralda); }
+.fds-icon--violeta { color: var(--fds-color-violeta); }
+.fds-icon--danger  { color: var(--fds-color-danger); }
+.fds-icon--muted   { color: var(--fds-text-tertiary); }
+
+/* =============== CHECKBOX =============== */
+.fds-check {
+  display: inline-flex; align-items: center; gap: var(--fds-space-3);
+  cursor: pointer; user-select: none;
+  font-size: var(--fds-text-body-s);
+}
+.fds-check input { position: absolute; opacity: 0; pointer-events: none; }
+.fds-check__box {
+  flex-shrink: 0;
+  width: 20px; height: 20px;
+  border: 2px solid var(--fds-border-strong);
+  border-radius: var(--fds-radius-xs);
+  background: transparent;
+  transition: all var(--fds-duration-fast) var(--fds-ease-out);
+  position: relative;
+}
+.fds-check__box::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='3 8 6.5 11.5 13 5'/%3E%3C/svg%3E") no-repeat center / 14px;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity var(--fds-duration-fast), transform var(--fds-duration-fast) var(--fds-ease-spring);
+}
+.fds-check input:checked + .fds-check__box {
+  background: var(--fds-color-nucleo);
+  border-color: var(--fds-color-nucleo);
+}
+.fds-check input:checked + .fds-check__box::after { opacity: 1; transform: scale(1); }
+.fds-check input:indeterminate + .fds-check__box {
+  background: var(--fds-color-nucleo);
+  border-color: var(--fds-color-nucleo);
+}
+.fds-check input:indeterminate + .fds-check__box::after {
+  opacity: 1; transform: scale(1);
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round'%3E%3Cline x1='4' y1='8' x2='12' y2='8'/%3E%3C/svg%3E") no-repeat center / 14px;
+}
+.fds-check input:focus-visible + .fds-check__box { box-shadow: 0 0 0 4px rgba(0,102,255,0.18); }
+.fds-check input:disabled + .fds-check__box { opacity: 0.4; cursor: not-allowed; }
+.fds-check:hover input:not(:disabled) + .fds-check__box { border-color: var(--fds-color-nucleo); }
+
+/* =============== RADIO =============== */
+.fds-radio {
+  display: inline-flex; align-items: center; gap: var(--fds-space-3);
+  cursor: pointer; user-select: none;
+  font-size: var(--fds-text-body-s);
+}
+.fds-radio input { position: absolute; opacity: 0; pointer-events: none; }
+.fds-radio__dot {
+  flex-shrink: 0;
+  width: 20px; height: 20px;
+  border: 2px solid var(--fds-border-strong);
+  border-radius: 50%;
+  background: transparent;
+  position: relative;
+  transition: all var(--fds-duration-fast) var(--fds-ease-out);
+}
+.fds-radio__dot::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background: #fff;
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity var(--fds-duration-fast), transform var(--fds-duration-fast) var(--fds-ease-spring);
+}
+.fds-radio input:checked + .fds-radio__dot {
+  background: var(--fds-color-nucleo);
+  border-color: var(--fds-color-nucleo);
+}
+.fds-radio input:checked + .fds-radio__dot::after { opacity: 1; transform: scale(1); }
+.fds-radio input:focus-visible + .fds-radio__dot { box-shadow: 0 0 0 4px rgba(0,102,255,0.18); }
+.fds-radio input:disabled + .fds-radio__dot { opacity: 0.4; cursor: not-allowed; }
+.fds-radio:hover input:not(:disabled) + .fds-radio__dot { border-color: var(--fds-color-nucleo); }
+
+/* =============== SWITCH (toggle) =============== */
+.fds-switch {
+  display: inline-flex; align-items: center; gap: var(--fds-space-3);
+  cursor: pointer; user-select: none;
+  font-size: var(--fds-text-body-s);
+}
+.fds-switch input { position: absolute; opacity: 0; pointer-events: none; }
+.fds-switch__track {
+  flex-shrink: 0;
+  width: 40px; height: 24px;
+  border-radius: var(--fds-radius-full);
+  background: var(--fds-border-strong);
+  position: relative;
+  transition: background var(--fds-duration-fast) var(--fds-ease-out);
+}
+.fds-switch__track::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transition: transform var(--fds-duration-base) var(--fds-ease-spring);
+}
+.fds-switch input:checked + .fds-switch__track { background: var(--fds-color-nucleo); }
+.fds-switch input:checked + .fds-switch__track::after { transform: translateX(16px); }
+.fds-switch input:focus-visible + .fds-switch__track { box-shadow: 0 0 0 4px rgba(0,102,255,0.18); }
+.fds-switch input:disabled + .fds-switch__track { opacity: 0.4; cursor: not-allowed; }
+.fds-switch--sm .fds-switch__track { width: 32px; height: 18px; }
+.fds-switch--sm .fds-switch__track::after { width: 14px; height: 14px; }
+.fds-switch--sm input:checked + .fds-switch__track::after { transform: translateX(14px); }
+
+/* =============== SELECT =============== */
+.fds-select {
+  position: relative;
+  display: block;
+}
+.fds-select select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 48px;
+  padding: 0 var(--fds-space-7) 0 var(--fds-space-4);
+  border: 1px solid var(--fds-border-default);
+  border-radius: var(--fds-radius-md);
+  background: var(--fds-surface-1);
+  color: var(--fds-text-primary);
+  font-family: var(--fds-font-family);
+  font-size: var(--fds-text-body-m);
+  cursor: pointer;
+  transition: border-color var(--fds-duration-fast), box-shadow var(--fds-duration-fast);
+}
+.fds-select select:hover { border-color: var(--fds-border-strong); }
+.fds-select select:focus { outline: none; border-color: var(--fds-color-nucleo); box-shadow: 0 0 0 4px rgba(0,102,255,0.18); }
+.fds-select::after {
+  content: '';
+  position: absolute;
+  right: var(--fds-space-4); top: 50%;
+  transform: translateY(-50%);
+  width: 16px; height: 16px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237C849A' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat center / contain;
+  pointer-events: none;
+}
+
+/* =============== SPINNER =============== */
+.fds-spinner {
+  display: inline-block;
+  width: 24px; height: 24px;
+  border: 2.5px solid var(--fds-border-subtle);
+  border-top-color: var(--fds-color-nucleo);
+  border-radius: 50%;
+  animation: fds-spin 0.8s linear infinite;
+}
+.fds-spinner--sm { width: 16px; height: 16px; border-width: 2px; }
+.fds-spinner--lg { width: 36px; height: 36px; border-width: 3px; }
+.fds-spinner--xl { width: 56px; height: 56px; border-width: 4px; }
+.fds-spinner--esmeralda { border-top-color: var(--fds-color-esmeralda); }
+.fds-spinner--violeta   { border-top-color: var(--fds-color-violeta); }
+.fds-spinner--branco    { border-color: rgba(255,255,255,0.2); border-top-color: #FFFFFF; }
+@keyframes fds-spin { to { transform: rotate(360deg); } }
+
+/* Dots loader alternativo */
+.fds-dots { display: inline-flex; align-items: center; gap: 4px; }
+.fds-dots span {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--fds-color-nucleo);
+  animation: fds-dots-bounce 1.2s infinite ease-in-out;
+}
+.fds-dots span:nth-child(2) { animation-delay: 0.15s; }
+.fds-dots span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes fds-dots-bounce {
+  0%, 80%, 100% { transform: scale(0.5); opacity: 0.5; }
+  40%           { transform: scale(1);   opacity: 1; }
+}
+
+/* =============== DIVIDER =============== */
+.fds-divider {
+  height: 1px;
+  background: var(--fds-border-default);
+  border: none;
+  margin: var(--fds-space-6) 0;
+}
+.fds-divider--gradient {
+  background: linear-gradient(to right, transparent, var(--fds-border-strong), transparent);
+}
+.fds-divider--vertical {
+  width: 1px; height: 100%; min-height: 24px;
+  display: inline-block; vertical-align: middle;
+  margin: 0 var(--fds-space-4);
+}
+.fds-divider-label {
+  display: flex; align-items: center; gap: var(--fds-space-3);
+  color: var(--fds-text-tertiary);
+  font-size: var(--fds-text-caption);
+  text-transform: uppercase;
+  letter-spacing: var(--fds-tracking-wider);
+  margin: var(--fds-space-6) 0;
+}
+.fds-divider-label::before, .fds-divider-label::after {
+  content: ''; flex: 1; height: 1px;
+  background: var(--fds-border-default);
+}
+
+/* =============== LINK =============== */
+.fds-link {
+  color: var(--fds-color-nucleo);
+  font-weight: var(--fds-weight-semibold);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--fds-duration-fast), color var(--fds-duration-fast);
+}
+.fds-link:hover { border-bottom-color: currentColor; color: var(--fds-color-nucleo-90); }
+.fds-link--inline { font-weight: inherit; border-bottom: 1px solid currentColor; }
+.fds-link--external::after {
+  content: '↗';
+  display: inline-block;
+  margin-left: 4px;
+  font-size: 0.85em;
+}
+.fds-link--muted { color: var(--fds-text-secondary); }
+.fds-link--muted:hover { color: var(--fds-text-primary); }
+
+/* =============== TAG (variação de badge, removível) =============== */
+.fds-tag {
+  display: inline-flex; align-items: center;
+  padding: 4px 10px 4px 12px;
+  background: var(--fds-surface-elevated);
+  border: 1px solid var(--fds-border-default);
+  border-radius: var(--fds-radius-full);
+  font-size: var(--fds-text-caption);
+  color: var(--fds-text-primary);
+  gap: var(--fds-space-2);
+}
+.fds-tag__remove {
+  background: transparent; border: 0; cursor: pointer;
+  width: 16px; height: 16px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  color: var(--fds-text-tertiary);
+  font-size: 14px; line-height: 1;
+  transition: background var(--fds-duration-fast), color var(--fds-duration-fast);
+}
+.fds-tag__remove:hover { background: var(--fds-border-strong); color: var(--fds-text-primary); }
+
+/* =============== AVATAR EXTRA (extends components.css) =============== */
+.fds-avatar { position: relative; }
+.fds-avatar__status {
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--fds-surface-0);
+}
+.fds-avatar__status--online  { background: var(--fds-color-esmeralda); }
+.fds-avatar__status--busy    { background: var(--fds-color-danger); }
+.fds-avatar__status--away    { background: var(--fds-color-warning); }
+.fds-avatar__status--offline { background: var(--fds-text-tertiary); }
+
+.fds-avatar-group { display: inline-flex; }
+.fds-avatar-group .fds-avatar {
+  border: 2px solid var(--fds-surface-0);
+  margin-left: -8px;
+}
+.fds-avatar-group .fds-avatar:first-child { margin-left: 0; }
+
+/* =============== KBD (keyboard key) =============== */
+.fds-kbd {
+  display: inline-block;
+  padding: 2px 6px;
+  font-family: var(--fds-font-mono);
+  font-size: 0.85em;
+  background: var(--fds-surface-2);
+  border: 1px solid var(--fds-border-default);
+  border-bottom-width: 2px;
+  border-radius: var(--fds-radius-xs);
+  color: var(--fds-text-primary);
+}
+
+/* =============== PROGRESS =============== */
+.fds-progress {
+  width: 100%;
+  height: 8px;
+  background: var(--fds-surface-elevated);
+  border-radius: var(--fds-radius-full);
+  overflow: hidden;
+}
+.fds-progress__bar {
+  height: 100%;
+  background: var(--fds-color-nucleo);
+  border-radius: inherit;
+  transition: width var(--fds-duration-slow) var(--fds-ease-out);
+}
+.fds-progress--gradient .fds-progress__bar { background: var(--fds-gradient-nucleo-violeta); }
