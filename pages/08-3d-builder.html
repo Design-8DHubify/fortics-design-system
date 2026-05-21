@@ -13,8 +13,14 @@
 <link rel="stylesheet" href="../css/molecules.css" />
 <link rel="stylesheet" href="../css/3d-builder.css" />
 <script>
-  // 3D builder é sempre dark (palco)
-  document.documentElement.setAttribute('data-theme', 'light');
+  // No-FOUC: respeita escolha do usuário, default light
+  (function(){
+    try {
+      var t = localStorage.getItem('fds-theme');
+      if (!t) t = 'light';
+      document.documentElement.setAttribute('data-theme', t);
+    } catch(_) { document.documentElement.setAttribute('data-theme', 'light'); }
+  })();
 </script>
 </head>
 <body>

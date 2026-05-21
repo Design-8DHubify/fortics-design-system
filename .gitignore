@@ -29,3 +29,4 @@ dist/
 build/
 .cache/
 tmp/
+.backup/
