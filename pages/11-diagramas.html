@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Diagramas · Fortics DS</title>
+<link rel="icon" type="image/svg+xml" href="../assets/icons/spark-principal.svg" />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/tokens.css" />
+<link rel="stylesheet" href="../css/base.css" />
+<link rel="stylesheet" href="../css/components.css" />
+<link rel="stylesheet" href="../css/atoms.css" />
+<link rel="stylesheet" href="../css/molecules.css" />
+<link rel="stylesheet" href="../css/organisms.css" />
+<link rel="stylesheet" href="../css/showcase.css" />
+<script>
+  (function(){
+    try{ var t=localStorage.getItem('fds-theme')||'light';
+    document.documentElement.setAttribute('data-theme',t);
+    }catch(_){document.documentElement.setAttribute('data-theme','light');}
+  })();
+</script>
+<style>
+/* ─── Canvas ────────────────────────────────────────────── */
+.dgr-wrap {
+  overflow-x: auto;
+  overflow-y: hidden;
+  border: 1px solid rgba(0,102,255,.25);
+  border-radius: 16px;
+  background: #0b1121;
+  box-shadow: 0 0 0 1px rgba(0,102,255,.1), 0 8px 40px rgba(0,0,0,.5);
+  position: relative;
+}
+.dgr-canvas {
+  position: relative;
+  cursor: default;
+}
+
+/* ─── Toolbar ───────────────────────────────────────────── */
+.dgr-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: var(--fds-space-4);
+  flex-wrap: wrap;
+}
+.dgr-toolbar__sep {
+  width: 1px;
+  height: 28px;
+  background: var(--fds-border-subtle);
+  margin: 0 2px;
+}
+.dgr-mode-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 14px;
+  border-radius: var(--fds-radius-m);
+  border: 1.5px solid var(--fds-border-default);
+  background: var(--fds-surface-2);
+  color: var(--fds-text-secondary);
+  font-family: var(--fds-font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .15s;
+  white-space: nowrap;
+}
+.dgr-mode-btn:hover {
+  border-color: #20D78A;
+  color: #20D78A;
+  background: rgba(32,215,138,.08);
+}
+.dgr-mode-btn.is-active {
+  border-color: #20D78A;
+  background: rgba(32,215,138,.12);
+  color: #20D78A;
+  box-shadow: 0 0 12px rgba(32,215,138,.2);
+}
+.dgr-type-sel {
+  height: 34px;
+  padding: 0 10px;
+  border-radius: var(--fds-radius-m);
+  border: 1px solid var(--fds-border-default);
+  background: var(--fds-surface-2);
+  color: var(--fds-text-primary);
+  font-family: var(--fds-font-sans);
+  font-size: 12px;
+  cursor: pointer;
+  max-width: 136px;
+}
+.dgr-hint {
+  font-size: 11px;
+  color: var(--fds-text-tertiary);
+  margin-left: auto;
+  letter-spacing: .01em;
+}
+
+/* ─── Preset panel ──────────────────────────────────────── */
+.dgr-preset-wrap {
+  position: relative;
+  display: inline-block;
+}
+.dgr-preset-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 12px;
+  border-radius: var(--fds-radius-m);
+  border: 1.5px solid rgba(0,102,255,.4);
+  background: rgba(0,102,255,.06);
+  color: var(--fds-text-primary);
+  font-family: var(--fds-font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .15s;
+  white-space: nowrap;
+}
+.dgr-preset-btn:hover {
+  background: rgba(0,102,255,.12);
+  border-color: #0066FF;
+}
+.dgr-preset-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  background: #0d1626;
+  border: 1px solid rgba(0,102,255,.3);
+  border-radius: 12px;
+  padding: 8px;
+  z-index: 100;
+  box-shadow: 0 8px 32px rgba(0,0,0,.6);
+  min-width: 220px;
+}
+.dgr-preset-menu.is-open { display: block; }
+.dgr-preset-group {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  color: rgba(255,255,255,.3);
+  text-transform: uppercase;
+  padding: 6px 8px 4px;
+}
+.dgr-preset-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255,255,255,.8);
+  transition: background .1s;
+  white-space: nowrap;
+}
+.dgr-preset-item:hover {
+  background: rgba(0,102,255,.15);
+  color: #fff;
+}
+.dgr-preset-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ─── Legend ────────────────────────────────────────────── */
+.dgr-legend {
+  display: flex;
+  gap: var(--fds-space-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--fds-space-4);
+}
+.dgr-legend__item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--fds-text-secondary);
+}
+.dgr-legend__swatch {
+  width: 14px; height: 14px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+</style>
+</head>
+<body>
+<div class="docs">
+
+  <aside class="docs-side">
+    <div class="docs-side__brand">
+      <img class="logo-dark"  src="../assets/logos/horizontal-branco.svg" alt="Fortics" />
+      <img class="logo-light" src="../assets/logos/horizontal-marinho.svg" alt="Fortics" hidden />
+    </div>
+    <div class="docs-side__group">
+      <div class="docs-side__title">Início</div>
+      <a class="docs-side__link" href="../index.html"><i data-lucide="home"></i> Visão geral</a>
+    </div>
+    <div class="docs-side__group">
+      <div class="docs-side__title">Atomic Design</div>
+      <a class="docs-side__link" href="./01-foundations.html"><span class="level-dot">0</span> Fundamentos</a>
+      <a class="docs-side__link" href="./02-atoms.html"><span class="level-dot">A</span> Átomos</a>
+      <a class="docs-side__link" href="./03-molecules.html"><span class="level-dot">M</span> Moléculas</a>
+      <a class="docs-side__link" href="./04-organisms.html"><span class="level-dot">O</span> Organismos</a>
+    </div>
+    <div class="docs-side__group">
+      <div class="docs-side__title">Recursos</div>
+      <a class="docs-side__link" href="./10-marca-segmento.html"><i data-lucide="layers"></i> Marca &amp; Segmento</a>
+      <a class="docs-side__link is-active" href="./11-diagramas.html"><i data-lucide="git-fork"></i> Diagramas</a>
+    </div>
+    <div class="docs-side__group">
+      <div class="docs-side__title">Nesta página</div>
+      <a class="docs-side__link" href="#ecossistema"><i data-lucide="circle-dot"></i> Ecossistema</a>
+      <a class="docs-side__link" href="#fluxo"><i data-lucide="arrow-right-left"></i> Fluxograma</a>
+      <a class="docs-side__link" href="#arquitetura"><i data-lucide="server"></i> Arquitetura</a>
+    </div>
+    <div class="docs-side__footer">
+      <div class="fds-theme-toggle" data-fds-theme-toggle role="group" aria-label="Tema">
+        <button class="fds-theme-toggle__btn" data-theme-set="light" aria-pressed="true" aria-label="Tema claro"><i data-lucide="sun" style="width:16px;height:16px"></i></button>
+        <button class="fds-theme-toggle__btn" data-theme-set="dark" aria-pressed="false" aria-label="Tema escuro"><i data-lucide="moon" style="width:16px;height:16px"></i></button>
+      </div>
+      <p class="fds-caption" style="margin:0">Fortics DS v1.0</p>
+    </div>
+  </aside>
+
+  <main class="docs-main">
+    <header class="docs-top">
+      <div class="docs-top__crumb">~ / design-system / diagramas</div>
+      <div class="docs-top__actions">
+        <span class="fds-badge fds-badge--nucleo"><span class="fds-badge__dot"></span>Editável · Export HTML</span>
+      </div>
+    </header>
+
+    <section class="docs-section" style="border:none;padding-bottom:0">
+      <h1 class="docs-section__title">Diagramas</h1>
+      <p class="docs-section__lead">Modelos editáveis com visual tech-brand da Fortics. <strong>Arraste</strong> nós para mover, <strong>clique no texto</strong> para editar, use <strong>⊕ Conectar</strong> para criar ligações e clique numa linha para excluí-la.</p>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         1. ECOSSISTEMA DE PRODUTO
+    ════════════════════════════════════════════ -->
+    <section class="docs-section" id="ecossistema">
+      <h2 class="docs-section__subtitle">Ecossistema de Produto</h2>
+      <p class="docs-section__lead">Portfólio completo centrado no Fortics Core.</p>
+
+      <div class="dgr-legend">
+        <div class="dgr-legend__item"><div class="dgr-legend__swatch" style="background:#0066FF"></div>Hub / Core</div>
+        <div class="dgr-legend__item"><div class="dgr-legend__swatch" style="background:rgba(0,102,255,.55);border:1.5px solid rgba(0,102,255,.55)"></div>Produto</div>
+        <div class="dgr-legend__item"><div class="dgr-legend__swatch" style="background:rgba(139,92,246,.55);border:1.5px solid rgba(139,92,246,.55)"></div>IA / Engine</div>
+        <div class="dgr-legend__item"><div class="dgr-legend__swatch" style="background:rgba(32,215,138,.55);border:1.5px solid rgba(32,215,138,.55)"></div>Canal</div>
+      </div>
+
+      <div class="dgr-toolbar" id="tb-eco">
+        <button class="dgr-mode-btn" id="eco-conn" title="Ativar modo conexão">
+          <i data-lucide="git-branch" style="width:13px;height:13px"></i> Conectar
+        </button>
+        <div class="dgr-toolbar__sep"></div>
+        <select class="dgr-type-sel" id="eco-type">
+          <option value="product">Produto</option>
+          <option value="platform">IA / Engine</option>
+          <option value="channel">Canal</option>
+          <option value="hub">Hub</option>
+          <option value="integration">Integração</option>
+          <option value="label">Anotação</option>
+        </select>
+        <button class="fds-btn fds-btn--sm fds-btn--primary" id="eco-add">
+          <i data-lucide="plus" style="width:13px;height:13px"></i> Nó
+        </button>
+        <div class="dgr-preset-wrap">
+          <button class="dgr-preset-btn" id="eco-brand-btn">
+            <i data-lucide="sparkles" style="width:13px;height:13px"></i> Marca ▾
+          </button>
+          <div class="dgr-preset-menu" id="eco-brand-menu"></div>
+        </div>
+        <div class="dgr-toolbar__sep"></div>
+        <button class="fds-btn fds-btn--sm fds-btn--secondary" id="eco-reset">
+          <i data-lucide="rotate-ccw" style="width:13px;height:13px"></i> Resetar
+        </button>
+        <button class="fds-btn fds-btn--sm fds-btn--ghost" id="eco-export">
+          <i data-lucide="download" style="width:13px;height:13px"></i> Exportar HTML
+        </button>
+        <span class="dgr-hint">Arraste · Clique no texto · <kbd style="font-size:10px;padding:1px 4px;border-radius:3px;background:var(--fds-surface-3);border:1px solid var(--fds-border-subtle)">ESC</kbd> cancela conexão</span>
+      </div>
+
+      <div class="dgr-wrap">
+        <div class="dgr-canvas" id="canvas-eco" style="width:920px;height:500px"></div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         2. FLUXOGRAMA DE PROCESSO
+    ════════════════════════════════════════════ -->
+    <section class="docs-section" id="fluxo">
+      <h2 class="docs-section__subtitle">Fluxograma de Processo</h2>
+      <p class="docs-section__lead">Jornada de atendimento — primeiro contato à resolução.</p>
+
+      <div class="dgr-legend">
+        <div class="dgr-legend__item"><div class="dgr-legend__swatch" style="background:#20D78A;border-radius:100px"></div>Início / Fim</div>
+        <div class="dgr-legend__item"><div class="dgr-legend__swatch" style="border:1.5px solid rgba(255,255,255,.22)"></div>Processo</div>
+        <div class="dgr-legend__item"><div class="dgr-legend__swatch" style="border:1.5px solid rgba(139,92,246,.65);transform:rotate(45deg)"></div>Decisão</div>
+      </div>
+
+      <div class="dgr-toolbar">
+        <button class="dgr-mode-btn" id="flx-conn">
+          <i data-lucide="git-branch" style="width:13px;height:13px"></i> Conectar
+        </button>
+        <div class="dgr-toolbar__sep"></div>
+        <select class="dgr-type-sel" id="flx-type">
+          <option value="process">Processo</option>
+          <option value="decision">Decisão</option>
+          <option value="start">Início</option>
+          <option value="end">Fim</option>
+          <option value="platform">IA / Bot</option>
+          <option value="label">Anotação</option>
+        </select>
+        <button class="fds-btn fds-btn--sm fds-btn--primary" id="flx-add">
+          <i data-lucide="plus" style="width:13px;height:13px"></i> Nó
+        </button>
+        <div class="dgr-preset-wrap">
+          <button class="dgr-preset-btn" id="flx-brand-btn">
+            <i data-lucide="sparkles" style="width:13px;height:13px"></i> Marca ▾
+          </button>
+          <div class="dgr-preset-menu" id="flx-brand-menu"></div>
+        </div>
+        <div class="dgr-toolbar__sep"></div>
+        <button class="fds-btn fds-btn--sm fds-btn--secondary" id="flx-reset">
+          <i data-lucide="rotate-ccw" style="width:13px;height:13px"></i> Resetar
+        </button>
+        <button class="fds-btn fds-btn--sm fds-btn--ghost" id="flx-export">
+          <i data-lucide="download" style="width:13px;height:13px"></i> Exportar HTML
+        </button>
+        <span class="dgr-hint">Clique numa linha para selecioná-la · <kbd style="font-size:10px;padding:1px 4px;border-radius:3px;background:var(--fds-surface-3);border:1px solid var(--fds-border-subtle)">Del</kbd> para excluir</span>
+      </div>
+
+      <div class="dgr-wrap">
+        <div class="dgr-canvas" id="canvas-flx" style="width:1080px;height:430px"></div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         3. DIAGRAMA DE ARQUITETURA
+    ════════════════════════════════════════════ -->
+    <section class="docs-section" id="arquitetura">
+      <h2 class="docs-section__subtitle">Diagrama de Arquitetura</h2>
+      <p class="docs-section__lead">Camadas da plataforma: canais de entrada, engine IA, core e integrações.</p>
+
+      <div class="dgr-legend">
+        <div class="dgr-legend__item"><div class="dgr-legend__swatch" style="border:1.5px solid rgba(32,215,138,.55)"></div>Canal</div>
+        <div class="dgr-legend__item"><div class="dgr-legend__swatch" style="border:1.5px solid rgba(139,92,246,.6)"></div>Plataforma</div>
+        <div class="dgr-legend__item"><div class="dgr-legend__swatch" style="background:#0066FF"></div>Core</div>
+        <div class="dgr-legend__item"><div class="dgr-legend__swatch" style="border:1.5px solid rgba(0,102,255,.35)"></div>Integração</div>
+      </div>
+
+      <div class="dgr-toolbar">
+        <button class="dgr-mode-btn" id="arq-conn">
+          <i data-lucide="git-branch" style="width:13px;height:13px"></i> Conectar
+        </button>
+        <div class="dgr-toolbar__sep"></div>
+        <select class="dgr-type-sel" id="arq-type">
+          <option value="channel">Canal</option>
+          <option value="platform">Plataforma</option>
+          <option value="integration">Integração</option>
+          <option value="process">Serviço</option>
+          <option value="label">Anotação</option>
+        </select>
+        <button class="fds-btn fds-btn--sm fds-btn--primary" id="arq-add">
+          <i data-lucide="plus" style="width:13px;height:13px"></i> Nó
+        </button>
+        <div class="dgr-preset-wrap">
+          <button class="dgr-preset-btn" id="arq-brand-btn">
+            <i data-lucide="sparkles" style="width:13px;height:13px"></i> Marca ▾
+          </button>
+          <div class="dgr-preset-menu" id="arq-brand-menu"></div>
+        </div>
+        <div class="dgr-toolbar__sep"></div>
+        <button class="fds-btn fds-btn--sm fds-btn--secondary" id="arq-reset">
+          <i data-lucide="rotate-ccw" style="width:13px;height:13px"></i> Resetar
+        </button>
+        <button class="fds-btn fds-btn--sm fds-btn--ghost" id="arq-export">
+          <i data-lucide="download" style="width:13px;height:13px"></i> Exportar HTML
+        </button>
+        <span class="dgr-hint">Arrastar · Conectar · Exportar HTML autossuficiente</span>
+      </div>
+
+      <div class="dgr-wrap">
+        <div class="dgr-canvas" id="canvas-arq" style="width:980px;height:500px"></div>
+      </div>
+    </section>
+
+    <footer style="padding:var(--fds-space-7) var(--fds-space-8);color:var(--fds-text-tertiary);font-size:var(--fds-text-caption);border-top:1px solid var(--fds-border-subtle)">
+      © Fortics · Design System v1.0
+    </footer>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/motion@11/dist/motion.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="../js/fds-theme.js"></script>
+<script src="../js/fds-toast.js"></script>
+<script src="../js/fds-clipboard.js"></script>
+<script src="../js/fds-diagrams.js"></script>
+<script>
+lucide.createIcons();
+
+/* ─── Helper: preset menu ─────────────────────────────── */
+const PRESET_COLORS = {
+  hub:'#0066FF', spark:'#8B5CF6', product:'rgba(0,102,255,.55)',
+  platform:'rgba(139,92,246,.65)', channel:'rgba(32,215,138,.55)',
+  integration:'rgba(0,102,255,.35)', process:'rgba(255,255,255,.22)',
+};
+
+function buildPresetMenu(menuEl, diagramRef) {
+  const groups = {
+    'Hub & Marca':     ['Fortics Hub','Spark'],
+    'Produtos':        ['Chat Center','Contact Center','IA Engine','Voz','Campanha','Channel Connect'],
+    'Canais':          ['WhatsApp','SMS','E-mail','Instagram'],
+    'Integrações':     ['CRM','ERP','Analytics','API'],
+    'Processo':        ['Atendente','Bot'],
+  };
+  for (const [groupName, items] of Object.entries(groups)) {
+    const g = document.createElement('div');
+    g.className = 'dgr-preset-group';
+    g.textContent = groupName;
+    menuEl.appendChild(g);
+    items.forEach(name => {
+      const item = document.createElement('div');
+      item.className = 'dgr-preset-item';
+      const preset = FDS_BRAND_PRESETS.includes(name) ? name : null;
+      const type   = preset ? window._FDS_PRESET_TYPE?.[name] || 'product' : 'default';
+      item.innerHTML = `<div class="dgr-preset-dot" style="background:${PRESET_COLORS[type]||'rgba(255,255,255,.3)'}"></div>${name}`;
+      item.addEventListener('click', () => {
+        diagramRef().addBrandNode(name);
+        lucide.createIcons();
+        menuEl.classList.remove('is-open');
+      });
+      menuEl.appendChild(item);
+    });
+  }
+}
+
+/* ─── Helper: connect toggle ─────────────────────────── */
+function wireConnectBtn(btn, diagramRef) {
+  btn.addEventListener('click', () => {
+    const active = diagramRef().toggleConnect();
+    btn.classList.toggle('is-active', active);
+    btn.querySelector('i').dataset.lucide = active ? 'x' : 'git-branch';
+    lucide.createIcons({ nodes: [btn.querySelector('i')] });
+  });
+}
+
+/* ─── Helper: preset toggle ──────────────────────────── */
+function wirePresetBtn(btnId, menuId) {
+  const btn  = document.getElementById(btnId);
+  const menu = document.getElementById(menuId);
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    document.querySelectorAll('.dgr-preset-menu').forEach(m => {
+      if (m !== menu) m.classList.remove('is-open');
+    });
+    menu.classList.toggle('is-open');
+  });
+}
+document.addEventListener('click', () =>
+  document.querySelectorAll('.dgr-preset-menu').forEach(m => m.classList.remove('is-open'))
+);
+
+/* ═══════════════════════════════════════════════════════
+   1. ECOSSISTEMA DE PRODUTO
+══════════════════════════════════════════════════════ */
+const ECO_DATA = {
+  nodes: [
+    { id:'fortics',  label:'',                x:460, y:250, type:'hub',      icon:'spark' },
+    { id:'ia',       label:'IA Engine',        x:340, y: 80, type:'platform', icon:'zap'   },
+    { id:'chat',     label:'Chat Center',      x:580, y: 80, type:'product',  icon:'message-circle' },
+    { id:'contact',  label:'Contact Center',   x:700, y:250, type:'product',  icon:'phone-call'     },
+    { id:'campanha', label:'Campanha',          x:580, y:420, type:'product',  icon:'megaphone'      },
+    { id:'channel',  label:'Channel Connect',  x:340, y:420, type:'channel',  icon:'share-2'        },
+    { id:'voz',      label:'Voz',              x:220, y:250, type:'product',  icon:'mic'            },
+  ],
+  edges: [
+    { from:'fortics', to:'ia',       color:'violet', bold:true },
+    { from:'fortics', to:'chat',     color:'blue',   bold:true },
+    { from:'fortics', to:'contact',  color:'blue'              },
+    { from:'fortics', to:'campanha', color:'blue'              },
+    { from:'fortics', to:'channel',  color:'green'             },
+    { from:'fortics', to:'voz',      color:'blue'              },
+  ]
+};
+let eco;
+function getEco() { return eco; }
+eco = new FDSDiagram('#canvas-eco', ECO_DATA, { curved: true });
+
+buildPresetMenu(document.getElementById('eco-brand-menu'), getEco);
+wireConnectBtn(document.getElementById('eco-conn'), getEco);
+wirePresetBtn('eco-brand-btn','eco-brand-menu');
+
+document.getElementById('eco-add').addEventListener('click', () => {
+  eco.addNode({ type: document.getElementById('eco-type').value });
+  lucide.createIcons();
+});
+document.getElementById('eco-reset').addEventListener('click', () => {
+  eco.reset();
+  document.getElementById('eco-conn').classList.remove('is-active');
+  lucide.createIcons();
+});
+document.getElementById('eco-export').addEventListener('click', () => {
+  eco.exportHTML('Ecossistema de Produto · Fortics');
+  FDS.toast.success('HTML exportado!', 'Arquivo baixado — abra no navegador.');
+});
+
+/* ═══════════════════════════════════════════════════════
+   2. FLUXOGRAMA DE PROCESSO
+══════════════════════════════════════════════════════ */
+const FLX_DATA = {
+  nodes: [
+    { id:'cli',  label:'Cliente',          x: 90, y:215, type:'start'    },
+    { id:'can',  label:'Canal de\nEntrada',x:270, y:215, type:'process'  },
+    { id:'bot',  label:'IA / Bot',         x:460, y:215, type:'platform', icon:'zap' },
+    { id:'dec',  label:'Resolvido?',       x:655, y:215, type:'decision' },
+    { id:'enc',  label:'Encerrado',        x:855, y:110, type:'end'      },
+    { id:'aten', label:'Atendente\nHumano',x:855, y:335, type:'process',  icon:'user' },
+    { id:'res',  label:'Resolução',        x:1020,y:335, type:'end'      },
+  ],
+  edges: [
+    { from:'cli',  to:'can',  color:'green' },
+    { from:'can',  to:'bot'                 },
+    { from:'bot',  to:'dec'                 },
+    { from:'dec',  to:'enc',  color:'green', label:'Sim' },
+    { from:'dec',  to:'aten',               label:'Não' },
+    { from:'aten', to:'res',  color:'blue'  },
+  ]
+};
+let flx;
+function getFlx() { return flx; }
+flx = new FDSDiagram('#canvas-flx', FLX_DATA);
+
+buildPresetMenu(document.getElementById('flx-brand-menu'), getFlx);
+wireConnectBtn(document.getElementById('flx-conn'), getFlx);
+wirePresetBtn('flx-brand-btn','flx-brand-menu');
+
+document.getElementById('flx-add').addEventListener('click', () => {
+  flx.addNode({ type: document.getElementById('flx-type').value });
+  lucide.createIcons();
+});
+document.getElementById('flx-reset').addEventListener('click', () => {
+  flx.reset();
+  document.getElementById('flx-conn').classList.remove('is-active');
+  lucide.createIcons();
+});
+document.getElementById('flx-export').addEventListener('click', () => {
+  flx.exportHTML('Fluxograma de Atendimento · Fortics');
+  FDS.toast.success('HTML exportado!', 'Arquivo baixado — abra no navegador.');
+});
+
+/* ═══════════════════════════════════════════════════════
+   3. DIAGRAMA DE ARQUITETURA
+══════════════════════════════════════════════════════ */
+const ARQ_DATA = {
+  nodes: [
+    { id:'wpp',   label:'WhatsApp',        x:100, y: 90, type:'channel',     icon:'message-circle' },
+    { id:'sms',   label:'SMS',              x:100, y:190, type:'channel',     icon:'smartphone'     },
+    { id:'mail',  label:'E-mail',           x:100, y:290, type:'channel',     icon:'mail'           },
+    { id:'voz2',  label:'Voz',              x:100, y:390, type:'channel',     icon:'mic'            },
+    { id:'cc',    label:'Channel Connect',  x:340, y:140, type:'platform'                           },
+    { id:'iaeng', label:'IA Engine',        x:340, y:320, type:'platform',    icon:'zap'            },
+    { id:'core',  label:'',                  x:580, y:240, type:'hub',         icon:'spark'          },
+    { id:'crm',   label:'CRM',              x:810, y:120, type:'integration', icon:'users'          },
+    { id:'erp',   label:'ERP',              x:810, y:240, type:'integration', icon:'database'       },
+    { id:'bi',    label:'Analytics',        x:810, y:365, type:'integration', icon:'bar-chart-2'    },
+  ],
+  edges: [
+    { from:'wpp',   to:'cc',    color:'green' },
+    { from:'sms',   to:'cc',    color:'green' },
+    { from:'mail',  to:'cc'                   },
+    { from:'voz2',  to:'iaeng', color:'green' },
+    { from:'cc',    to:'core',  color:'blue', bold:true },
+    { from:'iaeng', to:'core',  color:'violet', bold:true },
+    { from:'core',  to:'crm',   color:'blue' },
+    { from:'core',  to:'erp',   color:'blue' },
+    { from:'core',  to:'bi',    color:'blue' },
+  ]
+};
+let arq;
+function getArq() { return arq; }
+arq = new FDSDiagram('#canvas-arq', ARQ_DATA);
+
+buildPresetMenu(document.getElementById('arq-brand-menu'), getArq);
+wireConnectBtn(document.getElementById('arq-conn'), getArq);
+wirePresetBtn('arq-brand-btn','arq-brand-menu');
+
+document.getElementById('arq-add').addEventListener('click', () => {
+  arq.addNode({ type: document.getElementById('arq-type').value });
+  lucide.createIcons();
+});
+document.getElementById('arq-reset').addEventListener('click', () => {
+  arq.reset();
+  document.getElementById('arq-conn').classList.remove('is-active');
+  lucide.createIcons();
+});
+document.getElementById('arq-export').addEventListener('click', () => {
+  arq.exportHTML('Arquitetura Técnica · Fortics');
+  FDS.toast.success('HTML exportado!', 'Arquivo baixado — abra no navegador.');
+});
+
+/* ─── Reinicia ícones após tudo montar ──────────────────── */
+lucide.createIcons();
+</script>
+</body>
+</html>

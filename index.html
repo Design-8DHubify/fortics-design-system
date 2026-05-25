@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Fortics — Design System</title>
-<meta name="description" content="Design System oficial da Fortics — Atomic Design, tokens interativos, biblioteca GSAP, componentes WordPress-friendly." />
+<meta name="description" content="Design System oficial da Fortics — Atomic Design, tokens interativos, biblioteca Motion One, componentes WordPress-friendly." />
 
 <link rel="icon" type="image/svg+xml" href="assets/icons/spark-principal.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -72,6 +72,7 @@
       <a class="docs-side__link" href="./pages/07-spark-animations.html"><i data-lucide="sparkles"></i> Spark Animations</a>
       <a class="docs-side__link" href="./pages/08-3d-builder.html"><i data-lucide="box"></i> 3D Builder</a>
       <a class="docs-side__link" href="./pages/10-marca-segmento.html"><i data-lucide="layers-2"></i> Marca por Segmento</a>
+      <a class="docs-side__link" href="./pages/11-diagramas.html"><i data-lucide="git-fork"></i> Diagramas</a>
     </div>
 
     <div class="docs-side__footer">
@@ -199,6 +200,16 @@
               <li>Draw</li><li>Pulse</li><li>Orbit</li><li>Neon</li><li>Burst</li>
             </ul>
           </a>
+
+          <a class="atomic-card" href="./pages/11-diagramas.html" style="border-color:rgba(0,102,255,0.4);background:linear-gradient(135deg, rgba(0,102,255,0.08), rgba(139,92,246,0.05))">
+            <span class="atomic-card__arrow"><i data-lucide="arrow-up-right" style="width:18px;height:18px"></i></span>
+            <span class="atomic-card__level" style="color:var(--fds-color-nucleo)"><i data-lucide="git-fork" style="width:14px;height:14px;vertical-align:middle"></i> Especial</span>
+            <h3 class="atomic-card__title">Diagramas</h3>
+            <p class="atomic-card__desc">Modelos editáveis de ecossistema, fluxograma e arquitetura. Arraste nós, edite textos, adicione elementos e exporte como JSON.</p>
+            <ul class="atomic-card__list">
+              <li>Ecossistema</li><li>Fluxograma</li><li>Arquitetura</li><li>Editável</li>
+            </ul>
+          </a>
         </div>
       </div>
     </section>
@@ -219,8 +230,7 @@
 &lt;link rel="stylesheet" href="css/molecules.css"&gt;
 
 &lt;!-- 2. Vendors --&gt;
-&lt;script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"&gt;&lt;/script&gt;
-&lt;script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"&gt;&lt;/script&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/motion@11/dist/motion.js"&gt;&lt;/script&gt;
 &lt;script src="https://unpkg.com/lucide@latest"&gt;&lt;/script&gt;
 
 &lt;!-- 3. Biblioteca FDS --&gt;
@@ -246,9 +256,8 @@
 &lt;link rel="stylesheet" href="css/components.css"&gt;
 &lt;link rel="stylesheet" href="css/molecules.css"&gt;
 
-&lt;!-- 2. Vendors (GSAP + Lucide) --&gt;
-&lt;script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"&gt;&lt;/script&gt;
-&lt;script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"&gt;&lt;/script&gt;
+&lt;!-- 2. Vendors (Motion One + Lucide) --&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/motion@11/dist/motion.js"&gt;&lt;/script&gt;
 &lt;script src="https://unpkg.com/lucide@latest"&gt;&lt;/script&gt;
 
 &lt;!-- 3. Biblioteca Fortics --&gt;
@@ -262,22 +271,21 @@
 // API global window.FDS — disponível depois que os scripts carregam
 FDS.toast.success('Tudo certo!', 'O Design System está ativo.');
 FDS.theme.set('light');             // ou 'dark'
-FDS.animate.scrollReveal('.card');   // GSAP scroll reveal
+FDS.animate.scrollReveal('.card');   // Motion One scroll reveal
 FDS.clipboard.copy('#0066FF', { label: 'HEX' });
         </template>
       </div>
     </section>
 
     <footer style="padding:var(--fds-space-7) var(--fds-space-8);color:var(--fds-text-tertiary);font-size:var(--fds-text-caption);border-top:1px solid var(--fds-border-subtle)">
-      © Fortics · Design System v1.0 · Construído com Atomic Design + GSAP + Lucide.
+      © Fortics · Design System v1.0 · Construído com Atomic Design + Motion One + Lucide.
     </footer>
 
   </main>
 </div>
 
 <!-- Vendors -->
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motion@11/dist/motion.js"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 
 <!-- FDS Library -->

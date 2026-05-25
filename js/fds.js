@@ -1,241 +1,245 @@
 /* ============================================================
-   FORTICS DESIGN SYSTEM — ANIMATION LIBRARY
-   Biblioteca de animações GSAP exposta como window.FDS
+   FORTICS DESIGN SYSTEM — ANIMATION LIBRARY v2 (Motion One)
+   Migrado de GSAP → Motion One (Web Animations API nativa).
+   Sem conflitos com Oxygen Builder / WordPress.
 
-   Requer: gsap 3.x e ScrollTrigger (carregados via CDN no index.html)
+   CDN: https://cdn.jsdelivr.net/npm/motion@11/dist/motion.js
+   Expõe: window.Motion → { animate, scroll, inView, stagger, spring }
 
-   USO:
+   API pública idêntica à versão anterior:
      FDS.animate.fadeIn('.hero-title')
      FDS.animate.slideIn('.card', { direction: 'up', delay: 0.2 })
      FDS.animate.stagger('.feature', { y: 40, stagger: 0.08 })
      FDS.animate.scrollReveal('.section', { y: 60 })
-     FDS.animate.sparkPulse('#spark')
-     FDS.animate.textReveal('.headline')
-     FDS.animate.countUp('.metric', { to: 1247, duration: 2 })
      FDS.hover.lift('.card-interactive')
    ============================================================ */
 
 (function (global) {
   'use strict';
 
-  if (!global.gsap) {
-    console.warn('[FDS] GSAP não está carregado. Importe gsap.min.js antes deste arquivo.');
+  const M = global.Motion;
+  if (!M) {
+    console.warn('[FDS] Motion One não carregado. Adicione motion.js antes de fds.js.');
     return;
   }
-  const gsap = global.gsap;
-  const ScrollTrigger = global.ScrollTrigger;
-  if (ScrollTrigger && gsap.registerPlugin) gsap.registerPlugin(ScrollTrigger);
+
+  const { animate: mot, scroll: motScroll, inView, stagger: motStagger } = M;
 
   /* -------------------------------------------------------- */
   /* DURATIONS & EASES (espelham os tokens CSS)               */
   /* -------------------------------------------------------- */
   const D = { instant: 0.1, fast: 0.2, base: 0.32, slow: 0.48, slower: 0.72, hero: 1.2 };
   const E = {
-    out:    'expo.out',
-    inOut:  'power3.inOut',
-    spring: 'back.out(1.7)',
-    soft:   'power2.out',
-    bounce: 'elastic.out(1, 0.5)'
+    out:    [0.16, 1, 0.3, 1],           // expo.out
+    inOut:  [0.65, 0, 0.35, 1],          // power3.inOut
+    spring: [0.34, 1.56, 0.64, 1],       // back.out(1.7) — overshoot suave
+    soft:   'ease-out',
+    bounce: [0.175, 0.885, 0.32, 1.275]  // elastic — overshoot pronunciado
   };
 
   /* -------------------------------------------------------- */
   /* HELPERS                                                  */
   /* -------------------------------------------------------- */
   function toEls(target) {
-    if (typeof target === 'string') return gsap.utils.toArray(target);
-    if (target instanceof Element) return [target];
+    if (typeof target === 'string')  return Array.from(document.querySelectorAll(target));
+    if (target instanceof Element)   return [target];
     if (target instanceof NodeList || Array.isArray(target)) return Array.from(target);
     return [];
   }
 
-  function defaults(opts, fallback) { return Object.assign({}, fallback, opts || {}); }
+  function defaults(opts, fb) { return Object.assign({}, fb, opts || {}); }
 
   /* -------------------------------------------------------- */
-  /* ANIMATE — entradas / saídas                              */
+  /* ANIMATE — entradas / saídas / loops                      */
   /* -------------------------------------------------------- */
   const animate = {
 
-    /** Fade in suave. */
     fadeIn(target, opts) {
-      const o = defaults(opts, { duration: D.base, delay: 0, y: 0, ease: E.out });
-      return gsap.fromTo(target,
-        { autoAlpha: 0, y: o.y },
-        { autoAlpha: 1, y: 0, duration: o.duration, delay: o.delay, ease: o.ease, overwrite: 'auto' }
-      );
+      const o = defaults(opts, { duration: D.base, delay: 0, y: 0, easing: E.out });
+      const els = toEls(target);
+      els.forEach(el => { el.style.opacity = '0'; });
+      const kf = { opacity: [0, 1] };
+      if (o.y) kf.y = [o.y, 0];
+      return mot(els, kf, { duration: o.duration, delay: o.delay, easing: o.easing });
     },
 
     fadeOut(target, opts) {
-      const o = defaults(opts, { duration: D.fast, ease: E.soft });
-      return gsap.to(target, { autoAlpha: 0, duration: o.duration, ease: o.ease });
+      const o = defaults(opts, { duration: D.fast, easing: E.soft });
+      return mot(toEls(target), { opacity: [1, 0] }, { duration: o.duration, easing: o.easing });
     },
 
-    /** Slide a partir de uma direção: 'up' | 'down' | 'left' | 'right'. */
     slideIn(target, opts) {
-      const o = defaults(opts, { direction: 'up', distance: 48, duration: D.slow, delay: 0, ease: E.out });
-      const from = { autoAlpha: 0 };
-      if (o.direction === 'up')    from.y =  o.distance;
-      if (o.direction === 'down')  from.y = -o.distance;
-      if (o.direction === 'left')  from.x =  o.distance;
-      if (o.direction === 'right') from.x = -o.distance;
-      return gsap.fromTo(target, from,
-        { autoAlpha: 1, x: 0, y: 0, duration: o.duration, delay: o.delay, ease: o.ease, overwrite: 'auto' }
-      );
-    },
-
-    /** Scale-in com leve overshoot (efeito "pop"). */
-    scaleIn(target, opts) {
-      const o = defaults(opts, { from: 0.85, duration: D.slow, delay: 0, ease: E.spring });
-      return gsap.fromTo(target,
-        { autoAlpha: 0, scale: o.from },
-        { autoAlpha: 1, scale: 1, duration: o.duration, delay: o.delay, ease: o.ease, overwrite: 'auto' }
-      );
-    },
-
-    /** Blur reveal — fade + desfoque. */
-    blurIn(target, opts) {
-      const o = defaults(opts, { duration: D.slow, delay: 0, blur: 16, ease: E.out });
-      return gsap.fromTo(target,
-        { autoAlpha: 0, filter: `blur(${o.blur}px)` },
-        { autoAlpha: 1, filter: 'blur(0px)', duration: o.duration, delay: o.delay, ease: o.ease, overwrite: 'auto' }
-      );
-    },
-
-    /** Stagger genérico em coleção. */
-    stagger(target, opts) {
-      const o = defaults(opts, { y: 32, x: 0, duration: D.slow, stagger: 0.08, delay: 0, ease: E.out });
-      return gsap.fromTo(target,
-        { autoAlpha: 0, y: o.y, x: o.x },
-        { autoAlpha: 1, y: 0, x: 0, duration: o.duration, delay: o.delay, stagger: o.stagger, ease: o.ease, overwrite: 'auto' }
-      );
-    },
-
-    /** Reveal acionado por scroll. */
-    scrollReveal(target, opts) {
-      if (!ScrollTrigger) { return animate.slideIn(target, opts); }
-      const o = defaults(opts, { y: 60, duration: D.slow, stagger: 0.08, ease: E.out, start: 'top 85%' });
-      return toEls(target).map(el => gsap.fromTo(el,
-        { autoAlpha: 0, y: o.y },
-        {
-          autoAlpha: 1, y: 0, duration: o.duration, ease: o.ease, stagger: o.stagger,
-          scrollTrigger: { trigger: el, start: o.start, toggleActions: 'play none none reverse' }
-        }
-      ));
-    },
-
-    /** Revela texto palavra por palavra (envolve cada palavra em <span>). */
-    textReveal(target, opts) {
-      const o = defaults(opts, { duration: D.slow, stagger: 0.04, y: '100%', ease: E.out });
+      const o = defaults(opts, { direction: 'up', distance: 48, duration: D.slow, delay: 0, easing: E.out });
       const els = toEls(target);
-      const tweens = [];
-      els.forEach(el => {
+      els.forEach(el => { el.style.opacity = '0'; });
+      const kf = { opacity: [0, 1] };
+      if (o.direction === 'up')    kf.y = [ o.distance, 0];
+      if (o.direction === 'down')  kf.y = [-o.distance, 0];
+      if (o.direction === 'left')  kf.x = [ o.distance, 0];
+      if (o.direction === 'right') kf.x = [-o.distance, 0];
+      return mot(els, kf, { duration: o.duration, delay: o.delay, easing: o.easing });
+    },
+
+    scaleIn(target, opts) {
+      const o = defaults(opts, { from: 0.85, duration: D.slow, delay: 0, easing: E.spring });
+      const els = toEls(target);
+      els.forEach(el => { el.style.opacity = '0'; });
+      return mot(els,
+        { opacity: [0, 1], scale: [o.from, 1] },
+        { duration: o.duration, delay: o.delay, easing: o.easing }
+      );
+    },
+
+    blurIn(target, opts) {
+      const o = defaults(opts, { duration: D.slow, delay: 0, blur: 16, easing: E.out });
+      const els = toEls(target);
+      els.forEach(el => { el.style.opacity = '0'; });
+      return mot(els,
+        { opacity: [0, 1], filter: [`blur(${o.blur}px)`, 'blur(0px)'] },
+        { duration: o.duration, delay: o.delay, easing: o.easing }
+      );
+    },
+
+    stagger(target, opts) {
+      const o = defaults(opts, { y: 32, x: 0, duration: D.slow, stagger: 0.08, delay: 0, easing: E.out });
+      const els = toEls(target);
+      els.forEach(el => { el.style.opacity = '0'; });
+      const kf = { opacity: [0, 1] };
+      if (o.y) kf.y = [o.y, 0];
+      if (o.x) kf.x = [o.x, 0];
+      return mot(els, kf, {
+        duration: o.duration,
+        delay: motStagger(o.stagger, { start: o.delay }),
+        easing: o.easing
+      });
+    },
+
+    scrollReveal(target, opts) {
+      const o = defaults(opts, { y: 60, duration: D.slow, stagger: 0.08, easing: E.out });
+      toEls(target).forEach(el => {
+        el.style.opacity = '0';
+        const stop = inView(el, () => {
+          mot(el, { opacity: [0, 1], y: [o.y, 0] }, { duration: o.duration, easing: o.easing });
+          stop();
+        }, { margin: '-10% 0px' });
+      });
+    },
+
+    textReveal(target, opts) {
+      const o = defaults(opts, { duration: D.slow, stagger: 0.04, easing: E.out });
+      toEls(target).forEach(el => {
         if (!el.dataset.fdsTextReady) {
           const words = el.textContent.split(/\s+/);
           el.innerHTML = words.map(w =>
-            `<span class="fds-word" style="display:inline-block;overflow:hidden;vertical-align:bottom;"><span style="display:inline-block;">${w}</span></span>`
+            `<span class="fds-word" style="display:inline-block;overflow:hidden;vertical-align:bottom;">` +
+            `<span style="display:inline-block;">${w}</span></span>`
           ).join(' ');
           el.dataset.fdsTextReady = '1';
         }
-        const inner = el.querySelectorAll('.fds-word > span');
-        tweens.push(gsap.fromTo(inner,
-          { yPercent: 110, opacity: 0 },
-          { yPercent: 0, opacity: 1, duration: o.duration, ease: o.ease, stagger: o.stagger, overwrite: 'auto' }
-        ));
+        const inner = Array.from(el.querySelectorAll('.fds-word > span'));
+        mot(inner,
+          { opacity: [0, 1], transform: ['translateY(110%)', 'translateY(0%)'] },
+          { duration: o.duration, easing: o.easing, delay: motStagger(o.stagger) }
+        );
       });
-      return tweens;
     },
 
-    /** Anima um número de `from` até `to`. */
     countUp(target, opts) {
-      const o = defaults(opts, { from: 0, to: 100, duration: 1.8, ease: E.out, format: (v) => Math.round(v).toLocaleString('pt-BR'), suffix: '' });
-      return toEls(target).map(el => {
-        const obj = { v: o.from };
-        return gsap.to(obj, {
-          v: o.to, duration: o.duration, ease: o.ease,
-          onUpdate: () => { el.textContent = o.format(obj.v) + o.suffix; }
-        });
+      const o = defaults(opts, {
+        from: 0, to: 100, duration: 1800,
+        format: (v) => Math.round(v).toLocaleString('pt-BR'), suffix: ''
+      });
+      toEls(target).forEach(el => {
+        const start = performance.now();
+        const range = o.to - o.from;
+        function tick(now) {
+          const t      = Math.min((now - start) / o.duration, 1);
+          const eased  = 1 - Math.pow(1 - t, 3); // ease-out cubic
+          el.textContent = o.format(o.from + range * eased) + o.suffix;
+          if (t < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
       });
     },
 
-    /** Typewriter — escreve o texto caractere por caractere. */
     typewriter(target, opts) {
-      const o = defaults(opts, { text: '', speed: 0.035, ease: 'none' });
-      return toEls(target).map(el => {
+      const o = defaults(opts, { text: '', speed: 35 });
+      toEls(target).forEach(el => {
         const text = o.text || el.dataset.text || el.textContent;
         el.textContent = '';
-        const obj = { i: 0 };
-        return gsap.to(obj, {
-          i: text.length, duration: text.length * o.speed, ease: o.ease,
-          onUpdate: () => { el.textContent = text.slice(0, Math.round(obj.i)); }
-        });
+        let i = 0;
+        const id = setInterval(() => {
+          el.textContent = text.slice(0, ++i);
+          if (i >= text.length) clearInterval(id);
+        }, o.speed);
       });
     },
 
-    /* ---------- ANIMAÇÕES DE MARCA ---------- */
-
-    /** Pulsa o Spark — efeito de respiração com glow. */
     sparkPulse(target, opts) {
-      const o = defaults(opts, { scale: 1.08, duration: 1.6, ease: 'sine.inOut' });
-      return gsap.to(target, {
-        scale: o.scale, duration: o.duration, ease: o.ease, yoyo: true, repeat: -1,
-        transformOrigin: '50% 50%'
-      });
+      const o = defaults(opts, { scale: 1.08, duration: 1.6 });
+      return mot(toEls(target),
+        { scale: [1, o.scale] },
+        { duration: o.duration, easing: 'ease-in-out', repeat: Infinity, direction: 'alternate' }
+      );
     },
 
-    /** Rotação infinita do Spark. */
     sparkSpin(target, opts) {
       const o = defaults(opts, { duration: 12, direction: 1 });
-      return gsap.to(target, { rotation: 360 * o.direction, duration: o.duration, ease: 'none', repeat: -1, transformOrigin: '50% 50%' });
+      return mot(toEls(target),
+        { rotate: [0, 360 * o.direction] },
+        { duration: o.duration, easing: 'linear', repeat: Infinity }
+      );
     },
 
-    /** Float — flutuação contínua (cards, mockups, ícones). */
     float(target, opts) {
-      const o = defaults(opts, { y: 12, duration: 3, ease: 'sine.inOut' });
-      return gsap.to(target, { y: -o.y, duration: o.duration, ease: o.ease, yoyo: true, repeat: -1 });
+      const o = defaults(opts, { y: 12, duration: 3 });
+      return mot(toEls(target),
+        { y: [0, -o.y] },
+        { duration: o.duration, easing: 'ease-in-out', repeat: Infinity, direction: 'alternate' }
+      );
     },
 
-    /** Gradiente animado — usa background-position. */
     gradientShift(target, opts) {
-      const o = defaults(opts, { duration: 6, ease: 'sine.inOut' });
-      return gsap.to(target, {
-        backgroundPosition: '200% 50%', duration: o.duration, ease: o.ease,
-        yoyo: true, repeat: -1
-      });
+      const o = defaults(opts, { duration: 6 });
+      return mot(toEls(target),
+        { backgroundPosition: ['0% 50%', '200% 50%'] },
+        { duration: o.duration, easing: 'ease-in-out', repeat: Infinity, direction: 'alternate' }
+      );
     },
 
-    /** Magnetic effect — o elemento "atrai" o cursor. */
     magnetic(target, opts) {
-      const o = defaults(opts, { strength: 0.25, ease: E.out });
+      const o = defaults(opts, { strength: 0.25 });
       toEls(target).forEach(el => {
         const move = (e) => {
-          const r = el.getBoundingClientRect();
-          const x = (e.clientX - r.left - r.width / 2) * o.strength;
-          const y = (e.clientY - r.top - r.height / 2) * o.strength;
-          gsap.to(el, { x, y, duration: D.base, ease: o.ease });
+          const r  = el.getBoundingClientRect();
+          const dx = (e.clientX - r.left - r.width  / 2) * o.strength;
+          const dy = (e.clientY - r.top  - r.height / 2) * o.strength;
+          mot(el, { x: dx, y: dy }, { duration: D.base, easing: E.out });
         };
-        const reset = () => gsap.to(el, { x: 0, y: 0, duration: D.slow, ease: E.spring });
+        const reset = () => mot(el, { x: 0, y: 0 }, { duration: D.slow, easing: E.spring });
         el.addEventListener('mousemove', move);
         el.addEventListener('mouseleave', reset);
       });
     },
 
-    /** Entrada de página — sequência heroica. */
     pageEnter(opts) {
       const o = defaults(opts, { selector: '[data-page-enter]' });
       const els = toEls(o.selector);
-      return gsap.fromTo(els,
-        { autoAlpha: 0, y: 24 },
-        { autoAlpha: 1, y: 0, duration: D.slow, ease: E.out, stagger: 0.08 }
+      els.forEach(el => { el.style.opacity = '0'; });
+      return mot(els,
+        { opacity: [0, 1], y: [24, 0] },
+        { duration: D.slow, easing: E.out, delay: motStagger(0.08) }
       );
     },
 
-    /** Parallax leve no scroll. */
     parallax(target, opts) {
-      if (!ScrollTrigger) return;
-      const o = defaults(opts, { y: 80, ease: 'none' });
-      return toEls(target).map(el => gsap.to(el, {
-        y: o.y, ease: o.ease,
-        scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true }
-      }));
+      const o = defaults(opts, { y: 80 });
+      toEls(target).forEach(el => {
+        motScroll(
+          mot(el, { y: [0, o.y] }, { easing: 'linear' }),
+          { target: el, offset: ['start end', 'end start'] }
+        );
+      });
     }
   };
 
@@ -244,30 +248,37 @@
   /* -------------------------------------------------------- */
   const hover = {
     lift(target, opts) {
-      const o = defaults(opts, { y: -4, scale: 1, duration: D.fast, ease: E.out });
+      const o = defaults(opts, { y: -4, scale: 1, duration: D.fast, easing: E.out });
       toEls(target).forEach(el => {
-        el.addEventListener('mouseenter', () => gsap.to(el, { y: o.y, scale: o.scale, duration: o.duration, ease: o.ease }));
-        el.addEventListener('mouseleave', () => gsap.to(el, { y: 0, scale: 1, duration: o.duration, ease: o.ease }));
+        el.addEventListener('mouseenter', () => mot(el, { y: o.y, scale: o.scale }, { duration: o.duration, easing: o.easing }));
+        el.addEventListener('mouseleave', () => mot(el, { y: 0,   scale: 1       }, { duration: o.duration, easing: o.easing }));
       });
     },
+
     glow(target, opts) {
       const o = defaults(opts, { color: '0, 102, 255', intensity: 0.45, duration: D.base });
       toEls(target).forEach(el => {
-        el.addEventListener('mouseenter', () => gsap.to(el, { boxShadow: `0 0 40px rgba(${o.color}, ${o.intensity})`, duration: o.duration }));
-        el.addEventListener('mouseleave', () => gsap.to(el, { boxShadow: '0 0 0 rgba(0,0,0,0)', duration: o.duration }));
+        el.addEventListener('mouseenter', () => mot(el, { boxShadow: `0 0 40px rgba(${o.color}, ${o.intensity})` }, { duration: o.duration }));
+        el.addEventListener('mouseleave', () => mot(el, { boxShadow: '0 0 0px rgba(0,0,0,0)'                    }, { duration: o.duration }));
       });
     },
+
     tilt(target, opts) {
       const o = defaults(opts, { max: 8, duration: D.fast });
       toEls(target).forEach(el => {
         el.style.transformStyle = 'preserve-3d';
         el.addEventListener('mousemove', (e) => {
-          const r = el.getBoundingClientRect();
-          const px = (e.clientX - r.left) / r.width - 0.5;
-          const py = (e.clientY - r.top) / r.height - 0.5;
-          gsap.to(el, { rotateY: px * o.max * 2, rotateX: -py * o.max * 2, duration: o.duration, ease: E.out, transformPerspective: 1000 });
+          const r  = el.getBoundingClientRect();
+          const rx = (e.clientX - r.left) / r.width  - 0.5;
+          const ry = (e.clientY - r.top)  / r.height - 0.5;
+          mot(el,
+            { rotateY: rx * o.max * 2, rotateX: -ry * o.max * 2 },
+            { duration: o.duration, easing: E.out }
+          );
         });
-        el.addEventListener('mouseleave', () => gsap.to(el, { rotateX: 0, rotateY: 0, duration: D.slow, ease: E.spring }));
+        el.addEventListener('mouseleave', () =>
+          mot(el, { rotateX: 0, rotateY: 0 }, { duration: D.slow, easing: E.spring })
+        );
       });
     }
   };
@@ -279,8 +290,8 @@
     document.querySelectorAll('[data-fds-anim]').forEach(el => {
       const type = el.dataset.fdsAnim;
       const opts = {};
-      if (el.dataset.fdsDelay)    opts.delay    = parseFloat(el.dataset.fdsDelay);
-      if (el.dataset.fdsDuration) opts.duration = parseFloat(el.dataset.fdsDuration);
+      if (el.dataset.fdsDelay)     opts.delay     = parseFloat(el.dataset.fdsDelay);
+      if (el.dataset.fdsDuration)  opts.duration  = parseFloat(el.dataset.fdsDuration);
       if (el.dataset.fdsDirection) opts.direction = el.dataset.fdsDirection;
       if (el.dataset.fdsScroll === 'true') {
         animate.scrollReveal(el, opts);
@@ -293,7 +304,9 @@
   /* -------------------------------------------------------- */
   /* EXPORT                                                    */
   /* -------------------------------------------------------- */
-  global.FDS = { animate, hover, autoInit, D, E };
+  global.FDS = global.FDS
+    ? Object.assign(global.FDS, { animate, hover, autoInit, D, E })
+    : { animate, hover, autoInit, D, E };
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', autoInit);

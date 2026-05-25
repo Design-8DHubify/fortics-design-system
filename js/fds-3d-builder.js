@@ -3,7 +3,7 @@
    Three.js OBJ builder com material/lighting/motion/hover.
    Inspirado no 8DH 3D Lab, adaptado para o brandbook Fortics.
 
-   Requer: THREE (r128), THREE.OBJLoader, GSAP 3.x
+   Requer: THREE (r128), THREE.OBJLoader, Motion One
    Carrega: assets/3d/Fortics.obj
    ============================================================ */
 
