@@ -3,17 +3,55 @@
    Layout das páginas de documentação (index + atomic levels)
    ============================================================ */
 
+/* ---------------- PRE-HEADER ---------------- */
+.fds-prehead {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  height: 36px;
+  background: #6633FF;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  font-family: 'Sora', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.03em;
+}
+.fds-prehead__brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: .9;
+}
+.fds-prehead__brand strong { font-weight: 700; }
+.fds-prehead__logout {
+  background: rgba(255,255,255,.18);
+  border: 1px solid rgba(255,255,255,.35);
+  color: #fff;
+  border-radius: 6px;
+  padding: 3px 12px;
+  font-size: 11px;
+  font-family: 'Sora', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: background .15s;
+}
+.fds-prehead__logout:hover { background: rgba(255,255,255,.3); }
+
 .docs {
   display: grid;
   grid-template-columns: 280px 1fr;
-  min-height: 100vh;
+  min-height: calc(100vh - 36px);
 }
 
 /* ---------------- SIDEBAR ---------------- */
 .docs-side {
   position: sticky;
-  top: 0;
-  height: 100vh;
+  top: 36px;
+  height: calc(100vh - 36px);
   padding: var(--fds-space-5) var(--fds-space-4);
   background: var(--fds-surface-1);
   border-right: 1px solid var(--fds-border-subtle);
@@ -74,7 +112,7 @@
 
 /* ---------------- TOPBAR ---------------- */
 .docs-top {
-  position: sticky; top: 0;
+  position: sticky; top: 36px;
   z-index: var(--fds-z-sticky);
   display: flex; align-items: center; justify-content: space-between;
   padding: var(--fds-space-4) var(--fds-space-7);
