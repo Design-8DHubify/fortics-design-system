@@ -58,14 +58,13 @@
 </head>
 <body>
 
-  <div class="fds-prehead">
+    <div class="fds-prehead">
     <div class="fds-prehead__brand">
       <svg viewBox="0 0 469.28 333.7" style="width:16px;height:auto;fill:#fff;flex-shrink:0">
         <path d="M298.45,295.98c-8.94-64.31-58.65-115.58-122.2-126.82,63.55-11.25,113.26-62.51,122.2-126.82,8.94,64.31,58.65,115.58,122.2,126.82-63.54,11.25-113.26,62.51-122.2,126.82M313.01,0h-14.46c-.03.25-.06.51-.09.76-.03-.25-.06-.51-.1-.76H1.54C.53,7.02,0,14.2,0,21.51c0,73.84,53.37,135.21,123.64,147.65C53.37,181.59,0,242.96,0,316.8c0,5.71.33,11.35.95,16.9h312.08c86.3-.01,156.25-69.97,156.25-156.28v-21.15C469.28,69.97,399.32,0,313.01,0"/>
       </svg>
       <span>Desenvolvido por <strong>8D Hubify</strong> para Fortics</span>
     </div>
-    <button class="fds-prehead__logout" onclick="FDSAuth.logout()">⊘ Sair</button>
   </div>
 
   <div class="docs">
@@ -98,6 +97,12 @@
       <a class="docs-side__link" href="#tabs"><i data-lucide="layout-panel-top"></i> Tabs</a>
       <a class="docs-side__link" href="#cta"><i data-lucide="megaphone"></i> CTA</a>
       <a class="docs-side__link" href="#footer"><i data-lucide="panel-bottom"></i> Footer</a>
+    </div>
+    <div class="docs-side__footer">
+      <button class="fds-logout-btn" onclick="FDSAuth.logout()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Sair
+      </button>
     </div>
   </aside>
 
