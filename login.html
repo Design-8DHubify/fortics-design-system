@@ -178,16 +178,6 @@
             </div>
           </div>
 
-          <!-- Manter conectado -->
-          <div class="pt-2 pb-2 gs-form-item">
-            <label class="flex items-center gap-2 cursor-pointer text-base/80 font-light text-sm group" id="remember-label">
-              <div id="check-box" class="w-4 h-4 border border-base/30 rounded flex items-center justify-center bg-transparent group-hover:border-cometa transition-colors">
-                <i data-lucide="check" class="w-3 h-3 text-creme opacity-0 transition-opacity" id="check-icon"></i>
-              </div>
-              Manter conectado
-            </label>
-          </div>
-
           <!-- Botão -->
           <div class="pt-2 gs-form-item">
             <button type="submit" id="submit-btn"
@@ -233,24 +223,6 @@
       lucide.createIcons();
     });
 
-    // ── Checkbox ──
-    const rememberLabel = document.getElementById('remember-label');
-    const checkBox  = document.getElementById('check-box');
-    const checkIcon = document.getElementById('check-icon');
-    let isChecked = false;
-    rememberLabel.addEventListener('click', e => {
-      e.preventDefault();
-      isChecked = !isChecked;
-      if (isChecked) {
-        checkIcon.classList.remove('opacity-0');
-        checkBox.classList.add('bg-cometa', 'border-cometa');
-        checkBox.classList.remove('bg-transparent', 'border-base/30');
-      } else {
-        checkIcon.classList.add('opacity-0');
-        checkBox.classList.remove('bg-cometa', 'border-cometa');
-        checkBox.classList.add('bg-transparent', 'border-base/30');
-      }
-    });
 
     // ── Login ──
     const form    = document.getElementById('login-form');

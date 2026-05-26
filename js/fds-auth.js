@@ -15,7 +15,7 @@
 
   const AUTH_KEY   = 'fds-session-v1';
   const CREDENTIALS = [
-    { user: 'fortics', pass: 'ds2026' },
+    { user: 'fortics', pass: 'F0rt!cs@DS#26' },
   ];
 
   const path       = window.location.pathname;
