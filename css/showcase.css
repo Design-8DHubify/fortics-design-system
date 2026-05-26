@@ -41,9 +41,9 @@
   gap: 6px;
   padding: 8px;
   border-radius: 8px;
-  border: 1px solid rgba(255,255,255,.1);
-  background: rgba(255,255,255,.04);
-  color: rgba(255,255,255,.45);
+  border: 1px solid var(--fds-border-subtle);
+  background: transparent;
+  color: var(--fds-text-secondary);
   font-family: 'Sora', sans-serif;
   font-size: 11px;
   font-weight: 600;
@@ -52,9 +52,9 @@
   transition: border-color .15s, color .15s, background .15s;
 }
 .fds-logout-btn:hover {
-  border-color: rgba(255,80,80,.45);
-  color: rgba(255,110,110,.9);
-  background: rgba(255,50,50,.06);
+  border-color: rgba(220,50,50,.4);
+  color: rgba(200,50,50,.9);
+  background: rgba(220,50,50,.06);
 }
 
 .docs {
